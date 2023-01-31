@@ -1,0 +1,141 @@
+.aboutUsBanner{
+    background-image: url(/img/Ellipse\ 1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 430px;
+}
+.aboutHeadLine{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    color: white;
+}
+.aboutSubHeadLine{
+    color: #FFEF04;
+}
+#whoWeAre{
+    margin-top: 70px;
+    background-image: url(/img/Rectangle\ 4634.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    padding: 32px;
+    text-align: center;
+}
+#whoWeAre h2{
+    font-weight: 700;
+    font-size: 40px;
+    color: #FFEF04;
+}
+#whoWeAre p{
+    font-weight: 400;
+    font-size: 20px;
+    color: #ffffff !important;
+}
+#whatIsBeeda{
+    margin-top: 142px;
+}
+#whatIsBeeda img{
+    border-radius: 20px;
+}
+#whatIsBeeda h3{
+    font-weight: 600;
+    font-size: 30px;
+    color: #163BDE;
+}
+#whatIsBeeda p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #6D758B;
+}
+#thankU{
+    background: linear-gradient(83.78deg, #CE85F1 0%, #009DC1 99.89%);
+    opacity: 0.8;
+    backdrop-filter: blur(20px);
+    margin-top: 190px;
+    margin-bottom: 270px;
+    padding: 48px;
+    text-align: center;
+    border-radius: 25px;
+}
+#thankU h3{
+    font-weight: 600;
+    font-family: 'Poppins';
+    font-size: 30px;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+}
+#thankU p{
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: white;
+    margin: 0;
+    line-height: 24px;
+}
+.thankUImg{
+    position: absolute;
+    bottom: 25%;
+    left: -20%;
+    z-index: -1;
+}
+.clickToRegister{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    color: #1B5BFF;
+}
+.torusIcon{
+    position: absolute;
+}
+.vector1{
+    width: 343px;
+    height: 308px;
+    left: -94px;
+    top: 357px;
+}
+.vector2{
+    width: 320px;
+    height: 265px;
+    left: -9px;
+    top: 1197px;
+}
+.torus1{
+    width: 320.75px;
+    height: 330.48px;
+    right: 0;
+    top: 730.26px;
+}
+.torus2{
+    width: 275.95px;
+    height: 314px;
+    left: 80%;
+    top: 1828.19px;
+}
+.torus3{
+    width: 412.13px;
+    height: 261.77px;
+    left: -84px;
+    top: 2045.23px;
+}
+/* #ourMotive img{
+    border-radius: 20px;
+}
+#ourMotive h3{
+    font-weight: 600;
+    font-size: 30px;
+    color: #163BDE;
+}
+#ourMotive p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #6D758B;
+} */
