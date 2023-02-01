@@ -95,7 +95,7 @@ const Blog = () => {
                     {newPost.length === 0 ?  <>
                       <SkeletonTheme>
                       <div>
-                          <Skeleton count={10} height={20} ></Skeleton>
+                          <Skeleton count={10} height={`100%`} width={`100%`}></Skeleton>
                       </div>
                       </SkeletonTheme>
                     </>:     
