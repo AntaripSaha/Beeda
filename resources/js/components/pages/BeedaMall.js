@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AboutStyle from "../../../css/aboutUs.module.css";
 import {
   BrowserRouter as Router,
@@ -10,6 +10,10 @@ import {
 import { CDN_URL } from "../../constant";
 
 const BeedaMall = () => {
+  const [URL, setUrl] = useState("beeda-frontend/");
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <img
