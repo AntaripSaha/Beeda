@@ -3052,6 +3052,18 @@ input:focus {
         background-size: 100% 120% !important;
         margin-bottom: 13px !important;
     }
+    #hero-banner-top .heading-1 {
+        font-size: clamp(1rem, 0.2rem + 5.333vw, 62px);
+    }
+    #hero-banner-top .heading-2 {
+        font-size: clamp(1rem, 0.9rem + 5.333vw, 94px);
+    }
+    #hero-banner-top .heading-3 {
+        font-size: clamp(1rem, 1.2rem + 5.333vw, 108px);
+    }
+    #hero-banner-top .heading-4 {
+        font-size: clamp(1rem, 0.05rem + 5.333vw, 52px);
+    }
 }
 
 /* //////////////call-to-action style/////////////////// */
@@ -4072,6 +4084,9 @@ color: #F1951C;
         white-space: nowrap;
         text-align: center;
         position: relative;
+    }
+    #featured_section .featured_section_wrapper .featured_section_wrapper_item p {
+        font-size: 14px;
     }
 }
 

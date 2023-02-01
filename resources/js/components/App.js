@@ -37,6 +37,7 @@ import OtherHeader from "./layouts/OtherHeader";
 import Blog from "./pages/Blog/index";
 import Details from "./pages/Blog/Details";
 import RideShare from "./pages/RideShare";
+import BeedaMall from "./pages/BeedaMall";
 
 class App extends Component {
     render() {
@@ -92,6 +93,16 @@ class App extends Component {
                                 <>
                                     {" "}
                                     <RideShare />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`beeda-mall`}
+                            element={
+                                <>
+                                    {" "}
+                                    <BeedaMall />{" "}
                                 </>
                             }
                         ></Route>
