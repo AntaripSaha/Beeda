@@ -3039,6 +3039,18 @@ input:focus {
         height: 654px !important;
         margin-left: 38% !important;
     }
+    #hero-banner-top .heading-1 {
+        font-size: clamp(1rem, 0.2rem + 5.333vw, 62px);
+    }
+    #hero-banner-top .heading-2 {
+        font-size: clamp(1rem, 0.9rem + 5.333vw, 94px);
+    }
+    #hero-banner-top .heading-3 {
+        font-size: clamp(1rem, 1.2rem + 5.333vw, 108px);
+    }
+    #hero-banner-top .heading-4 {
+        font-size: clamp(1rem, 0.05rem + 5.333vw, 52px);
+    }
 }
 @media (min-width: 2200px) {
     #hero-banner-top .hero-banner-top-wrapper .hero-banner-top-right img {
@@ -3053,16 +3065,16 @@ input:focus {
         margin-bottom: 13px !important;
     }
     #hero-banner-top .heading-1 {
-        font-size: clamp(1rem, 0.2rem + 5.333vw, 62px);
+        font-size: clamp(1rem, 0.2rem + 5.333vw, 72px);
     }
     #hero-banner-top .heading-2 {
-        font-size: clamp(1rem, 0.9rem + 5.333vw, 94px);
+        font-size: clamp(1rem, 0.9rem + 5.333vw, 104px);
     }
     #hero-banner-top .heading-3 {
-        font-size: clamp(1rem, 1.2rem + 5.333vw, 108px);
+        font-size: clamp(1rem, 1.2rem + 5.333vw, 118px);
     }
     #hero-banner-top .heading-4 {
-        font-size: clamp(1rem, 0.05rem + 5.333vw, 52px);
+        font-size: clamp(1rem, 0.05rem + 5.333vw, 62px);
     }
 }
 
