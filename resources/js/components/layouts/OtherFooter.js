@@ -118,10 +118,11 @@ export default function OtherFooter() {
                                     
                                 </li>
                                 <li className="list-group-item">
-                                Refund Policy
+                                <NavLink to={`refund-policy`}>Refund Policy</NavLink>
+                                
                                 </li>
                                 <li className="list-group-item">
-                                    Fraud Prevention
+                                <NavLink to={`disclaimer`}>Disclaimer</NavLink>
                                 </li>
                             </ul>
                         </div>
