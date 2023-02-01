@@ -122,7 +122,7 @@ export default function OtherFooter() {
                                 
                                 </li>
                                 <li className="list-group-item">
-                                    Fraud Prevention
+                                <NavLink to={`disclaimer`}>Disclaimer</NavLink>
                                 </li>
                             </ul>
                         </div>

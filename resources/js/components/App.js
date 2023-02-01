@@ -48,6 +48,7 @@ import Movies from "./pages/Movies";
 import Travel from "./pages/Travel";
 import Gas from "./pages/Gas";
 import Others from "./pages/Others";
+import Disclaimer from "./pages/Disclaimer";
 
 class App extends Component {
     render() {
@@ -364,6 +365,16 @@ class App extends Component {
                                 <>
                                     {" "}
                                     <RefundPolicy />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`disclaimer`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Disclaimer />{" "}
                                 </>
                             }
                         ></Route>
