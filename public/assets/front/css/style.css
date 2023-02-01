@@ -10,9 +10,8 @@
 --------------------------------------------------------------*/
 html {
     overflow-x: hidden;
-    scroll-behavior:inherit !important;
+    scroll-behavior: inherit !important;
 }
-
 
 body {
     background: #fff;
@@ -54,7 +53,7 @@ h6 {
     padding: 0;
 }
 
-.margin-top{
+.margin-top {
     margin-top: 7rem;
 }
 /* Back to top button */
@@ -2157,7 +2156,6 @@ input:focus {
     align-items: end;
 }
 
-
 #hero-banner-top .hero-banner-top-wrapper .hero-banner-top-left img {
     width: 100%;
     box-shadow: 0 0 5px rgba(132, 132, 132, 0.607);
@@ -2977,7 +2975,6 @@ input:focus {
     }
 }
 @media (min-width: 1440px) {
-
     #featured_section {
         display: flex;
     }
@@ -3097,7 +3094,7 @@ input:focus {
 }
 .rideShareHeadline {
     font-style: normal;
-    font-weight: 700;
+    font-weight: 800;
     font-size: clamp(1rem, 0.4rem + 5.333vw, 80px);
     color: white;
     white-space: nowrap;
@@ -3500,7 +3497,6 @@ input:focus {
         margin-bottom: 20px;
         white-space: nowrap;
     }
-    
 }
 
 /* ///////////////////////////////////////////////////////contact-us page style////////////////////////////////////////////// */
@@ -4015,6 +4011,9 @@ color: #F1951C;
     }
 }
 @media (max-width: 560px) {
+    .aboutUsBanner {
+        height: 185px;
+    }
     #hero-banner-top .hero-banner-top-wrapper {
         padding-top: 37px;
         display: flex;
@@ -4067,14 +4066,13 @@ color: #F1951C;
     }
     .rideShareHeadline {
         font-style: normal;
-        font-weight: 700;
+        font-weight: 600;
         font-size: clamp(1rem, 0.4rem + 5.333vw, 24px);
         color: white;
         white-space: nowrap;
         text-align: center;
         position: relative;
     }
-
 }
 
 @media only screen and (min-width: 300px) and (max-width: 500px) {
@@ -4093,6 +4091,5 @@ color: #F1951C;
         display: block !important;
     }
 }
-
 
 /* ///////////////////////////////////////////////////////service-details style////////////////////////////////////////////// */
