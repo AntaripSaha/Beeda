@@ -10,9 +10,9 @@ import { BrowserRouter as Router, Routes, Route, Link, NavLink } from "react-rou
 
 const PrivacyPolicy = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
-    useEffect(() =>{
-        window.scrollTo(0, 0)
-    }, [])
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     return (
         <>
         <Container>
