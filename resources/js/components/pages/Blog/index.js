@@ -25,11 +25,13 @@ const Blog = () => {
             window.scrollTo(0, 0)
     }, []);
     function nextPage(event, value) {
+        setLoading(true);
         axios
             .get(`https://beeda.com/api/all-blogs?per_page=12&page=${value}`)
             .then((res) => {
                 setTotalPage(res.data.posts.last_page);
                 setTotalPost(res.data.posts.data);
+                setLoading(false);
             });
     }
     const goDetails = (item) =>{
@@ -39,6 +41,10 @@ const Blog = () => {
             }
         });
     }
+    useEffect(() => {
+        setLoading(true);
+        nextPage();
+      }, []);
    
     return (
         <>
@@ -234,8 +240,10 @@ const Blog = () => {
                         <Pagination count={totalPage} onChange={nextPage} />
                     </div>
                     <div className="blog-underline"></div>
-                    <div className="row">
-                        {totalPost.map((item) => {
+                    <div className="row w-100 m-0">
+                        {
+                        isLoading=== false &&   
+                        totalPost.map((item) => {
                             let year = new Date(item.created_at).getFullYear();
                             let month =
                                 new Date(item.created_at).getMonth() + 1;
@@ -247,13 +255,13 @@ const Blog = () => {
                                                 cursor: 'pointer',
                                                 }}    onClick={() => goDetails(item)}>
                                             <img
-                                                src={`${blogImageUrl}/${item.img.file_name}`}
+                                                src={`${blogImageUrl}/${item.img.file_name}` || <Skeleton/>}
                                                 className="card-img-top"
                                                 alt="blog-card-img"
                                             />
                                             <div className="card-body">
                                                 <h5 className="card-title">
-                                                    {item.title}
+                                                    {item.title || <Skeleton/>}
                                                 </h5>
                                                 <div className="blog-auth-details">
                                                     <div className="author">
@@ -285,6 +293,27 @@ const Blog = () => {
                                 </>
                             );
                         })}
+                      
+                        {
+                           (
+                            isLoading === true &&
+                            <div className="col-12">
+                            <SkeletonTheme>
+                            <div className="row gx-3 gy-3 w-100">
+                           <div className="col-12 col-sm-6 col-md-4 col-lg-4">
+                               <Skeleton count={10}></Skeleton>
+                           </div>
+                           <div className="col-12 col-sm-6 col-md-4 col-lg-4">
+                               <Skeleton count={10} ></Skeleton>
+                           </div> 
+                           <div className="col-12 col-sm-6 col-md-4 col-lg-4">
+                               <Skeleton count={10}></Skeleton>
+                           </div>
+                            </div>
+                           </SkeletonTheme>
+                            </div>
+                           )
+                        }
                     </div>
                 </div>
             </div>
