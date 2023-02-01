@@ -203,7 +203,7 @@ const Home = () => {
                 <div className="wrapper">
                     <div className="title">One App for everyday needs</div>
                     <div className="slider-wrapper">
-                        <Swiper slidesPerView={"auto"}   >
+                        <Swiper slidesPerView={"auto"}    >
                             <SwiperSlide>
                                 <div className="over-slider-item">
                                     <div className="over-slider-item-img-content">

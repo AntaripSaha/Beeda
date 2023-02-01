@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 const Blog = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
     const [blogImageUrl] = useState(
@@ -11,6 +12,7 @@ const Blog = () => {
     const [totalPage, setTotalPage] = useState();
     const [totalPost, setTotalPost] = useState([]);
     const [newPost, setNewPost] = useState([]);
+    const [isLoading,setLoading]=useState(false)
     const navigate = useNavigate()
     useEffect(() => {
         axios
@@ -37,7 +39,7 @@ const Blog = () => {
             }
         });
     }
-
+   
     return (
         <>
             {/* <img
@@ -45,6 +47,7 @@ const Blog = () => {
                 alt=""
                 className="blog-vector-left"
             /> */}
+
             <div className="blog-banner">
                 <img
                     src="/img/banner-side-snap-1.png"
@@ -83,11 +86,20 @@ const Blog = () => {
                     </div>
                 </div>
             </div>
+            
             <div className="wrapper">
                 <div id="blog-new">
                     <h3>New Blogs</h3>
                     <div className="blog-underline"></div>
-                    {newPost.map((item, i) => {
+
+                    {newPost.length === 0 ?  <>
+                      <SkeletonTheme>
+                      <div>
+                          <Skeleton count={10} height={20} ></Skeleton>
+                      </div>
+                      </SkeletonTheme>
+                    </>:     
+                    newPost.map((item, i) => {
                         console.log(newPost);
                         let year = new Date(item.created_at).getFullYear();
                         let month = new Date(item.created_at).getMonth() + 1;
@@ -96,14 +108,14 @@ const Blog = () => {
                             i === 0 && (
                                 <>
                                     <div className="row">
-                                        <div className="col-sm-6 pr-sm-0 d-flex">
+                                        <div className="col-sm-6 pr-sm-0 d-flex ">
                                             <img
                                                 src={`${blogImageUrl}/${item.img.file_name}`}
                                                 className="card-img-top"
                                                 alt="blog-card-img"
                                             />
                                         </div>
-                                        <div className="col-sm-6 pl-sm-0">
+                                        <div className="col-sm-6 pl-sm-0 ">
                                             <div className="card"  style={{
                                                 cursor: 'pointer',
                                                 }}  onClick={() => goDetails(item)}>
@@ -145,6 +157,7 @@ const Blog = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                       
                                     </div>
                                 </>
                             )
