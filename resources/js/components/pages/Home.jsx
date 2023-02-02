@@ -403,7 +403,7 @@ const Home = () => {
         <div className="wrapper">
           <div className="container-fluid p-0">
             <div className="join_the_change">
-              <div className="title" >
+              <div className="title pb-5" >
                 Join the Change with <span>Beeda</span>{" "}
               </div>
             </div>
