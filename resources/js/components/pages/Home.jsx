@@ -261,7 +261,7 @@ const Home = () => {
               </SwiperSlide>
             </Swiper>
           </div>
-          <div className="slider-wrapper mt-3 mt-md-4 mt-lg-5">
+          <div className="slider-wrapper mt-3 mt-md-4 mt-lg-5" id="driver">
             <Swiper slidesPerView={"auto"}>
               <SwiperSlide>
                 <NavLink to={`liquor`}>
@@ -403,7 +403,7 @@ const Home = () => {
         <div className="wrapper">
           <div className="container-fluid p-0">
             <div className="join_the_change">
-              <div className="title">
+              <div className="title" >
                 Join the Change with <span>Beeda</span>{" "}
               </div>
             </div>
