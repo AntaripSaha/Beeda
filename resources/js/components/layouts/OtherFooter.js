@@ -130,16 +130,13 @@ export default function OtherFooter() {
                             <h3>Quick Links</h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
-                                    Join as Driver
+                                <a href="#driver">Join as Driver</a>
                                 </li>
                                 <li className="list-group-item">
-                                    Join as Merchant 
+                                <a href="#driver">Join as Merchant </a>
                                 </li>
                                 <li className="list-group-item">
-                                    Join as Employee
-                                </li>
-                                <li className="list-group-item">
-                                    How it works
+                                 <a href="#driver"> Join as Employee</a>
                                 </li>
                                 <li className="list-group-item">
                                     Help Center
