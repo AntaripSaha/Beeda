@@ -102,21 +102,16 @@ const BeedaMall = () => {
                 />
               </div>
               <div className="col-lg-6 d-flex flex-column justify-content-start">
-                <h3>About Beeda ride sharing</h3>
+                <h3>About BeedaMall</h3>
                 <p>
-                  Beedamall was created as part of a Mega ecosystem of online
-                  and on demand services, where users can find everything they
-                  do on their mobile in one place, under one tap, at Beeda
-                  you’ll be empowered to drive impact across the world, working
-                  with our talented team to build a world class product that
-                  nations will run on.
+                  Beedamall is a leading E-Commerce platform dedicated to providing a seamless shopping experience for customers worldwide.
+                  Our platform offers a vast selection of products across multiple categories,
+                  making it easy for customers to find what they need.
                 </p>
                 <p>
-                  whether you’re creating codes for our Mega- App or finding new
-                  ways to bring our platform to the people in your city. You’ll
-                  have the opportunity to learn and grow every day, and develop
-                  your skills alongside talented and inspiring people from
-                  around the Globe.
+                  At the same time, vendors can enlist their business and all of their products and reach their target audience within the shortest possible time.
+                  Millions of users are buying thousands of different products from BeedaMall. Since Beeda is a subscription-based platform,
+                  any business owner can subscribe to our platform and grow their business accordingly.
                 </p>
               </div>
             </div>
@@ -126,18 +121,12 @@ const BeedaMall = () => {
           <div className="container-fluid p-0">
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                <h3>Travel smarter, not harder with Beeda ride sharing</h3>
+                <h3>Beedamall’s Motive</h3>
                 <p>
-                  Beeda leaders are purpose driven and motivated. To keep on
-                  pushing the boundaries forward, by leveraging technology to
-                  simplify and improve lives of millions.
-                </p>
-                <p>
-                  We are building an awesome organisation, and a global platform
-                  that offers subscription model over the old commission system,
-                  therefore allowing vendors, drivers and businesses to earn
-                  more, our vison at Beeda is to always remember that the only
-                  way to win is for everyone to win.
+                  Our motive is to create a mutually beneficial platform for both customers and vendors.
+                  We strive to offer a seamless and convenient shopping experience for customers and an effective marketplace
+                  for vendors to expand their reach and grow their business. With thousands of vendors and an extensive range of products,
+                  we aim to fulfill the diverse needs of our customers.
                 </p>
               </div>
               <div className="col-lg-6 order-1">
@@ -161,12 +150,13 @@ const BeedaMall = () => {
                 />
               </div>
               <div className="col-lg-6 d-flex flex-column justify-content-start">
-                <h3>Enjoy the ride, leave the driving to us</h3>
+                <h3>Get Your Everyday Needs</h3>
                 <p>
-                  Beeda is determined to continue partnering with small business
-                  owners in the local community and believes that creating the
-                  soil for small businesses to grow and making the local
-                  community prosperous is the way for Beeda to truly grow.
+                  At Beeda, we are dedicated to providing a hassle-free shopping experience for all your daily essentials.
+                  Our platform offers a wide selection of high-quality products at competitive prices,
+                  so you can get everything you need without sacrificing quality.
+                  With our user-friendly interface and quick delivery options,
+                  shopping is much easier than before.
                 </p>
                 <span
                   className={`d-flex align-items-center ${AboutStyle.clickToRegister}`}
@@ -184,18 +174,12 @@ const BeedaMall = () => {
           <div className="container-fluid p-0">
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                <h3>Relax, we've got your ride covered</h3>
+                <h3>Grow Your Busines</h3>
                 <p>
-                  Beeda customers can easily and quickly access the products of
-                  small business owners starting their business through Beeda
-                  Mega Platform, allowing small business owners to acquire more
-                  sales opportunities based on customer trust in Beeda
-                  platform. 
-                </p>
-                <p>
-                  The growth of these small businesses leads to the development
-                  of the local economy, and leads to a virtuous cycle of win-win
-                  growth with the local community, sellers, and customers.
+                  Our platform offers vendors a unique opportunity to reach new customers and increase sales.
+                  With a user-friendly interface, real-time analytics, and a commitment to quality,
+                  Beeda provides the tools and support needed to
+                  succeed in the e-commerce marketplace. Join us today and take your business to the next level.
                 </p>
               </div>
               <div className="col-lg-6 order-1">
