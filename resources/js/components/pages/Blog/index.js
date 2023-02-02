@@ -250,7 +250,7 @@ const Blog = () => {
                             let day = new Date(item.created_at).getDate();
                             return (
                                 <>
-                                    <div className="col-12 col-sm-6 col-md-4 col-lg-4 py-3">
+                                    <div className="col-sm-12 col-md-6 col-lg-4 py-3">
                                         <div className="card"  style={{
                                                 cursor: 'pointer',
                                                 }}    onClick={() => goDetails(item)}>
@@ -300,13 +300,13 @@ const Blog = () => {
                             <div className="col-12">
                             <SkeletonTheme>
                             <div className="row gx-3 gy-3 w-100">
-                           <div className="col-12 col-sm-6 col-md-4 col-lg-4">
+                           <div className="col-sm-12 col-md-6 col-lg-4">
                                <Skeleton count={10}></Skeleton>
                            </div>
-                           <div className="col-12 col-sm-6 col-md-4 col-lg-4">
+                           <div className="col-sm-12 col-md-6 col-lg-4">
                                <Skeleton count={10} ></Skeleton>
                            </div> 
-                           <div className="col-12 col-sm-6 col-md-4 col-lg-4">
+                           <div className="col-sm-12 col-md-6 col-lg-4">
                                <Skeleton count={10}></Skeleton>
                            </div>
                             </div>
