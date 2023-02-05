@@ -17,7 +17,10 @@ export default function Details() {
         setMonth(new Date(item.created_at).getMonth() + 1);
         setDay(new Date(item.created_at).getDate());
     })
-    const data = item.description
+    const data = item.description;
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
     return (
         <>
             <div className="wrapper">
