@@ -363,7 +363,7 @@ const Home = () => {
                 <NavLink to={`#`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/food-and-drink 2.png" alt="bag" />
+                      <img src="/img/food-and-drink.png" alt="bag" />
                     </div>
                     <p>Food Delivery</p>
                   </div>
@@ -373,7 +373,7 @@ const Home = () => {
                 <NavLink to={`#`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/Grocery Icon low 1.png" alt="bag" />
+                      <img src="/img/Grocery-Icon-low.png" alt="bag" />
                     </div>
                     <p>Grocery</p>
                   </div>
@@ -383,7 +383,7 @@ const Home = () => {
                 <NavLink to={`#`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/flower-bucket 1.png" alt="bag" />
+                      <img src="/img/flower-bucket.png" alt="bag" />
                     </div>
                     <p>Flower</p>
                   </div>
@@ -394,7 +394,7 @@ const Home = () => {
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
                       <img
-                        src="/img/water-bottle 1.png"
+                        src="/img/water-bottle.png"
                         alt="water bottle"
                         className="object-contain"
                       />
@@ -411,7 +411,7 @@ const Home = () => {
                 <NavLink to={`#`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/beer-bottles 1.png" alt="beer-bottles" />
+                      <img src="/img/beer-bottles.png" alt="beer-bottles" />
                     </div>
                     <p>Liquor</p>
                   </div>
@@ -441,7 +441,7 @@ const Home = () => {
                 <NavLink to={`#`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/Travel 1.png" alt="world-tour" />
+                      <img src="/img/travel.png" alt="world-tour" />
                     </div>
                     <p>Travel</p>
                   </div>
@@ -462,7 +462,7 @@ const Home = () => {
                 <NavLink to={`#`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/more-option 1.png" alt="other" />
+                      <img src="/img/more-option.png" alt="other" />
                     </div>
                     <p>Others</p>
                   </div>
