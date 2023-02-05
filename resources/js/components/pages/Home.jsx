@@ -190,7 +190,9 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="one-app">
+
+      {/* With Link Start  */}
+      {/* <section className="one-app">
         <div className="wrapper">
           <div className="title">One App for everyday needs</div>
           <div className="slider-wrapper">
@@ -327,6 +329,148 @@ const Home = () => {
             </Swiper>
           </div>
         </div>
+      </section> */}
+      {/* With Link End  */}
+
+
+      {/* Without Link Start */}
+      <section className="one-app">
+        <div className="wrapper">
+          <div className="title">One App for everyday needs</div>
+          <div className="slider-wrapper">
+            <Swiper slidesPerView={"auto"}>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/bag.png" alt="bag" />
+                    </div>
+                    <p>Beedamall</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/drive-icon.png" alt="bag" />
+                    </div>
+                    <p>Ride Share</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/food-and-drink 2.png" alt="bag" />
+                    </div>
+                    <p>Food Delivery</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/Grocery Icon low 1.png" alt="bag" />
+                    </div>
+                    <p>Grocery</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/flower-bucket 1.png" alt="bag" />
+                    </div>
+                    <p>Flower</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img
+                        src="/img/water-bottle 1.png"
+                        alt="water bottle"
+                        className="object-contain"
+                      />
+                    </div>
+                    <p>Water</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+            </Swiper>
+          </div>
+          <div className="slider-wrapper mt-3 mt-md-4 mt-lg-5" id="driver">
+            <Swiper slidesPerView={"auto"}>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/beer-bottles 1.png" alt="beer-bottles" />
+                    </div>
+                    <p>Liquor</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/digital-payment.png" alt="online-payment" />
+                    </div>
+                    <p>Payments</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/Frame.png" alt="film" />
+                    </div>
+                    <p>Movies</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/Travel 1.png" alt="world-tour" />
+                    </div>
+                    <p>Travel</p>
+                  </div>
+                </NavLink>
+
+              </SwiperSlide>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/gas.png" alt="gas" />
+                    </div>
+                    <p>Gas</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+              <SwiperSlide>
+                <NavLink to={`#`}>
+                  <div className="over-slider-item">
+                    <div className="over-slider-item-img-content">
+                      <img src="/img/more-option 1.png" alt="other" />
+                    </div>
+                    <p>Others</p>
+                  </div>
+                </NavLink>
+              </SwiperSlide>
+            </Swiper>
+          </div>
+        </div>
 
         {/* <div className="row">
                     <div className="col-12 col-lg-11 ml-3 ml-md-auto">
@@ -399,6 +543,8 @@ const Home = () => {
                     </div>
                 </div> */}
       </section>
+      {/* Without Link End*/}
+
       <section id="call-to-action">
         <div className="wrapper">
           <div className="container-fluid p-0">
