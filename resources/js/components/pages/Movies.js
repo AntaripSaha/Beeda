@@ -95,7 +95,7 @@ const movies = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/beedamall/beedamall1.png"
+                    src="/img/movies/movie1.jpg"
                     alt="Beeda"
                     width="430px"
                   />
@@ -141,7 +141,7 @@ const movies = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/ride-share/Beeda-Ride_Sharing_Service.jpg"
+                    src="/img/movies/movie2.jpg"
                     alt="Beeda Mega App"
                     width="430px"
                   />
@@ -154,7 +154,7 @@ const movies = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/about-us/Beeda-Business With Beeda.png"
+                    src="/img/movies/movie3.jpg"
                     alt="Small Business With Beeda"
                     width="430px"
                   />
@@ -199,7 +199,7 @@ const movies = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/about-us/Beeda-Grow your Business.jpg"
+                    src="/img/movies/movie4.jpg"
                     alt="Grow Your Business With Beeda Mega App"
                     width="430px"
                   />

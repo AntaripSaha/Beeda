@@ -63,13 +63,13 @@ const BeedaMall = () => {
               </div>
               <div>
                 <img
-                  src="/img/ride-share/drive-image-mobile.png"
+                  src="/img/bag.png"
                   alt="beeda icon"
                   className="mobile"
                 />
 
                 <img
-                  src="/img/ride-share/drive-image.png"
+                  src="/img/bag.png"
                   alt="beeda icon"
                   className="desktop"
                 />
@@ -96,7 +96,7 @@ const BeedaMall = () => {
             <div className="row">
               <div className="col-lg-6">
                 <img
-                  src="/img/beedamall/beedamall1.png"
+                  src="/img/beedamall/beedamall1.jpg"
                   alt="Beeda"
                   width="430px"
                 />
@@ -131,7 +131,7 @@ const BeedaMall = () => {
               </div>
               <div className="col-lg-6 order-1">
                 <img
-                  src="/img/ride-share/Beeda-Ride_Sharing_Service.jpg"
+                  src="/img/beedamall/beedamall2.jpg"
                   alt="Beeda Mega App"
                   width="430px"
                 />
@@ -144,7 +144,7 @@ const BeedaMall = () => {
             <div className="row">
               <div className="col-lg-6">
                 <img
-                  src="/img/about-us/Beeda-Business With Beeda.png"
+                  src="/img/beedamall/beedamall3.jpg"
                   alt="Small Business With Beeda"
                   width="430px"
                 />
@@ -184,7 +184,7 @@ const BeedaMall = () => {
               </div>
               <div className="col-lg-6 order-1">
                 <img
-                  src="/img/about-us/Beeda-Grow your Business.jpg"
+                  src="/img/beedamall/beedamall4.jpg"
                   alt="Grow Your Business With Beeda Mega App"
                   width="430px"
                 />

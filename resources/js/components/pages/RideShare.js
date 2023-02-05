@@ -95,7 +95,7 @@ const RideShare = () => {
             <div className="row">
               <div className="col-lg-6">
                 <img
-                  src="/img/ride-share/beeda-ride_sharing_service_1.jpg"
+                  src="/img/ride-share/ride1.jpg"
                   alt="Beeda"
                   width="490"
                 />
@@ -128,7 +128,7 @@ const RideShare = () => {
               </div>
               <div className="col-lg-6 order-1">
                 <img
-                  src="/img/ride-share/Beeda-Ride_Sharing_Service.jpg"
+                  src="/img/ride-share/ride2.jpg"
                   alt="Beeda Mega App"
                   width="490"
                 />
@@ -141,7 +141,7 @@ const RideShare = () => {
             <div className="row">
               <div className="col-lg-6">
                 <img
-                  src="/img/about-us/Beeda-Business With Beeda.png"
+                  src="/img/ride-share/ride3.jpg"
                   alt="Small Business With Beeda"
                   width="490"
                 />
@@ -183,7 +183,7 @@ const RideShare = () => {
               </div>
               <div className="col-lg-6 order-1">
                 <img
-                  src="/img/about-us/Beeda-Grow your Business.jpg"
+                  src="/img/ride-share/ride4.jpg"
                   alt="Grow Your Business With Beeda Mega App"
                   width="490"
                 />
