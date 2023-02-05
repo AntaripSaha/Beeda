@@ -182,7 +182,7 @@ const Home = () => {
             </div>
             <div className="featured_section_wrapper_item">
               <img
-                src={`assets/front/img/1st_section/others.png`}
+                src={`${CDN_URL}assets/front/img/1st_section/others.png`}
                 alt="Vendors Platform-Beeda"
               />
               <p className="about_images_p">Digital Business Card</p>
