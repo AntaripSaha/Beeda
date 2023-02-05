@@ -101,21 +101,13 @@ const RideShare = () => {
                 />
               </div>
               <div className="col-lg-6 d-flex flex-column justify-content-start">
-                <h3>About Beeda ride sharing</h3>
+                <h3>About Beeda Ride Sharing</h3>
                 <p>
-                  Beedamall was created as part of a Mega ecosystem of online
-                  and on demand services, where users can find everything they
-                  do on their mobile in one place, under one tap, at Beeda
-                  you’ll be empowered to drive impact across the world, working
-                  with our talented team to build a world class product that
-                  nations will run on.
-                </p>
-                <p>
-                  whether you’re creating codes for our Mega- App or finding new
-                  ways to bring our platform to the people in your city. You’ll
-                  have the opportunity to learn and grow every day, and develop
-                  your skills alongside talented and inspiring people from
-                  around the Globe.
+                  Beeda ride-sharing service has become increasingly popular in recent years.
+                  We connect both passengers and drivers in a single platform where users can request a ride,
+                  and nearby drivers can accept the request. Requesting, tracking, paying, and rating,
+                  everything is possible in this single platform.
+                  It’s a more convenient and cost-effective option than the traditional transportation system.
                 </p>
               </div>
             </div>
@@ -125,18 +117,13 @@ const RideShare = () => {
           <div className="container-fluid p-0">
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                <h3>Travel smarter, not harder with Beeda ride sharing</h3>
+                <h3>Our Motive</h3>
                 <p>
-                  Beeda leaders are purpose driven and motivated. To keep on
-                  pushing the boundaries forward, by leveraging technology to
-                  simplify and improve lives of millions.
-                </p>
-                <p>
-                  We are building an awesome organisation, and a global platform
-                  that offers subscription model over the old commission system,
-                  therefore allowing vendors, drivers and businesses to earn
-                  more, our vison at Beeda is to always remember that the only
-                  way to win is for everyone to win.
+                  Beeda is dedicated to revolutionizing transportation for everyone.
+                  Our platform connects riders with drivers in a seamless, efficient manner.
+                  Whether you're a driver looking to earn extra or a rider in need of a convenient and affordable ride,
+                  Beeda has got you covered. With our user-friendly interface, secure payment options, and commitment to accessibility,
+                  we're making transportation accessible and enjoyable for everyone.
                 </p>
               </div>
               <div className="col-lg-6 order-1">
@@ -160,12 +147,13 @@ const RideShare = () => {
                 />
               </div>
               <div className="col-lg-6 d-flex flex-column justify-content-start">
-                <h3>Enjoy the ride, leave the driving to us</h3>
+                <h3>Drive & Earn</h3>
                 <p>
-                  Beeda is determined to continue partnering with small business
-                  owners in the local community and believes that creating the
-                  soil for small businesses to grow and making the local
-                  community prosperous is the way for Beeda to truly grow.
+                  Beeda provides a unique opportunity for drivers to monetize their vehicles and turn their daily commute into a source of income.
+                  With our flexible scheduling, you can choose when and how often you want to drive.
+                  And with our secure payment system, you can easily receive your earnings.
+                  Whether you're looking for a part-time or a full-time job,
+                  Beeda provides a hassle-free way to earn extra income.
                 </p>
                 <span
                   className={`d-flex align-items-center ${AboutStyle.clickToRegister}`}
@@ -183,18 +171,14 @@ const RideShare = () => {
           <div className="container-fluid p-0">
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                <h3>Relax, we've got your ride covered</h3>
+                <h3>Enjoy A Safe Ride</h3>
                 <p>
-                  Beeda customers can easily and quickly access the products of
-                  small business owners starting their business through Beeda
-                  Mega Platform, allowing small business owners to acquire more
-                  sales opportunities based on customer trust in Beeda
-                  platform. 
-                </p>
-                <p>
-                  The growth of these small businesses leads to the development
-                  of the local economy, and leads to a virtuous cycle of win-win
-                  growth with the local community, sellers, and customers.
+                  Riders can easily book and pay for their rides using the Beeda wallet,
+                  making it fast and convenient to travel.
+                  Our platform connects riders with safe and reliable drivers,
+                  ensuring a smooth and enjoyable ride experience.
+                  And with our commitment to accessibility,
+                  riders can enjoy affordable transportation no matter where they're located.
                 </p>
               </div>
               <div className="col-lg-6 order-1">
