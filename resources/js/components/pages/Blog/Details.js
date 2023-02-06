@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {  useParams } from "react-router-dom";
 import axios from "axios";
-
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 export default function Details() {
-
+    const [isLoading,setLoading]=useState(false)
     const [item, setItem] = useState()
     // const [item] = useState(location.state.item)
     const [year, setYear] = useState()
@@ -17,6 +18,7 @@ export default function Details() {
     useEffect(() =>{
         window.scrollTo(0, 0);
         console.log("loading");
+        setLoading(true);
         axios
         .get("https://beeda.com/api/all-blogs?per_page=12&page=1").then((res) => {
             let singlePost = res.data.posts.data.find(item => item.slug === slug)
@@ -24,6 +26,7 @@ export default function Details() {
                 setYear(new Date(singlePost.created_at).getFullYear());
                 setMonth(new Date(singlePost.created_at).getMonth() + 1);
                 setDay(new Date(singlePost.created_at).getDate());
+                setLoading(false)
             });
         
     }, [])
@@ -33,10 +36,10 @@ export default function Details() {
     //   }, []);
     return (
         <>
-        {
+        {  
             item &&  <div className="wrapper">
             <div id="blog-details">
-                <h1>{item.title}</h1>
+                <h1>{item.title }</h1>
                 <div className="d-flex gap-3 author-detail">
                     <div className="author">by: {item.user.name}</div>
                     <div className="date mb-2">({`${
@@ -62,8 +65,18 @@ export default function Details() {
                     dangerouslySetInnerHTML={{ __html: item.description }}
                 />
             </div>
-            
         </div>
+        }
+        isLoading===true && 
+        {
+              <div>
+              <SkeletonTheme >
+                <p className="container">
+                 <Skeleton count={30}></Skeleton>
+                </p>
+             
+             </SkeletonTheme>
+              </div>
         }
         </>
     );

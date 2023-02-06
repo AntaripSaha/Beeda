@@ -255,13 +255,13 @@ const Blog = () => {
                                                 cursor: 'pointer',
                                                 }}    onClick={() => goDetails(item)}>
                                             <img
-                                                src={`${blogImageUrl}/${item.img.file_name}` || <Skeleton/>}
+                                                src={`${blogImageUrl}/${item.img.file_name}`}
                                                 className="card-img-top"
                                                 alt="blog-card-img"
                                             />
                                             <div className="card-body">
                                                 <h5 className="card-title">
-                                                    {item.title || <Skeleton/>}
+                                                    {item.title}
                                                 </h5>
                                                 <div className="blog-auth-details">
                                                     <div className="author">
