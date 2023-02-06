@@ -35,7 +35,7 @@ const Blog = () => {
             });
     }
     const goDetails = (item) =>{
-        navigate('/blogs-details', {
+        navigate(`/blogs-details`, {
             state: {
                 item
             }
