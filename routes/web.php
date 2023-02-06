@@ -24,4 +24,4 @@ require __DIR__ . '/includes/subscriptions.php';
 
 Route::get('/chats', [ChatController::class, 'getChats'])->name('chat.get');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/{path?}', [HomeController::class, 'index'])->name('home.index');
+Route::get('/{path?}', [HomeController::class, 'index'])->where('path', '.*')->name('home.index');

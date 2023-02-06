@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 const Blog = () => {
@@ -35,7 +35,7 @@ const Blog = () => {
             });
     }
     const goDetails = (item) =>{
-        navigate(`/blogs-details`, {
+        navigate(`/blogs-details/${item.slug}`, {
             state: {
                 item
             }
@@ -112,7 +112,7 @@ const Blog = () => {
                         let day = new Date(item.created_at).getDate();
                         return (
                             i === 0 && (
-                                <>
+                                <Link to={`/blogs-details/${item.slug}`}>
                                     <div className="row">
                                         <div className="col-sm-6 pr-sm-0 d-flex ">
                                             <img
@@ -124,7 +124,7 @@ const Blog = () => {
                                         <div className="col-sm-6 pl-sm-0 ">
                                             <div className="card"  style={{
                                                 cursor: 'pointer',
-                                                }}  onClick={() => goDetails(item)}>
+                                                }} >
                                                 <div className="card-body d-flex flex-column p-2 p-md-5 justify-content-center">
                                                     <h5 className="card-title">
                                                         {item.title}
@@ -165,7 +165,7 @@ const Blog = () => {
                                         </div>
                                        
                                     </div>
-                                </>
+                                </Link>
                             )
                         );
                     })}

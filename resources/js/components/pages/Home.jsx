@@ -25,17 +25,6 @@ const Home = () => {
   }, []);
   return (
     <>
-      {/* <section id="intro" style={{backgroundImage: `url('https://d2t5292uahafuy.cloudfront.net/public/img/home_banner.png')`,backgroundPosition: "center",backgroundRepeat: "no-repeat",backgroundSize: "cover"}}>
-                <div className="intro-text ">
-                    <div className="row">
-                        <div className="banner_span d-flex justify-content-center align-items-center">
-                            <span>We're</span><img className="banner_beeda_logo" src={`${CDN_URL}assets/front/img/beeda_logo.svg`} alt="beeda"/>
-                        </div>
-                    </div>
-                    <p className="banner_text">The world’s first & only <a href="https://www.youtube.com/watch?v=_OQ_lhjanKA" target="_blank">Mega App</a></p>
-                    <p className="banner_text">Experience <a href="https://www.youtube.com/watch?v=R2Bad2FH5fA" target="_blank">Beeda</a> Today</p>
-                </div>
-            </section> */}
       <img
         src="/img/home-top-vector-1.png"
         alt="home-top-vector"
@@ -101,30 +90,6 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* <div className="d-flex mt-3 gap-3">
-                                    <div className="rounded w-4/12">
-                                        <img
-                                            src="/img/apply-store-banner.png"
-                                            alt="apply-store-banner"
-                                            className="rounded"
-                                        />
-                                    </div>
-                                    <div className="rounded w-4/12">
-                                        <img
-                                            src="/img/google-store-banner.png"
-                                            alt="google-store-banner"
-                                            className="rounded"
-                                        />
-                                    </div>
-                                    <div className="rounded w-4/12">
-                                        <img
-                                            src="/img/Huwaei.jpg"
-                                            alt="google-store-banner"
-                                            className="rounded"
-                                        />
-                                    </div>
-                                </div> */}
               </div>
             </div>
             <div className="hero-banner-top-right mx-auto col-12 col-md-6 desktop">
@@ -192,7 +157,7 @@ const Home = () => {
       </section>
 
       {/* With Link Start  */}
-      {/* <section className="one-app">
+      <section className="one-app">
         <div className="wrapper">
           <div className="title">One App for everyday needs</div>
           <div className="slider-wrapper">
@@ -221,7 +186,7 @@ const Home = () => {
                 <NavLink to={`food-delivery`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/food-and-drink 2.png" alt="bag" />
+                    <img src="/img/food-and-drink.png" alt="bag" />
                     </div>
                     <p>Food Delivery</p>
                   </div>
@@ -231,7 +196,7 @@ const Home = () => {
                 <NavLink to={`grocery`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/Grocery Icon low 1.png" alt="bag" />
+                    <img src="/img/Grocery-Icon-low.png" alt="bag" />
                     </div>
                     <p>Grocery</p>
                   </div>
@@ -241,7 +206,7 @@ const Home = () => {
               <NavLink to={`flower`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/flower-bucket 1.png" alt="bag" />
+                    <img src="/img/flower-bucket.png" alt="bag" />
                     </div>
                     <p>Flower</p>
                   </div>
@@ -252,7 +217,7 @@ const Home = () => {
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
                     <img
-                      src="/img/water-bottle 1.png"
+                      src="/img/water-bottle.png"
                       alt="water bottle"
                       className="object-contain"
                     />
@@ -269,7 +234,7 @@ const Home = () => {
                 <NavLink to={`liquor`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/beer-bottles 1.png" alt="beer-bottles" />
+                    <img src="/img/beer-bottles.png" alt="beer-bottles" />
                     </div>
                     <p>Liquor</p>
                   </div>
@@ -289,7 +254,7 @@ const Home = () => {
               <NavLink to={`movies`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/Frame.png" alt="film" />
+                    <img src="/img/frame.png" alt="film" />
                     </div>
                     <p>Movies</p>
                   </div>
@@ -299,7 +264,7 @@ const Home = () => {
               <NavLink to={`travel`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/Travel 1.png" alt="world-tour" />
+                    <img src="/img/travel.png" alt="world-tour" />
                     </div>
                     <p>Travel</p>
                   </div>
@@ -320,7 +285,7 @@ const Home = () => {
               <NavLink to={`others`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/more-option 1.png" alt="other" />
+                    <img src="/img/more-option.png" alt="other" />
                     </div>
                     <p>Others</p>
                   </div>
@@ -329,12 +294,12 @@ const Home = () => {
             </Swiper>
           </div>
         </div>
-      </section> */}
+      </section>
       {/* With Link End  */}
 
 
       {/* Without Link Start */}
-      <section className="one-app">
+      {/* <section className="one-app">
         <div className="wrapper">
           <div className="title">One App for everyday needs</div>
           <div className="slider-wrapper">
@@ -471,78 +436,7 @@ const Home = () => {
             </Swiper>
           </div>
         </div>
-
-        {/* <div className="row">
-                    <div className="col-12 col-lg-11 ml-3 ml-md-auto">
-                        <Swiper slidesPerView={"auto"} loop={true}>
-                            <SwiperSlide>
-                                <div className="over-slider-item">
-                                    <div className="over-slider-item-img-content">
-                                        <img src="/img/bag.png" alt="bag" />
-                                    </div>
-                                    <p>Beedamall</p>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="over-slider-item">
-                                    <div className="over-slider-item-img-content">
-                                        <img
-                                            src="/img/drive-icon.png"
-                                            alt="bag"
-                                        />
-                                    </div>
-                                    <p>Ride Share</p>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="over-slider-item">
-                                    <div className="over-slider-item-img-content">
-                                        <img
-                                            src="/img/food-delivery-box 1.png"
-                                            alt="bag"
-                                        />
-                                    </div>
-                                    <p>Food Delivery</p>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="over-slider-item">
-                                    <div className="over-slider-item-img-content">
-                                        <img
-                                            src="/img/Grocery Icon low 1.png"
-                                            alt="bag"
-                                        />
-                                    </div>
-                                    <p>Grocery</p>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="over-slider-item">
-                                    <div className="over-slider-item-img-content">
-                                        <img
-                                            src="/img/flower-bucket 1.png"
-                                            alt="bag"
-                                        />
-                                    </div>
-                                    <p>Flower</p>
-                                </div>
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <div className="over-slider-item">
-                                    <div className="over-slider-item-img-content">
-                                        <img
-                                            src="/img/water-bottle 1.png"
-                                            alt="water bottle"
-                                            className="object-contain"
-                                        />
-                                    </div>
-                                    <p>Water</p>
-                                </div>
-                            </SwiperSlide>
-                        </Swiper>
-                    </div>
-                </div> */}
-      </section>
+      </section> */}
       {/* Without Link End*/}
 
       <section id="call-to-action">

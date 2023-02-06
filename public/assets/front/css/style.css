@@ -2350,6 +2350,7 @@ input:focus {
     align-items: center;
 }
 #featured_section .featured_section_wrapper .featured_section_wrapper_item img {
+    width: 100px;
     transition: all 0.3s;
 }
 

@@ -95,13 +95,13 @@ const movies = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/beedamall/beedamall1.png"
+                    src="/img/movies/movie1.jpg"
                     alt="Beeda"
                     width="430px"
                   />
                 </div>
                 <div className="col-lg-6 d-flex flex-column justify-content-start">
-                  <h3>About Beeda ride sharing</h3>
+                  <h3>About Beeda Movie</h3>
                   <p>
                     Beedamall was created as part of a Mega ecosystem of online
                     and on demand services, where users can find everything they
@@ -125,7 +125,7 @@ const movies = () => {
             <div className="container-fluid p-0">
               <div className="row">
                 <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                  <h3>Travel smarter, not harder with Beeda ride sharing</h3>
+                  <h3>Choose Your Plan</h3>
                   <p>
                     Beeda leaders are purpose driven and motivated. To keep on
                     pushing the boundaries forward, by leveraging technology to
@@ -141,7 +141,7 @@ const movies = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/ride-share/Beeda-Ride_Sharing_Service.jpg"
+                    src="/img/movies/movie2.jpg"
                     alt="Beeda Mega App"
                     width="430px"
                   />
@@ -154,13 +154,13 @@ const movies = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/about-us/Beeda-Business With Beeda.png"
+                    src="/img/movies/movie3.jpg"
                     alt="Small Business With Beeda"
                     width="430px"
                   />
                 </div>
                 <div className="col-lg-6 d-flex flex-column justify-content-start">
-                  <h3>Enjoy the ride, leave the driving to us</h3>
+                  <h3>Enjoy Watching it on TV</h3>
                   <p>
                     Beeda is determined to continue partnering with small business
                     owners in the local community and believes that creating the
@@ -183,7 +183,7 @@ const movies = () => {
             <div className="container-fluid p-0">
               <div className="row">
                 <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                  <h3>Relax, we've got your ride covered</h3>
+                  <h3>Watch Offline</h3>
                   <p>
                     Beeda customers can easily and quickly access the products of
                     small business owners starting their business through Beeda
@@ -199,7 +199,7 @@ const movies = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/about-us/Beeda-Grow your Business.jpg"
+                    src="/img/movies/movie4.jpg"
                     alt="Grow Your Business With Beeda Mega App"
                     width="430px"
                   />
