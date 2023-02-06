@@ -53,13 +53,13 @@ const Payment = () => {
               </div>
               <div>
                 <img
-                  src="/img/ride-share/drive-image-mobile.png"
+                  src="/img/payments/logo2.png"
                   alt="beeda icon"
                   className="mobile"
                 />
 
                 <img
-                  src="/img/ride-share/drive-image.png"
+                  src="/img/payments/logo1.png"
                   alt="beeda icon"
                   className="desktop"
                 />

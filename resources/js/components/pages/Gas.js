@@ -43,32 +43,20 @@ const Gas = () => {
         <div
           className={`aboutUsBanner d-flex justify-content-center align-items-center`}
         >
-          {/* <img src={AboutBannerImg} alt="about-us banner" /> */}
           <section className="w-100">
             <div className="container">
-              {/* <div className="row">
-                          <div className="col-6"></div>
-                          <div className="col-6 m-auto d-flex justify-content-end">
-                              <img
-                                  src={BeedaIcon}
-                                  alt="beeda icon"
-                                  className="beedaIcon"
-                              />
-                          </div>
-                      </div> */}
               <div className="d-flex align-items-center justify-content-between">
                 <div className="">
                   <div className="rideShareHeadline">Gas</div>
                 </div>
                 <div>
                   <img
-                    src="/img/ride-share/drive-image-mobile.png"
+                    src="/img/gas/logo2.png"
                     alt="beeda icon"
                     className="mobile"
                   />
-  
                   <img
-                    src="/img/ride-share/drive-image.png"
+                    src="/img/gas/logo1.png"
                     alt="beeda icon"
                     className="desktop"
                   />
@@ -76,26 +64,14 @@ const Gas = () => {
               </div>
             </div>
           </section>
-          {/* <Container>
-                  <section id="about" className="section-bg mb-5">
-                      <div className="container">
-                          <div className="row">
-                              <div className="col-4 m-auto">
-                                  All about Beeda!!
-                              </div>
-                          </div>
-                      </div>
-                  </section>
-              </Container> */}
         </div>
-  
         <div className="wrapper">
           <div id="whatIsBeeda">
             <div className="container-fluid p-0">
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/beedamall/beedamall1.png"
+                    src="/img/gas/gas1.jpg"
                     alt="Beeda"
                     width="430px"
                   />
@@ -141,7 +117,7 @@ const Gas = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/ride-share/Beeda-Ride_Sharing_Service.jpg"
+                    src="/img/gas/gas1.jpg"
                     alt="Beeda Mega App"
                     width="430px"
                   />
@@ -154,7 +130,7 @@ const Gas = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/about-us/Beeda-Business With Beeda.png"
+                    src="/img/gas/gas1.jpg"
                     alt="Small Business With Beeda"
                     width="430px"
                   />
@@ -199,7 +175,7 @@ const Gas = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/about-us/Beeda-Grow your Business.jpg"
+                    src="/img/gas/gas1.jpg"
                     alt="Grow Your Business With Beeda Mega App"
                     width="430px"
                   />

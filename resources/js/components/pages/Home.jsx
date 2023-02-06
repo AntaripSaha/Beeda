@@ -282,7 +282,7 @@ const Home = () => {
                 </NavLink>
               </SwiperSlide>
               <SwiperSlide>
-              <NavLink to={`others`}>
+              <NavLink to={`about-us`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
                     <img src="/img/more-option.png" alt="other" />
