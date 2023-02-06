@@ -44,19 +44,8 @@ const Liquor = () => {
         <div
           className={`aboutUsBanner d-flex justify-content-center align-items-center`}
         >
-          {/* <img src={AboutBannerImg} alt="about-us banner" /> */}
           <section className="w-100">
             <div className="container">
-              {/* <div className="row">
-                          <div className="col-6"></div>
-                          <div className="col-6 m-auto d-flex justify-content-end">
-                              <img
-                                  src={BeedaIcon}
-                                  alt="beeda icon"
-                                  className="beedaIcon"
-                              />
-                          </div>
-                      </div> */}
               <div className="d-flex align-items-center justify-content-between">
                 <div className="">
                   <div className="rideShareHeadline">Liquor</div>
@@ -77,17 +66,6 @@ const Liquor = () => {
               </div>
             </div>
           </section>
-          {/* <Container>
-                  <section id="about" className="section-bg mb-5">
-                      <div className="container">
-                          <div className="row">
-                              <div className="col-4 m-auto">
-                                  All about Beeda!!
-                              </div>
-                          </div>
-                      </div>
-                  </section>
-              </Container> */}
         </div>
   
         <div className="wrapper">
@@ -96,7 +74,7 @@ const Liquor = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/beedamall/beedamall1.png"
+                    src="/img/liquor/liquor1.jpg"
                     alt="Beeda"
                     width="430px"
                   />
@@ -142,7 +120,7 @@ const Liquor = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/ride-share/Beeda-Ride_Sharing_Service.jpg"
+                    src="/img/liquor/liquor2.jpg"
                     alt="Beeda Mega App"
                     width="430px"
                   />
@@ -155,7 +133,7 @@ const Liquor = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/about-us/Beeda-Business With Beeda.png"
+                    src="/img/liquor/liquor3.jpg"
                     alt="Small Business With Beeda"
                     width="430px"
                   />
