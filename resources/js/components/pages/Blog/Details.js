@@ -37,7 +37,9 @@ export default function Details() {
     return (
         <>
         {  
-            item &&  <div className="wrapper">
+           isLoading===false &&
+            item &&  
+            <div className="wrapper">
             <div id="blog-details">
                 <h1>{item.title }</h1>
                 <div className="d-flex gap-3 author-detail">
@@ -61,23 +63,25 @@ export default function Details() {
             </div>
             <div className="blog-details-rich-text">
                 <div
-                    className="blog-text text-justify"
+                    className="blog-text text-justify mb-5"
                     dangerouslySetInnerHTML={{ __html: item.description }}
                 />
             </div>
         </div>
+        
         }
-        isLoading===true && 
-        {
-              <div>
-              <SkeletonTheme >
-                <p className="container">
-                 <Skeleton count={30}></Skeleton>
-                </p>
-             
-             </SkeletonTheme>
-              </div>
-        }
+         {
+                           (
+                            isLoading === true &&
+                            <div>
+                            <SkeletonTheme>
+                            <div className="container">
+                               <Skeleton count={40}></Skeleton>
+                           </div>
+                           </SkeletonTheme>
+                            </div>
+                           )
+                        }
         </>
     );
 }
