@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -29,6 +29,9 @@ import { CDN_URL } from "../../constant";
 
 const Chats = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     return (
         <>
             <div className="container-fluid">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -10,6 +10,9 @@ import { BrowserRouter as Router, Routes, Route, Link, NavLink } from "react-rou
 
 const TrustAndSafety = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     return (
         <>
         <Container><h1>TrustAndSafety</h1></Container>

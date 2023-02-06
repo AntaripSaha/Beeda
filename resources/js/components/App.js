@@ -37,6 +37,18 @@ import OtherHeader from "./layouts/OtherHeader";
 import Blog from "./pages/Blog/index";
 import Details from "./pages/Blog/Details";
 import RideShare from "./pages/RideShare";
+import BeedaMall from "./pages/BeedaMall";
+import FoodDelivery from "./pages/FoodDelivery";
+import Grocery from "./pages/Grocery";
+import Flower from "./pages/Flower";
+import Water from "./pages/Water";
+import Liquor from "./pages/Liquor";
+import Payments from "./pages/Payments";
+import Movies from "./pages/Movies";
+import Travel from "./pages/Travel";
+import Gas from "./pages/Gas";
+import Others from "./pages/Others";
+import Disclaimer from "./pages/Disclaimer";
 
 class App extends Component {
     render() {
@@ -67,12 +79,10 @@ class App extends Component {
                             }
                         ></Route>
                         <Route
-                            exact
-                            path={`blogs-details`}
+                        
+                            path="blogs-details/:slug"
                             element={
-                                <>
                                     <Details />
-                                </>
                             }
                         ></Route>
                         <Route
@@ -92,6 +102,116 @@ class App extends Component {
                                 <>
                                     {" "}
                                     <RideShare />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`beeda-mall`}
+                            element={
+                                <>
+                                    {" "}
+                                    <BeedaMall />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`food-delivery`}
+                            element={
+                                <>
+                                    {" "}
+                                    <FoodDelivery />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`grocery`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Grocery />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`flower`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Flower />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`water`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Water />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`liquor`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Liquor />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`payments`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Payments />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`movies`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Movies />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`travel`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Travel />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`gas`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Gas />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`others`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Others />{" "}
                                 </>
                             }
                         ></Route>
@@ -243,6 +363,16 @@ class App extends Component {
                                 <>
                                     {" "}
                                     <RefundPolicy />{" "}
+                                </>
+                            }
+                        ></Route>
+                        <Route
+                            exact
+                            path={`disclaimer`}
+                            element={
+                                <>
+                                    {" "}
+                                    <Disclaimer />{" "}
                                 </>
                             }
                         ></Route>

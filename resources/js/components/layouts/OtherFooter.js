@@ -95,14 +95,14 @@ export default function OtherFooter() {
                                 <li className="list-group-item">  <NavLink to={`about-us`}>About Us</NavLink></li>
                                 </a>
                                 <li className="list-group-item">
-                                    Services
+                                <NavLink to={`contact-us`}>About Us</NavLink>
                                 </li>
                                 <li className="list-group-item">
                                 <NavLink to={`blogs`}>Blog</NavLink>
                                 </li>
-                                <li className="list-group-item">
+                                {/* <li className="list-group-item">
                                     FAQ's
-                                </li>
+                                </li> */}
                                 
                             </ul>
                         </div>
@@ -118,31 +118,29 @@ export default function OtherFooter() {
                                     
                                 </li>
                                 <li className="list-group-item">
-                                Refund Policy
+                                <NavLink to={`refund-policy`}>Refund Policy</NavLink>
+                                
                                 </li>
-                                <li className="list-group-item">
-                                    Fraud Prevention
-                                </li>
+                                {/* <li className="list-group-item">
+                                <NavLink to={`disclaimer`}>Disclaimer</NavLink>
+                                </li> */}
                             </ul>
                         </div>
                         <div className="col-6 col-lg-2">
                             <h3>Quick Links</h3>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
-                                    Join as Driver
+                                <a href="#driver">Join as Driver</a>
                                 </li>
                                 <li className="list-group-item">
-                                    Join as Merchant 
+                                <a href="#driver">Join as Merchant </a>
                                 </li>
                                 <li className="list-group-item">
-                                    Join as Employee
+                                 <a href="#driver"> Join as Employee</a>
                                 </li>
-                                <li className="list-group-item">
-                                    How it works
-                                </li>
-                                <li className="list-group-item">
+                                {/* <li className="list-group-item">
                                     Help Center
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                         <div className="col-12 col-lg-3">

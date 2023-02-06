@@ -10,9 +10,8 @@
 --------------------------------------------------------------*/
 html {
     overflow-x: hidden;
-    scroll-behavior:inherit !important;
+    scroll-behavior: inherit !important;
 }
-
 
 body {
     background: #fff;
@@ -54,7 +53,7 @@ h6 {
     padding: 0;
 }
 
-.margin-top{
+.margin-top {
     margin-top: 7rem;
 }
 /* Back to top button */
@@ -2157,7 +2156,6 @@ input:focus {
     align-items: end;
 }
 
-
 #hero-banner-top .hero-banner-top-wrapper .hero-banner-top-left img {
     width: 100%;
     box-shadow: 0 0 5px rgba(132, 132, 132, 0.607);
@@ -2809,7 +2807,7 @@ input:focus {
 }
 #footer #footerMiddle .card-container img {
     border-radius: 5px;
-    width: 36px;
+    width: 34px;
     height: 24px;
     margin-top: -10px;
 }
@@ -2841,220 +2839,6 @@ input:focus {
 }
 .icon-class:hover {
     cursor: pointer;
-}
-
-@media (min-width: 768px) {
-    #featured_section
-        .featured_section_wrapper
-        .featured_section_wrapper_item
-        img {
-        width: 120px;
-        transition: all 0.3s;
-    }
-
-    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img {
-        width: 40%;
-    }
-    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img-user {
-        width: 25% !important;
-    }
-    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img-drive {
-        width: 35% !important;
-    }
-    #footer #footerMiddle .storeBtn {
-        align-items: center;
-    }
-    /* #featured_section {
-        overflow: hidden;
-    } */
-    .one-app .over-slider-item {
-        width: 262px;
-        height: 244px;
-    }
-    .one-app .over-slider-item .over-slider-item-img-content img {
-        width: 150px;
-        height: 150px;
-        margin-bottom: 10px;
-        object-fit: contain;
-    }
-    .one-app .over-slider-item p {
-        font-size: 20px;
-        width: auto;
-    }
-    .swiper-slide {
-        margin-right: 40px !important;
-    }
-    .one-app .slider-wrapper {
-        padding-left: 50px;
-    }
-}
-@media (min-width: 1024px) {
-    .over-slider {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .one-app .slider-wrapper {
-        padding-left: 100px;
-    }
-    .one-app .over-slider .over-slider-content {
-        padding-left: 0%;
-    }
-    #call-to-container .driver {
-        align-items: start;
-        height: 100%;
-    }
-    #call-to-container .description {
-        text-align: center !important;
-    }
-    #call-to-container {
-        margin: 0;
-        height: 100%;
-    }
-    #call-to-container .profile-img {
-        width: 45%;
-        margin: auto;
-    }
-    #beeda-store .beeda-store-app .beeda-store-app-1 {
-        flex-wrap: nowrap !important;
-    }
-    #beeda-store
-        .beeda-store-app
-        .beeda-store-app-1
-        .beeda-store-img-container {
-        margin: 0 !important;
-        justify-content: end !important;
-    }
-    #beeda-store
-        .beeda-store-app
-        .beeda-store-app-1
-        .beeda-store-img-user-container {
-        justify-content: center !important;
-    }
-    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img {
-        width: 100%;
-        justify-self: end;
-        object-fit: cover;
-    }
-    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img-user {
-        width: 40% !important;
-    }
-    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img-drive {
-        margin-right: 0%;
-        width: 65% !important;
-    }
-    #call-to-container .call-to-container-details {
-        align-items: center;
-    }
-    #call-to-container .call-to-container-details h3 {
-        margin: 3% auto;
-    }
-    #featured_section {
-        display: flex;
-    }
-    #featured_section .featured_section_wrapper {
-        margin: auto;
-    }
-    #featured_section .featured_section_wrapper .featured_section_wrapper_item {
-        margin-top: -7%;
-    }
-    #footer #footerTop {
-        flex-direction: row;
-    }
-    #featured_section {
-        min-height: 400px;
-    }
-    #featured_section .featured_section_wrapper {
-        height: 160px;
-    }
-    #call-to-action .join_the_change {
-        margin-bottom: 100px;
-    }
-}
-@media (min-width: 1200px) {
-    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img {
-        width: 75%;
-    }
-}
-@media (min-width: 1440px) {
-
-    #featured_section {
-        display: flex;
-    }
-    #featured_section .featured_section_wrapper {
-        margin: auto;
-    }
-    #featured_section
-        .featured_section_wrapper
-        .featured_section_wrapper_item
-        img {
-        width: 160px;
-    }
-
-    #footer #footerMiddle .parQrCode {
-        display: flex !important;
-    }
-
-    #footer #footerMiddle .card-container-row {
-        margin-top: -45px;
-    }
-    #footer #footerBottom {
-        padding: 2% 5%;
-    }
-    #footer #footerTop .footerTopInput {
-        flex-wrap: nowrap;
-        padding: 1%;
-    }
-    #footer #footerTop .footerTopButton {
-        right: 0.6%;
-    }
-    #footer #footerTop .footerTopButton .footerTopButton_text {
-        display: block;
-    }
-    #footer #footerTop .footerTopInput input {
-        margin-left: 10px;
-    }
-    #footer #footerMiddle .card-container {
-        justify-content: end;
-        margin-top: -44px;
-    }
-    #footer #footerMiddle .storeBtn {
-        align-items: flex-end;
-    }
-    #hero-banner-top .hero-img {
-        object-fit: cover;
-    }
-
-    #featured_section
-        .featured_section_wrapper
-        .featured_section_wrapper-content {
-        margin-top: -65px;
-    }
-}
-@media (min-width: 1500px) {
-    .one-app .slider-wrapper {
-        padding-left: 0;
-    }
-}
-@media (min-width: 1900px) {
-    #hero-banner-top .hero-banner-top-wrapper .hero-banner-top-right img {
-        width: auto;
-        height: 654px !important;
-        margin-left: 38% !important;
-    }
-}
-@media (min-width: 2200px) {
-    #hero-banner-top .hero-banner-top-wrapper .hero-banner-top-right img {
-        width: auto;
-        height: 720px !important;
-        margin-left: 63% !important;
-        margin-top: 11%;
-        margin-bottom: -16%;
-    }
-    #hero-banner-top {
-        background-size: 100% 120% !important;
-        margin-bottom: 13px !important;
-    }
 }
 
 /* //////////////call-to-action style/////////////////// */
@@ -3097,7 +2881,7 @@ input:focus {
 }
 .rideShareHeadline {
     font-style: normal;
-    font-weight: 700;
+    font-weight: 800;
     font-size: clamp(1rem, 0.4rem + 5.333vw, 80px);
     color: white;
     white-space: nowrap;
@@ -3500,7 +3284,6 @@ input:focus {
         margin-bottom: 20px;
         white-space: nowrap;
     }
-    
 }
 
 /* ///////////////////////////////////////////////////////contact-us page style////////////////////////////////////////////// */
@@ -4015,6 +3798,9 @@ color: #F1951C;
     }
 }
 @media (max-width: 560px) {
+    .aboutUsBanner {
+        height: 185px;
+    }
     #hero-banner-top .hero-banner-top-wrapper {
         padding-top: 37px;
         display: flex;
@@ -4067,16 +3853,258 @@ color: #F1951C;
     }
     .rideShareHeadline {
         font-style: normal;
-        font-weight: 700;
+        font-weight: 600;
         font-size: clamp(1rem, 0.4rem + 5.333vw, 24px);
         color: white;
         white-space: nowrap;
         text-align: center;
         position: relative;
     }
-
+    #featured_section
+        .featured_section_wrapper
+        .featured_section_wrapper_item
+        p {
+        font-size: 14px;
+    }
 }
 
+@media (min-width: 768px) {
+    #featured_section
+        .featured_section_wrapper
+        .featured_section_wrapper_item
+        img {
+        width: 120px;
+        transition: all 0.3s;
+    }
+
+    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img {
+        width: 40%;
+    }
+    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img-user {
+        width: 25% !important;
+    }
+    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img-drive {
+        width: 35% !important;
+    }
+    #footer #footerMiddle .storeBtn {
+        align-items: center;
+    }
+    /* #featured_section {
+        overflow: hidden;
+    } */
+    .one-app .over-slider-item {
+        width: 262px;
+        height: 244px;
+    }
+    .one-app .over-slider-item .over-slider-item-img-content img {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 10px;
+        object-fit: contain;
+    }
+    .one-app .over-slider-item p {
+        font-size: 20px;
+        width: auto;
+    }
+    .swiper-slide {
+        margin-right: 40px !important;
+    }
+    .one-app .slider-wrapper {
+        padding-left: 50px;
+    }
+}
+@media (min-width: 1024px) {
+    .over-slider {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .one-app .slider-wrapper {
+        padding-left: 100px;
+    }
+    .one-app .over-slider .over-slider-content {
+        padding-left: 0%;
+    }
+    #call-to-container .driver {
+        align-items: start;
+        height: 100%;
+    }
+    #call-to-container .description {
+        text-align: center !important;
+    }
+    #call-to-container {
+        margin: 0;
+        height: 100%;
+    }
+    #call-to-container .profile-img {
+        width: 45%;
+        margin: auto;
+    }
+    #beeda-store .beeda-store-app .beeda-store-app-1 {
+        flex-wrap: nowrap !important;
+    }
+    #beeda-store
+        .beeda-store-app
+        .beeda-store-app-1
+        .beeda-store-img-container {
+        margin: 0 !important;
+        justify-content: end !important;
+    }
+    #beeda-store
+        .beeda-store-app
+        .beeda-store-app-1
+        .beeda-store-img-user-container {
+        justify-content: center !important;
+    }
+    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img {
+        width: 100%;
+        justify-self: end;
+        object-fit: cover;
+    }
+    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img-user {
+        width: 40% !important;
+    }
+    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img-drive {
+        margin-right: 0%;
+        width: 65% !important;
+    }
+    #call-to-container .call-to-container-details {
+        align-items: center;
+    }
+    #call-to-container .call-to-container-details h3 {
+        margin: 3% auto;
+    }
+    #featured_section {
+        display: flex;
+    }
+    #featured_section .featured_section_wrapper {
+        margin: auto;
+    }
+    #featured_section .featured_section_wrapper .featured_section_wrapper_item {
+        margin-top: -7%;
+    }
+    #footer #footerTop {
+        flex-direction: row;
+    }
+    #featured_section {
+        min-height: 400px;
+    }
+    #featured_section .featured_section_wrapper {
+        height: 160px;
+    }
+    #call-to-action .join_the_change {
+        margin-bottom: 100px;
+    }
+}
+@media (min-width: 1200px) {
+    #beeda-store .beeda-store-app .beeda-store-app-1 .beeda-store-img {
+        width: 75%;
+    }
+}
+@media (min-width: 1440px) {
+    #featured_section {
+        display: flex;
+    }
+    #featured_section .featured_section_wrapper {
+        margin: auto;
+    }
+    #featured_section
+        .featured_section_wrapper
+        .featured_section_wrapper_item
+        img {
+        width: 160px;
+    }
+
+    #footer #footerMiddle .parQrCode {
+        display: flex !important;
+    }
+
+    #footer #footerMiddle .card-container-row {
+        margin-top: -45px;
+    }
+    #footer #footerBottom {
+        padding: 2% 5%;
+    }
+    #footer #footerTop .footerTopInput {
+        flex-wrap: nowrap;
+        padding: 1%;
+    }
+    #footer #footerTop .footerTopButton {
+        right: 0.6%;
+    }
+    #footer #footerTop .footerTopButton .footerTopButton_text {
+        display: block;
+    }
+    #footer #footerTop .footerTopInput input {
+        margin-left: 10px;
+    }
+    #footer #footerMiddle .card-container {
+        justify-content: end;
+        margin-top: -44px;
+    }
+    #footer #footerMiddle .storeBtn {
+        align-items: flex-end;
+    }
+    #hero-banner-top .hero-img {
+        object-fit: cover;
+    }
+
+    #featured_section
+        .featured_section_wrapper
+        .featured_section_wrapper-content {
+        margin-top: -65px;
+    }
+}
+/* Responsive Multiple Devices */
+@media (min-width: 1500px) {
+    .one-app .slider-wrapper {
+        padding-left: 0;
+    }
+}
+@media (min-width: 1900px) {
+    #hero-banner-top .hero-banner-top-wrapper .hero-banner-top-right img {
+        width: auto;
+        height: 654px !important;
+        margin-left: 38% !important;
+    }
+    #hero-banner-top .heading-1 {
+        font-size: clamp(1rem, 0.2rem + 5.333vw, 62px);
+    }
+    #hero-banner-top .heading-2 {
+        font-size: clamp(1rem, 0.9rem + 5.333vw, 94px);
+    }
+    #hero-banner-top .heading-3 {
+        font-size: clamp(1rem, 1.2rem + 5.333vw, 108px);
+    }
+    #hero-banner-top .heading-4 {
+        font-size: clamp(1rem, 0.05rem + 5.333vw, 52px);
+    }
+}
+@media (min-width: 2200px) {
+    #hero-banner-top .hero-banner-top-wrapper .hero-banner-top-right img {
+        width: auto;
+        height: 720px !important;
+        margin-left: 63% !important;
+        margin-top: 11%;
+        margin-bottom: -16%;
+    }
+    #hero-banner-top {
+        background-size: 100% 120% !important;
+        margin-bottom: 13px !important;
+    }
+    #hero-banner-top .heading-1 {
+        font-size: clamp(1rem, 0.2rem + 5.333vw, 72px);
+    }
+    #hero-banner-top .heading-2 {
+        font-size: clamp(1rem, 0.9rem + 5.333vw, 104px);
+    }
+    #hero-banner-top .heading-3 {
+        font-size: clamp(1rem, 1.2rem + 5.333vw, 118px);
+    }
+    #hero-banner-top .heading-4 {
+        font-size: clamp(1rem, 0.05rem + 5.333vw, 62px);
+    }
+}
 @media only screen and (min-width: 300px) and (max-width: 500px) {
     .mobile {
         display: block !important;
@@ -4093,6 +4121,5 @@ color: #F1951C;
         display: block !important;
     }
 }
-
 
 /* ///////////////////////////////////////////////////////service-details style////////////////////////////////////////////// */

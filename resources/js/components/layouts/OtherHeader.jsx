@@ -43,7 +43,7 @@ const OtherHeader = () => {
                                 <Link to="/">
                                     <img
                                         src={
-                                            "assets/front/img/beeda_white_logo.png"
+                                            "/assets/front/img/beeda_white_logo.png"
                                         }
                                         alt="Beeda- Mega App"
 
@@ -99,7 +99,7 @@ const OtherHeader = () => {
                                     >
                                         <img
                                             className=""
-                                            src={"assets/front/img/vector.svg"}
+                                            src={"/assets/front/img/vector.svg"}
                                             alt=" "
                                         />
                                         EN&nbsp;
