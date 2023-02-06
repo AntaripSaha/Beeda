@@ -120,7 +120,7 @@ const Water = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/ride-share/Beeda-Ride_Sharing_Service.jpg"
+                    src="/img/water/water2.jpg"
                     alt="Beeda Mega App"
                     width="430px"
                   />
@@ -133,7 +133,7 @@ const Water = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/about-us/Beeda-Business With Beeda.png"
+                    src="/img/water/water3.jpg"
                     alt="Small Business With Beeda"
                     width="430px"
                   />
