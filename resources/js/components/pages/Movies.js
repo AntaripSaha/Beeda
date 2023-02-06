@@ -95,7 +95,7 @@ const movies = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/movies/movie1.jpg"
+                    src="/img/movies/movie1.png"
                     alt="Beeda"
                     width="430px"
                   />
@@ -154,7 +154,7 @@ const movies = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/movies/movie3.jpg"
+                    src="/img/movies/movie3.png"
                     alt="Small Business With Beeda"
                     width="430px"
                   />

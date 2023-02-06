@@ -133,7 +133,7 @@ const Travel = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <img
-                    src="/img/about-us/Beeda-Business With Beeda.png"
+                    src="/img/travel/travel3.jpg"
                     alt="Small Business With Beeda"
                     width="430px"
                   />
@@ -178,7 +178,7 @@ const Travel = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/about-us/Beeda-Grow your Business.jpg"
+                    src="/img/travel/travel4.jpg"
                     alt="Grow Your Business With Beeda Mega App"
                     width="430px"
                   />
