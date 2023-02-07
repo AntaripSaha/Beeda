@@ -56,7 +56,7 @@ const OtherHeader = () => {
                         <ul className="nav-menu">
                             <li className="menu-active">
                                 <NavLink to={``} activeClassName="nav-active">
-                                    Homeeee
+                                    Home
                                 </NavLink>
                             </li>
                             <li>
