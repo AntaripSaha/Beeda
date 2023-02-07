@@ -45,7 +45,7 @@ const Header = () => {
                         <ul className="nav-menu">
                             <li className="menu-active"><a href=""><Link to={``}>Home</Link></a></li>
                             <li><a href="" target="_blank"><Link to={`partner-with-us`}>Partner With Us</Link></a></li>
-                            <li><a href="" target="_blank"><Link to={`about-us`}>About Us</Link></a></li>
+                            <li><a href="" target="_blank"><Link to={`about-us`}>About Usssss</Link></a></li>
                             <li><a href="#advanced-features" target="_blank">More Features</a></li>
                             <li><a href={`${CDN_URL}login`} target="_blank" rel="noreferrer">Store Login</a></li>
                             <li><a href="#contact" target="_blank">Contact Us</a></li>
