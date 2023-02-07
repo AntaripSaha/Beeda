@@ -81,7 +81,7 @@ export default function Details() {
                            </SkeletonTheme>
                             </div>
                            )
-                        }
+        }
         </>
     );
 }

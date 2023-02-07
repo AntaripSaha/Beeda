@@ -276,8 +276,7 @@ export default function OtherFooter() {
                                     </a>
                                 </div>
                             </div>
-                           
-                        </div>
+                        </div>                  
                     </div>
                     <div className="card-container">
                                 <img src="/img/visa.jpg" alt="mastercard" />
@@ -288,9 +287,6 @@ export default function OtherFooter() {
                                 <img src="/img/paypal.jpg" alt="mastercard" />
                                 <img src="/img/google-pay.jpg" alt="mastercard" />
                                 <img src="/img/apple-pay.jpg" alt="mastercard" />
-                    </div>
-                    <div>
-                        
                     </div>
                 </div>
             </div>
