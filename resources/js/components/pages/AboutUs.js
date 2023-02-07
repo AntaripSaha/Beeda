@@ -118,23 +118,12 @@ const AboutUs = () => {
                             <div className="col-lg-6 d-flex flex-column justify-content-start">
                                 <h3>What is Beeda?</h3>
                                 <p>
-                                    Beedamall was created as part of a Mega
-                                    ecosystem of online and on demand services,
-                                    where users can find everything they do on
-                                    their mobile in one place, under one tap, at
-                                    Beeda you’ll be empowered to drive impact
-                                    across the world, working with our talented
-                                    team to build a world class product that
-                                    nations will run on.
-                                </p>
-                                <p>
-                                    whether you’re creating codes for our Mega-
-                                    App or finding new ways to bring our
-                                    platform to the people in your city. You’ll
-                                    have the opportunity to learn and grow every
-                                    day, and develop your skills alongside
-                                    talented and inspiring people from around
-                                    the Globe.
+                                    Beeda has all the services that you need in your daily life.
+                                    Users can find their needs with a single tap. Besides, the vendors can use Beeda platforms
+                                    to enlist their business and reach their audience more easily. So, whether you have
+                                    a small/medium business or need to get your needs, Beeda should be your first choice.
+                                    E-commerce, water, gas, flower, liquor, ride-sharing, food, grocery, and 50+ services are available in Beeda.
+                                    You can avail of all these services with a single tap and make your life easier.
                                 </p>
                             </div>
                         </div>
@@ -146,19 +135,12 @@ const AboutUs = () => {
                             <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
                                 <h3>Our Motive</h3>
                                 <p>
-                                    Beeda leaders are purpose driven and
-                                    motivated. To keep on pushing the boundaries
-                                    forward, by leveraging technology to
-                                    simplify and improve lives of millions.
-                                </p>
-                                <p>
-                                    We are building an awesome organisation, and
-                                    a global platform that offers subscription
-                                    model over the old commission system,
-                                    therefore allowing vendors, drivers and
-                                    businesses to earn more, our vison at Beeda
-                                    is to always remember that the only way to
-                                    win is for everyone to win.
+                                    Making life easier with a digital solution is our main motive.
+                                    We’ve introduced the subscription-based business model over the
+                                    commission-based old model. All the vendors, drivers,
+                                    and businesses can use our platforms and reach their audience
+                                    within the shortest possible time. Our expert tech team is there
+                                    to help you in every possible way.
                                 </p>
                             </div>
                             <div className="col-lg-6 order-1">
@@ -184,12 +166,11 @@ const AboutUs = () => {
                             <div className="col-lg-6 d-flex flex-column justify-content-start">
                                 <h3>Small Business</h3>
                                 <p>
-                                    Beeda is determined to continue partnering
-                                    with small business owners in the local
-                                    community and believes that creating the
-                                    soil for small businesses to grow and making
-                                    the local community prosperous is the way
-                                    for Beeda to truly grow.
+                                    If you have a small local business and you’re looking for the best platform to grow,
+                                    Beeda should be your first choice. We are committed to partnering with all
+                                    the local businesses, no matter what the size is. We are creating the soil
+                                    for entrepreneurs. You can enlist your business now and reach your audience
+                                    easier than before.
                                 </p>
                                 <span
                                     className={`link-page d-flex align-items-center ${AboutStyle.clickToRegister}`}
@@ -207,21 +188,12 @@ const AboutUs = () => {
                     <div className="container-fluid p-0">
                         <div className="row">
                             <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                                <h3>Grow Business with Beeda Mega App</h3>
+                                <h3>Grow with Beeda</h3>
                                 <p>
-                                    Beeda customers can easily and quickly
-                                    access the products of small business owners
-                                    starting their business through Beeda Mega
-                                    Platform, allowing small business owners to
-                                    acquire more sales opportunities based on
-                                    customer trust in Beeda platform.
-                                </p>
-                                <p>
-                                    The growth of these small businesses leads
-                                    to the development of the local economy, and
-                                    leads to a virtuous cycle of win-win growth
-                                    with the local community, sellers, and
-                                    customers.
+                                    Beeda has millions of users across the country.
+                                    Therefore, you can easily reach your target audience and
+                                    grow your business. So, enlist your business now,
+                                    and reach your target audience easier than before.
                                 </p>
                             </div>
                             <div className="col-lg-6 order-1">
