@@ -1029,8 +1029,7 @@ const Home = () => {
                     <div className="details">
                       <h3>50+ Services</h3>
                       <p>
-                        Beeda mega app allows to access more than 50 on-demand
-                        services.
+                        Beeda Mega App offers 50+ on-demand services.
                       </p>
                     </div>
                   </div>
