@@ -3877,12 +3877,12 @@ color: #F1951C;
         font-size: 14px;
     }
     #whoWeAre {
-        margin-top: 70px;
+        margin-top: 0px;
         background-image: url(/img/Rectangle\ 4635.png);
         width: 100%;
         backdrop-filter: blur(5px);
         border-radius: 33px;
-        padding: 3% 10%;
+        padding: 7% 7%;
         text-align: center;
     }
     #whoWeAre p {

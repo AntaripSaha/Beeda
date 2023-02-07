@@ -10,9 +10,9 @@ import {
 import { CDN_URL } from "../../constant";
 const AboutUs = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
-    const [showMore,setShowMore]=useState(false)
-    const divdata= {
-            paragraph :`Beeda Mega App aims to give you
+    const [showMore, setShowMore] = useState(false)
+    const divdata = {
+        paragraph: `Beeda Mega App aims to give you
             everything with a single tap. In Beeda,
             all the services are there; you can just
             click on the app and get the needed one. Apart from that, we create a great
@@ -24,12 +24,12 @@ const AboutUs = () => {
             help you in every way possible. Thus, we
             ensure the best use of technology to
             make life easier.`
-        }
-    
-    const {text}=divdata
-    
-    
-    useEffect(() =>{
+    }
+
+    const { text } = divdata
+
+
+    useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
     console.log(divdata[0])
@@ -102,7 +102,7 @@ const AboutUs = () => {
                     </section>
                 </Container> */}
             </div>
-           
+
 
             <div className="wrapper">
                 <div id="whatIsBeeda">
@@ -214,7 +214,7 @@ const AboutUs = () => {
                                     starting their business through Beeda Mega
                                     Platform, allowing small business owners to
                                     acquire more sales opportunities based on
-                                    customer trust in Beeda platform. 
+                                    customer trust in Beeda platform.
                                 </p>
                                 <p>
                                     The growth of these small businesses leads
@@ -242,7 +242,7 @@ const AboutUs = () => {
                             <div className="col-12 m-auto">
                                 <div id="whoWeAre" className="desktop">
                                     <h2>Who are we?</h2>
-                                    <p className="fs-8 text-justify">
+                                    <p className="fs-8 text-center">
                                         Beeda Mega App aims to give you
                                         everything with a single tap. In Beeda,
                                         all the services are there; you can just
@@ -257,17 +257,17 @@ const AboutUs = () => {
                                         ensure the best use of technology to
                                         make life easier.
                                     </p>
-                                    
-                             
+
+
                                 </div>
                                 <div id="whoWeAre" className="mobile">
-                                <h2>Who are we?</h2>
-                                     
-                                      <p className="fs-8 text-justify">
-                                      {showMore ? divdata.paragraph : `${divdata.paragraph.substring(0, 296)}`}
-                                      <span onClick={() => setShowMore(!showMore)}>{showMore ? <span className="showless">Show less</span>: <span className="showmore">Show more</span>}</span>
-                                      </p>
-                                 
+                                    <h2>Who are we?</h2>
+
+                                    <p className="fs-8 text-center">&nbsp
+                                        {showMore ? divdata.paragraph : `${divdata.paragraph.substring(0, 296)}`}
+                                        <span onClick={() => setShowMore(!showMore)}>{showMore ? <span className="showless"> Show less</span> : <span className="showmore">Show more</span>}</span>
+                                    </p>
+
                                 </div>
                             </div>
                         </div>
