@@ -8,12 +8,31 @@ import {
     NavLink,
 } from "react-router-dom";
 import { CDN_URL } from "../../constant";
-
 const AboutUs = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
+    const [showMore,setShowMore]=useState(false)
+    const divdata= {
+            paragraph :`Beeda Mega App aims to give you
+            everything with a single tap. In Beeda,
+            all the services are there; you can just
+            click on the app and get the needed one. Apart from that, we create a great
+            subscription-based platform for all
+            businesses. Using the Beeda platform,
+            you can build up and grow your business
+            in order to run through the country. For
+            that, our world-class team is there to
+            help you in every way possible. Thus, we
+            ensure the best use of technology to
+            make life easier.`
+        }
+    
+    const {text}=divdata
+    
+    
     useEffect(() =>{
         window.scrollTo(0, 0)
     }, [])
+    console.log(divdata[0])
     return (
         <>
             <img
@@ -83,34 +102,7 @@ const AboutUs = () => {
                     </section>
                 </Container> */}
             </div>
-            <div className="wrapper">
-                <div className="whoWeAre-content">
-                    <div className="container-fluid p-0">
-                        <div className="row">
-                            <div className="col-12 m-auto">
-                                <div id="whoWeAre">
-                                    <h2>Who are we?</h2>
-                                    <p className="fs-8 text-justify">
-                                        Beeda Mega App aims to give you
-                                        everything with a single tap. In Beeda,
-                                        all the services are there; you can just
-                                        click on the app and get the needed one.
-                                        Apart from that, we create a great
-                                        subscription-based platform for all
-                                        businesses. Using the Beeda platform,
-                                        you can build up and grow your business
-                                        in order to run through the country. For
-                                        that, our world-class team is there to
-                                        help you in every way possible. Thus, we
-                                        ensure the best use of technology to
-                                        make life easier.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
 
             <div className="wrapper">
                 <div id="whatIsBeeda">
@@ -200,7 +192,7 @@ const AboutUs = () => {
                                     for Beeda to truly grow.
                                 </p>
                                 <span
-                                    className={`d-flex align-items-center ${AboutStyle.clickToRegister}`}
+                                    className={`link-page d-flex align-items-center ${AboutStyle.clickToRegister}`}
                                 >
                                     Click here to register
                                     <span className="material-symbols-outlined ml-2">
@@ -243,7 +235,45 @@ const AboutUs = () => {
                     </div>
                 </div>
             </div>
-
+            <div className="wrapper">
+                <div className="whoWeAre-content">
+                    <div className="container-fluid p-0">
+                        <div className="row">
+                            <div className="col-12 m-auto">
+                                <div id="whoWeAre" className="desktop">
+                                    <h2>Who are we?</h2>
+                                    <p className="fs-8 text-justify">
+                                        Beeda Mega App aims to give you
+                                        everything with a single tap. In Beeda,
+                                        all the services are there; you can just
+                                        click on the app and get the needed one.
+                                        Apart from that, we create a great
+                                        subscription-based platform for all
+                                        businesses. Using the Beeda platform,
+                                        you can build up and grow your business
+                                        in order to run through the country. For
+                                        that, our world-class team is there to
+                                        help you in every way possible. Thus, we
+                                        ensure the best use of technology to
+                                        make life easier.
+                                    </p>
+                                    
+                             
+                                </div>
+                                <div id="whoWeAre" className="mobile">
+                                <h2>Who are we?</h2>
+                                     
+                                      <p className="fs-8 text-justify">
+                                      {showMore ? divdata.paragraph : `${divdata.paragraph.substring(0, 296)}`}
+                                      <span onClick={() => setShowMore(!showMore)}>{showMore ? <span className="showless">Show less</span>: <span className="showmore">Show more</span>}</span>
+                                      </p>
+                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-lg-7 m-auto p-relative">
@@ -261,7 +291,14 @@ const AboutUs = () => {
                             alt="happy"
                             width="315"
                             height="306"
-                            className="thankUImg"
+                            className="thankUImg desktop"
+                        />
+                        <img
+                            src="/img/about-us/happy.png"
+                            alt="happy"
+                            width="315"
+                            height="306"
+                            className="thankUImg mobile"
                         />
                     </div>
                 </div>
