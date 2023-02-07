@@ -80,7 +80,7 @@ const Flower = () => {
                   />
                 </div>
                 <div className="col-lg-6 d-flex flex-column justify-content-start">
-                  <h3>About Beeda ride sharing</h3>
+                  <h3>About Beeda Service</h3>
                   <p>
                     Beedamall was created as part of a Mega ecosystem of online
                     and on demand services, where users can find everything they
@@ -104,7 +104,7 @@ const Flower = () => {
             <div className="container-fluid p-0">
               <div className="row">
                 <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                  <h3>Travel smarter, not harder with Beeda ride sharing</h3>
+                  <h3>Why Choose Flowers from Beeda?</h3>
                   <p>
                     Beeda leaders are purpose driven and motivated. To keep on
                     pushing the boundaries forward, by leveraging technology to
@@ -139,7 +139,7 @@ const Flower = () => {
                   />
                 </div>
                 <div className="col-lg-6 d-flex flex-column justify-content-start">
-                  <h3>Enjoy the ride, leave the driving to us</h3>
+                  <h3>For User</h3>
                   <p>
                     Beeda is determined to continue partnering with small business
                     owners in the local community and believes that creating the
@@ -162,7 +162,7 @@ const Flower = () => {
             <div className="container-fluid p-0">
               <div className="row">
                 <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                  <h3>Relax, we've got your ride covered</h3>
+                  <h3>Grow Your Business</h3>
                   <p>
                     Beeda customers can easily and quickly access the products of
                     small business owners starting their business through Beeda
