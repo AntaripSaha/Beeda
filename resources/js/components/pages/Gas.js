@@ -175,7 +175,7 @@ const Gas = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/gas/gas1.jpg"
+                    src="/img/gas/gas4.jpg"
                     alt="Grow Your Business With Beeda Mega App"
                     width="430px"
                   />

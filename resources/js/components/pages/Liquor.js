@@ -178,7 +178,7 @@ const Liquor = () => {
                 </div>
                 <div className="col-lg-6 order-1">
                   <img
-                    src="/img/about-us/Beeda-Grow your Business.jpg"
+                    src="/img/liquor/liquor4.jpg"
                     alt="Grow Your Business With Beeda Mega App"
                     width="430px"
                   />
