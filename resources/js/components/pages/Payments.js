@@ -81,21 +81,14 @@ const Payment = () => {
                 />
               </div>
               <div className="col-lg-6 d-flex flex-column justify-content-start">
-                <h3>About Beeda ride sharing</h3>
+                <h3>About Beeda Wallet</h3>
                 <p>
-                  Beedamall was created as part of a Mega ecosystem of online
-                  and on demand services, where users can find everything they
-                  do on their mobile in one place, under one tap, at Beeda
-                  you’ll be empowered to drive impact across the world, working
-                  with our talented team to build a world class product that
-                  nations will run on.
-                </p>
-                <p>
-                  whether you’re creating codes for our Mega- App or finding new
-                  ways to bring our platform to the people in your city. You’ll
-                  have the opportunity to learn and grow every day, and develop
-                  your skills alongside talented and inspiring people from
-                  around the Globe.
+                  Beeda Wallet is a convenient and secure digital wallet that makes
+                  it easy for users to store and manage their money. With Beeda Wallet,
+                  users can easily make purchases, transfer money, and keep track of their
+                  transactions, all in one place. The wallet ensures that users' funds are
+                  always safe. Whether you're a consumer or a business owner, Beeda Wallet
+                  offers the flexibility and control you need to manage your finances effectively.
                 </p>
               </div>
             </div>
@@ -105,18 +98,14 @@ const Payment = () => {
           <div className="container-fluid p-0">
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                <h3>Travel smarter, not harder with Beeda ride sharing</h3>
+                <h3>Our Motive</h3>
                 <p>
-                  Beeda leaders are purpose driven and motivated. To keep on
-                  pushing the boundaries forward, by leveraging technology to
-                  simplify and improve lives of millions.
-                </p>
-                <p>
-                  We are building an awesome organisation, and a global platform
-                  that offers subscription model over the old commission system,
-                  therefore allowing vendors, drivers and businesses to earn
-                  more, our vison at Beeda is to always remember that the only
-                  way to win is for everyone to win.
+                  Beeda wallet is a simple, convenient, and secure platform that enables both users
+                  and businesses to manage their transactions easily. For users, Beeda wallet offers
+                  a seamless way to store and access their funds, while businesses can use it to process
+                  payments and manage their financial transactions. Whether you're a consumer looking for
+                  an easy-to-use payment solution, or a business owner seeking to streamline your financial
+                  operations, Beeda wallet has everything you need to succeed.
                 </p>
               </div>
               <div className="col-lg-6 order-1">
@@ -140,12 +129,13 @@ const Payment = () => {
                 />
               </div>
               <div className="col-lg-6 d-flex flex-column justify-content-start">
-                <h3>Enjoy the ride, leave the driving to us</h3>
+                <h3>Everything from One Wallet</h3>
                 <p>
-                  Beeda is determined to continue partnering with small business
-                  owners in the local community and believes that creating the
-                  soil for small businesses to grow and making the local
-                  community prosperous is the way for Beeda to truly grow.
+                  Beeda Wallet offers a convenient and secure way for users to manage their finances.
+                  Whether you're looking to store your cash, pay bills, or make purchases,
+                  Beeda's wallet has everything you need to keep your money safe and accessible.
+                  With fast and easy transactions, you can enjoy the peace of mind that comes with
+                  knowing your money is in good hands.
                 </p>
                 <span
                   className={`d-flex align-items-center ${AboutStyle.clickToRegister}`}
@@ -163,18 +153,13 @@ const Payment = () => {
           <div className="container-fluid p-0">
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                <h3>Relax, we've got your ride covered</h3>
+                <h3>Grow Your Business with Beeda Wallet</h3>
                 <p>
-                  Beeda customers can easily and quickly access the products of
-                  small business owners starting their business through Beeda
-                  Mega Platform, allowing small business owners to acquire more
-                  sales opportunities based on customer trust in Beeda
-                  platform.
-                </p>
-                <p>
-                  The growth of these small businesses leads to the development
-                  of the local economy, and leads to a virtuous cycle of win-win
-                  growth with the local community, sellers, and customers.
+                  Beeda Wallet helps businesses grow and manage their finances more efficiently.
+                  Whether you're a small business owner or a large corporation, Beeda Wallet offers
+                  a wide range of features to streamline your financial operations. With easy-to-use tools,
+                  real-time insights, secure transactions, getting payments, and taking loans,
+                  Beeda Wallet empowers businesses to grow and succeed.
                 </p>
               </div>
               <div className="col-lg-6 order-1">

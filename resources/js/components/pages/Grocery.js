@@ -79,21 +79,17 @@ const Grocery = () => {
                 />
               </div>
               <div className="col-lg-6 d-flex flex-column justify-content-start">
-                <h3>About Beeda ride sharing</h3>
+                <h3>About Beeda Grocery Delivery Service</h3>
                 <p>
-                  Beedamall was created as part of a Mega ecosystem of online
-                  and on demand services, where users can find everything they
-                  do on their mobile in one place, under one tap, at Beeda
-                  you’ll be empowered to drive impact across the world, working
-                  with our talented team to build a world class product that
-                  nations will run on.
-                </p>
-                <p>
-                  whether you’re creating codes for our Mega- App or finding new
-                  ways to bring our platform to the people in your city. You’ll
-                  have the opportunity to learn and grow every day, and develop
-                  your skills alongside talented and inspiring people from
-                  around the Globe.
+                  Beeda's grocery delivery service benefits both customers and business owners.
+                  It provides customers with a convenient and efficient way to order groceries online,
+                  saving time and hassle. With a wide selection of products, fast delivery options, and
+                  a user-friendly interface, Beeda makes grocery shopping easy and stress-free.
+                  For business owners, Beeda's grocery delivery service provides a new revenue stream and
+                  helps them reach a wider customer base. Enlisting their store on the platform allows business
+                  owners to expand their reach and sell more products. Beeda aims to bring customers
+                  and businesses together, making it easier and more enjoyable for everyone to get what they need.
+
                 </p>
               </div>
             </div>
@@ -103,18 +99,15 @@ const Grocery = () => {
           <div className="container-fluid p-0">
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                <h3>Travel smarter, not harder with Beeda ride sharing</h3>
+                <h3>Our Motive</h3>
                 <p>
-                  Beeda leaders are purpose driven and motivated. To keep on
-                  pushing the boundaries forward, by leveraging technology to
-                  simplify and improve lives of millions.
-                </p>
-                <p>
-                  We are building an awesome organisation, and a global platform
-                  that offers subscription model over the old commission system,
-                  therefore allowing vendors, drivers and businesses to earn
-                  more, our vison at Beeda is to always remember that the only
-                  way to win is for everyone to win.
+                  Beeda’s goal is to bridge the gap between
+                  customers and business owners with our grocery
+                  delivery service. Our aim is to make grocery shopping
+                  effortless for customers and allow business owners to
+                  expand their reach, increase their revenue streams, and
+                  create a seamless, efficient, and mutually beneficial solution
+                  that serves the needs of both customers and business owners.
                 </p>
               </div>
               <div className="col-lg-6 order-1">
@@ -138,12 +131,13 @@ const Grocery = () => {
                 />
               </div>
               <div className="col-lg-6 d-flex flex-column justify-content-start">
-                <h3>Enjoy the ride, leave the driving to us</h3>
+                <h3>Get Fresh Groceries at Your Doorsteps</h3>
                 <p>
-                  Beeda is determined to continue partnering with small business
-                  owners in the local community and believes that creating the
-                  soil for small businesses to grow and making the local
-                  community prosperous is the way for Beeda to truly grow.
+                  Get fresh groceries at your doorstep with Beeda's grocery delivery service.
+                  Our platform offers an extensive selection of products, fast and reliable delivery,
+                  and an easy-to-use interface. Say goodbye to crowded
+                  stores and long lines and enjoy the convenience of having your
+                  groceries delivered right to your home. Shop with confidence.
                 </p>
                 <span
                   className={`d-flex align-items-center ${AboutStyle.clickToRegister}`}
@@ -161,18 +155,13 @@ const Grocery = () => {
           <div className="container-fluid p-0">
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                <h3>Relax, we've got your ride covered</h3>
+                <h3>Grow Your Grocery Business</h3>
                 <p>
-                  Beeda customers can easily and quickly access the products of
-                  small business owners starting their business through Beeda
-                  Mega Platform, allowing small business owners to acquire more
-                  sales opportunities based on customer trust in Beeda
-                  platform.
-                </p>
-                <p>
-                  The growth of these small businesses leads to the development
-                  of the local economy, and leads to a virtuous cycle of win-win
-                  growth with the local community, sellers, and customers.
+                  Expand your grocery business with Beeda's platform. Our subscription-based model
+                  connects you with a larger customer base and streamlines your delivery operations.
+                  With real-time tracking capabilities, a user-friendly interface, and efficient delivery options,
+                  Beeda empowers your business to grow and meet market demands. Join Beeda today and take your
+                  grocery business to the next level.
                 </p>
               </div>
               <div className="col-lg-6 order-1">

@@ -80,21 +80,19 @@ const FoodDelivery = () => {
                 />
               </div>
               <div className="col-lg-6 d-flex flex-column justify-content-start">
-                <h3>About Beeda ride sharing</h3>
+                <h3>About Beeda Food Delivery Service</h3>
                 <p>
-                  Beedamall was created as part of a Mega ecosystem of online
-                  and on demand services, where users can find everything they
-                  do on their mobile in one place, under one tap, at Beeda
-                  you’ll be empowered to drive impact across the world, working
-                  with our talented team to build a world class product that
-                  nations will run on.
+                  Beeda Food Delivery Services is a game-changer in the food delivery industry.
+                  The platform offers a diverse selection of restaurants,
+                  giving customers a multitude of delicious options to choose from.
+                  Restaurants can join the platform, reach a larger customer base,
+                  and streamline their delivery operations through its subscription-based model.
                 </p>
                 <p>
-                  whether you’re creating codes for our Mega- App or finding new
-                  ways to bring our platform to the people in your city. You’ll
-                  have the opportunity to learn and grow every day, and develop
-                  your skills alongside talented and inspiring people from
-                  around the Globe.
+                  The intuitive interface, real-time tracking,
+                  and convenient payment options make ordering food a breeze for customers.
+                  Whether you're looking for a quick lunch or a full-on feast,
+                  Beeda has everything you need to satisfy your cravings.
                 </p>
               </div>
             </div>
@@ -104,18 +102,13 @@ const FoodDelivery = () => {
           <div className="container-fluid p-0">
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                <h3>Travel smarter, not harder with Beeda ride sharing</h3>
+                <h3>Our Motive</h3>
                 <p>
-                  Beeda leaders are purpose driven and motivated. To keep on
-                  pushing the boundaries forward, by leveraging technology to
-                  simplify and improve lives of millions.
-                </p>
-                <p>
-                  We are building an awesome organisation, and a global platform
-                  that offers subscription model over the old commission system,
-                  therefore allowing vendors, drivers and businesses to earn
-                  more, our vison at Beeda is to always remember that the only
-                  way to win is for everyone to win.
+                  Beeda Food Delivery Service's motive is to serve customers and food businesses equally.
+                  By providing a platform for restaurants to expand their reach and streamline their delivery operations,
+                  Beeda empowers food businesses to grow. At the same time, Beeda offers a convenient and reliable solution for customers,
+                  making ordering food from their favorite restaurants easy.
+                  The ultimate goal is to provide a seamless, efficient, and enjoyable food delivery experience for all.
                 </p>
               </div>
               <div className="col-lg-6 order-1">
@@ -139,12 +132,14 @@ const FoodDelivery = () => {
                 />
               </div>
               <div className="col-lg-6 d-flex flex-column justify-content-start">
-                <h3>Enjoy the ride, leave the driving to us</h3>
+                <h3>Eat Better, Live Better</h3>
                 <p>
-                  Beeda is determined to continue partnering with small business
-                  owners in the local community and believes that creating the
-                  soil for small businesses to grow and making the local
-                  community prosperous is the way for Beeda to truly grow.
+                  Beeda Food Delivery Service provides a user-friendly
+                  and efficient way to order food. Customers can browse through
+                  various restaurants and cuisines to find their desired meal.
+                  The platform offers real-time tracking, a simple payment,
+                  and a smooth ordering experience. With Beeda, getting your
+                  food delivered to your door is as easy as a few clicks.
                 </p>
                 <span
                   className={`d-flex align-items-center ${AboutStyle.clickToRegister}`}
@@ -162,18 +157,13 @@ const FoodDelivery = () => {
           <div className="container-fluid p-0">
             <div className="row">
               <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
-                <h3>Relax, we've got your ride covered</h3>
+                <h3>Grow Your Food Business</h3>
                 <p>
-                  Beeda customers can easily and quickly access the products of
-                  small business owners starting their business through Beeda
-                  Mega Platform, allowing small business owners to acquire more
-                  sales opportunities based on customer trust in Beeda
-                  platform.
-                </p>
-                <p>
-                  The growth of these small businesses leads to the development
-                  of the local economy, and leads to a virtuous cycle of win-win
-                  growth with the local community, sellers, and customers.
+                  Beeda empowers food businesses to reach their target customers and grow.
+                  By enlisting on the platform, restaurants can elevate their service and
+                  deliver delicious food to a wider audience. Beeda streamlines operations,
+                  allowing businesses to focus on their specialty and serving amazing food.
+                  Join Beeda and take your food business to the next level.
                 </p>
               </div>
               <div className="col-lg-6 order-1">
