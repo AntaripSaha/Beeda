@@ -20,8 +20,8 @@ export default function Details() {
         console.log("loading");
         setLoading(true);
         axios
-        .get("https://beeda.com/api/all-blogs?per_page=12&page=1").then((res) => {
-            let singlePost = res.data.posts.data.find(item => item.slug === slug)
+        .get("https://beeda.com/api/allBlogs").then((res) => {
+            let singlePost = res.data.posts.find(item => item.slug === slug)
                 setItem(singlePost)
                 setYear(new Date(singlePost.created_at).getFullYear());
                 setMonth(new Date(singlePost.created_at).getMonth() + 1);

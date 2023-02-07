@@ -52,13 +52,13 @@ const Liquor = () => {
                 </div>
                 <div>
                   <img
-                    src="/img/ride-share/drive-image-mobile.png"
+                    src="/img/liquor/logo2.png"
                     alt="beeda icon"
                     className="mobile"
                   />
   
                   <img
-                    src="/img/ride-share/drive-image.png"
+                    src="/img/liquor/logo1.png"
                     alt="beeda icon"
                     className="desktop"
                   />

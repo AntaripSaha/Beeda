@@ -43,32 +43,22 @@ const FoodDelivery = () => {
       <div
         className={`aboutUsBanner d-flex justify-content-center align-items-center`}
       >
-        {/* <img src={AboutBannerImg} alt="about-us banner" /> */}
         <section className="w-100">
           <div className="container">
-            {/* <div className="row">
-                          <div className="col-6"></div>
-                          <div className="col-6 m-auto d-flex justify-content-end">
-                              <img
-                                  src={BeedaIcon}
-                                  alt="beeda icon"
-                                  className="beedaIcon"
-                              />
-                          </div>
-                      </div> */}
+
             <div className="d-flex align-items-center justify-content-between">
               <div className="">
                 <div className="rideShareHeadline">Food Delivery</div>
               </div>
               <div>
                 <img
-                  src="/img/ride-share/drive-image-mobile.png"
+                  src="/img/food/logo2.png"
                   alt="beeda icon"
                   className="mobile"
                 />
 
                 <img
-                  src="/img/ride-share/drive-image.png"
+                  src="/img/food/logo1.png"
                   alt="beeda icon"
                   className="desktop"
                 />
@@ -76,17 +66,6 @@ const FoodDelivery = () => {
             </div>
           </div>
         </section>
-        {/* <Container>
-                  <section id="about" className="section-bg mb-5">
-                      <div className="container">
-                          <div className="row">
-                              <div className="col-4 m-auto">
-                                  All about Beeda!!
-                              </div>
-                          </div>
-                      </div>
-                  </section>
-              </Container> */}
       </div>
 
       <div className="wrapper">
