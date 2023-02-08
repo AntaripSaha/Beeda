@@ -95,7 +95,7 @@ export default function OtherFooter() {
                                 <li className="list-group-item">  <NavLink to={`about-us`}>About Us</NavLink></li>
                                 </a>
                                 <li className="list-group-item">
-                                <NavLink to={`contact-us`}>About Us</NavLink>
+                                <NavLink to={`contact-us`}>Contact Us</NavLink>
                                 </li>
                                 <li className="list-group-item">
                                 <NavLink to={`blogs`}>Blog</NavLink>

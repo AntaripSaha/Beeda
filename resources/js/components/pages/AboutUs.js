@@ -229,15 +229,13 @@ const AboutUs = () => {
                                         ensure the best use of technology to
                                         make life easier.
                                     </p>
-
-
                                 </div>
                                 <div id="whoWeAre" className="mobile">
                                     <h2>Who are we?</h2>
 
-                                    <p className="fs-8 text-center">&nbsp
+                                    <p className="fs-8 text-center">
                                         {showMore ? divdata.paragraph : `${divdata.paragraph.substring(0, 296)}`}
-                                        <span onClick={() => setShowMore(!showMore)}>{showMore ? <span className="showless"> Show less</span> : <span className="showmore">Show more</span>}</span>
+                                        <span onClick={() => setShowMore(!showMore)}>{showMore ? <span className="showless ms-2"> Show less</span> : <span className="showmore ms-2">Show more</span>}</span>
                                     </p>
 
                                 </div>
