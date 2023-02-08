@@ -79,7 +79,7 @@ const AboutUs = () => {
                                     <span className={`aboutSubHeadLine`}>
                                         Beeda
                                     </span>
-                                    !!
+                                    !
                                     <img
                                         src="/img/about-us/beeda-icon.svg"
                                         alt="beeda icon"

@@ -465,7 +465,7 @@ const Home = () => {
                       user-friendly products and the best services to customers.
                       Join the Beeda team to make a difference.
                     </div>
-                    <a href="" target="_blank" className="button_profile">
+                    <a href="mailto:support@beeda.com" target="_blank" className="button_profile">
                       Join as Employee
                     </a>
                   </div>
@@ -488,7 +488,7 @@ const Home = () => {
                       opportunity to work at your convenience time. Join Beeda
                       and start serving.
                     </div>
-                    <a href="" target="_blank" className="button_profile">
+                    <a href="https://play.google.com/store/apps/details?id=com.beeda.user&hl=en&gl=US" target="_blank" className="button_profile">
                       Join as Driver
                     </a>
                   </div>
@@ -511,7 +511,7 @@ const Home = () => {
                       platform and reach an enormous number of customers, place
                       ads and chat with them, and get payment in your wallet.
                     </div>
-                    <a href="" target="_blank" className="button_profile">
+                    <a href="https://beeda.com/register" target="_blank" className="button_profile">
                       Join as Merchant
                     </a>
                   </div>
