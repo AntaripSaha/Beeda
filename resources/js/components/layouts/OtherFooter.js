@@ -1,6 +1,5 @@
 import { auto } from "@popperjs/core";
 import React, { useState } from "react";
-import BeedaIcon from "../../../img/Frame.png";
 import { BsFacebook } from 'react-icons/bs';
 import { AiFillInstagram } from 'react-icons/ai';
 import { AiFillLinkedin } from 'react-icons/ai';
