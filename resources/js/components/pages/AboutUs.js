@@ -63,7 +63,7 @@ const AboutUs = () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-8 m-auto">
-                                <div className="aboutHeadLine">
+                                <h1 className="aboutHeadLine">
                                     All about{" "}
                                     <span className={`aboutSubHeadLine`}>
                                         Beeda
@@ -74,7 +74,7 @@ const AboutUs = () => {
                                         alt="beeda icon"
                                         className="beedaIcon"
                                     />
-                                </div>
+                                </h1>
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@ const AboutUs = () => {
                                 <span
                                     className={`link-page d-flex align-items-center ${AboutStyle.clickToRegister}`}
                                 >
-                                    Click here to register
+                                    <a href="#" className="text-primary">Click here to register</a>
                                     <span className="material-symbols-outlined ml-2">
                                         arrow_circle_right
                                     </span>

@@ -19,6 +19,7 @@ const OtherHeader = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
     return (
         <>
+        
             {/* <Navbar bg="primary" variant="dark">
             <Container>
             <Navbar.Brand href="#home"><img className='w-50'  src={'public/assets/front/img/beeda_white_logo.png'} /></Navbar.Brand>

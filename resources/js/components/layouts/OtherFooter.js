@@ -13,75 +13,91 @@ import {
     NavLink,
 } from "react-router-dom";
 import { NavHashLink } from 'react-router-hash-link';
+import axios from "axios";
+import { useToast, immediateToast } from "izitoast-react";
+import "izitoast-react/dist/iziToast.css";
+
 export default function OtherFooter() {
-    const [hoverFb, setHoverFb] = useState(false)
-    const [hoverInsta, setHoverInsta] = useState(false)
-    const [hoverIn, setHoverIn] = useState(false)
-    const [hoverTwe, setHoverTwe] = useState(false)
-    const [hoveryou, setHoverYou] = useState(false)
+    const [email, setEmail] = useState('');
+    const [hoverFb, setHoverFb]=useState(false)
+    const [hoverInsta, setHoverInsta]=useState(false)
+    const [hoverIn, setHoverIn]=useState(false)
+    const [hoverTwe, setHoverTwe]=useState(false)
+    const [hoveryou, setHoverYou]=useState(false)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) && email !== '')
+        {
+            axios
+                .post(`http://beeda-frontend.local/api/subscribe/store`, {email: email})
+                .then((res) => {
+                    console.log(res.data.message);
+                    if(res.data.status){
+                        setEmail('');
+                        immediateToast("info", {
+                            message: res.data.message,
+                            timeout: 500000
+                        });
+                    }
+                    else {
+                        immediateToast("info", {
+                            message: res.data.message,
+                            timeout: 500000
+                        });
+                    }
+                });
+        }
+        else
+        {
+            immediateToast("info", {
+                message: "You have entered an invalid email address!",
+                timeout: 500000
+            });
+        }
+    }
     return (
         <footer id="footer">
             <div className="wrapper">
-                <div id="footerTop">
-                    <div className="container-fluid p-0">
-                        <div className="row">
-                            <div className="col-12 col-lg-4 p-3">
-                                <img
-                                    src="/img/about-us/Frame.png"
-                                    alt="beeda icon"
-                                    className=""
-                                />
-                            </div>
-                            <div className="col-12 col-lg-8 d-flex align-items-center">
-                                <div className="footerTopInput">
-                                    <p>Newsletter Signup</p>
-                                    <div className="position-relative d-flex align-items-center w-100">
-                                        <input
-                                            type="text"
-                                            placeholder="Enter your email Address"
-                                        />
-                                        <button className="footerTopButton">
+                <form className="form-group" onSubmit={e => {handleSubmit(e)}}>
+                    <div id="footerTop">
+                        <div className="container-fluid p-0">
+                            <div className="row">
+                                <div className="col-12 col-lg-4 p-3">
+                                    <img
+                                        src="/img/about-us/Frame.png"
+                                        alt="beeda icon"
+                                        className=""
+                                    />
+                                </div>
+                                <div className="col-12 col-lg-8 d-flex align-items-center">
+                                    <div className="footerTopInput">
+                                        <p>Newsletter Signup</p>
+                                        <div className="position-relative d-flex align-items-center w-100">
+                                            <input
+                                                type="text"
+                                                placeholder="Enter your email Address"
+                                                id='email'
+                                                name='email'
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                required
+                                            />
+                                            <button className="footerTopButton">
                                             <span className="footerTopButton_text">
                                                 Subscribe
                                             </span>
-                                            <img
-                                                src="/img/send.svg"
-                                                alt="send"
-                                            />
-                                        </button>
+                                                <img
+                                                    src="/img/send.svg"
+                                                    alt="send"
+                                                />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    {/* <div className="w-100 py-3">
-                    <img
-                        src={BeedaIcon}
-                        alt="beeda icon"
-                        className="footer_icon"
-                    />
-                </div>
-                <div className="w-100">
-                    <div className="footerTopInput">
-                        <p>Newsletter Signup</p>
-                        <div className="position-relative d-flex align-items-center w-100">
-                            <input
-                                type="text"
-                                placeholder="Enter your email Address"
-                            />
-                            <button className="footerTopButton">
-                                Subscribe
-                                <img
-                                    src="/img/send.svg"
-                                    alt="send"
-                                    className="ml-3"
-                                />
-                            </button>
-                        </div>
-                    </div>
-                </div> */}
-                </div>
+                </form>
             </div>
 
             <div className="footerTopBorder"></div>
@@ -153,11 +169,11 @@ export default function OtherFooter() {
                             <h3>Contact us</h3>
                             <div className="d-flex align-items-start ">
                                 <div>
-                                    <img src="/img/LOCATION_ICON_1.svg" alt="" className="mr-3" />
+                                    <img src="/img/LOCATION_ICON_1.svg" alt="" className="mr-3"/>
                                 </div>
                                 <div>
                                     <p>
-                                        <address className="text-white" style={{ marginTop: "-5px" }}>
+                                        <address className="text-white" style={{marginTop: "-5px"}}>
                                             1115 Broadway 16 Madison Square West, New York, United States.
                                         </address>
                                     </p>
@@ -168,7 +184,7 @@ export default function OtherFooter() {
                             </div>
                             <ul className="list-group list-group-flush">
 
-                                <li className="list-group-item" style={{ marginTop: "-20px" }}>
+                                <li className="list-group-item" style={{marginTop: "-20px"}}>
                                     <img
                                         src="/img/clarity_chat-bubble-outline-badged.svg"
                                         alt="chat"
@@ -184,67 +200,69 @@ export default function OtherFooter() {
                                 <li className="list-group-item">
                                     <img src="/img/mail.svg" alt="chat" />
                                     <p>
-                                        support
-                                        <span className="highLight">
+                                        <a href="mailto:support@beeda.com" target="_blank">
+                                            <span className="text-white">support</span>
+                                            <span className="highLight">
                                             @beeda.com
                                         </span>
+                                        </a>
                                     </p>
                                 </li>
                                 <li>
                                     <a href="https://www.facebook.com/BeedaMegaApp"
-                                        onMouseEnter={() => setHoverFb(true)}
-                                        onMouseLeave={() => setHoverFb(false)}
-                                        className="rounded mr-2"
-                                        style={{
-                                            backgroundColor: hoverFb ? '#061880' : '#3B5998',
-                                            cursor: 'pointer',
-                                            color: 'inherit',
-                                        }}>
-                                        <BsFacebook color='#FFFFFF' className="p-2" size="36" />
+                                       onMouseEnter={() => setHoverFb(true)}
+                                       onMouseLeave={() => setHoverFb(false)}
+                                       className="rounded mr-2"
+                                       style={{
+                                           backgroundColor: hoverFb? '#061880' : '#3B5998',
+                                           cursor: 'pointer',
+                                           color: 'inherit',
+                                       }}>
+                                        <BsFacebook color='#FFFFFF' className="p-2" size="36"/>
                                     </a>
                                     <a href="https://www.instagram.com/beedamegaapp/"
-                                        onMouseEnter={() => setHoverInsta(true)}
-                                        onMouseLeave={() => setHoverInsta(false)}
-                                        className="rounded mr-2"
-                                        style={{
-                                            backgroundColor: hoverInsta ? '#061880' : '#C13584',
-                                            cursor: 'pointer',
-                                            color: 'inherit',
-                                        }}>
-                                        <AiFillInstagram color='#FFFFFF' className="p-2" size="36" />
+                                       onMouseEnter={() => setHoverInsta(true)}
+                                       onMouseLeave={() => setHoverInsta(false)}
+                                       className="rounded mr-2"
+                                       style={{
+                                           backgroundColor: hoverInsta? '#061880' : '#C13584',
+                                           cursor: 'pointer',
+                                           color: 'inherit',
+                                       }}>
+                                        <AiFillInstagram color='#FFFFFF' className="p-2" size="36"/>
                                     </a>
                                     <a href="https://www.linkedin.com/company/beeda/"
-                                        onMouseEnter={() => setHoverIn(true)}
-                                        onMouseLeave={() => setHoverIn(false)}
-                                        className="rounded mr-2"
-                                        style={{
-                                            backgroundColor: hoverIn ? '#061880' : '#0072B1',
-                                            cursor: 'pointer',
-                                            color: 'inherit',
-                                        }}>
-                                        <AiFillLinkedin color='#FFFFFF' className="p-2" size="36" />
+                                       onMouseEnter={() => setHoverIn(true)}
+                                       onMouseLeave={() => setHoverIn(false)}
+                                       className="rounded mr-2"
+                                       style={{
+                                           backgroundColor: hoverIn? '#061880' : '#0072B1',
+                                           cursor: 'pointer',
+                                           color: 'inherit',
+                                       }}>
+                                        <AiFillLinkedin color='#FFFFFF' className="p-2" size="36"/>
                                     </a>
                                     <a href="https://twitter.com/BeedamegaApp"
-                                        onMouseEnter={() => setHoverTwe(true)}
-                                        onMouseLeave={() => setHoverTwe(false)}
-                                        className="rounded mr-2"
-                                        style={{
-                                            backgroundColor: hoverTwe ? '#061880' : '#00ACEE',
-                                            cursor: 'pointer',
-                                            color: 'inherit',
-                                        }}>
-                                        <AiOutlineTwitter color='#FFFFFF' className="p-2" size="36" />
+                                       onMouseEnter={() => setHoverTwe(true)}
+                                       onMouseLeave={() => setHoverTwe(false)}
+                                       className="rounded mr-2"
+                                       style={{
+                                           backgroundColor: hoverTwe? '#061880' : '#00ACEE',
+                                           cursor: 'pointer',
+                                           color: 'inherit',
+                                       }}>
+                                        <AiOutlineTwitter color='#FFFFFF' className="p-2" size="36"/>
                                     </a>
                                     <a href="https://www.youtube.com/@beedamegaapp"
-                                        onMouseEnter={() => setHoverYou(true)}
-                                        onMouseLeave={() => setHoverYou(false)}
-                                        className="rounded"
-                                        style={{
-                                            backgroundColor: hoveryou ? '#061880' : '#FF0000',
-                                            cursor: 'pointer',
-                                            color: 'inherit',
-                                        }}>
-                                        <AiFillYoutube color='#FFFFFF' className="p-2" size="36" />
+                                       onMouseEnter={() => setHoverYou(true)}
+                                       onMouseLeave={() => setHoverYou(false)}
+                                       className="rounded"
+                                       style={{
+                                           backgroundColor: hoveryou? '#061880' : '#FF0000',
+                                           cursor: 'pointer',
+                                           color: 'inherit',
+                                       }}>
+                                        <AiFillYoutube color='#FFFFFF' className="p-2" size="36"/>
                                     </a>
                                 </li>
                             </ul>
@@ -264,7 +282,7 @@ export default function OtherFooter() {
                                         <img
                                             src="/img/Apple Store.jpg"
                                             alt="apply store"
-                                            style={{ width: "100px", height: "35px" }}
+                                            style={{width:"100px", height:"35px"}}
                                         />
                                     </a>
                                     <a href="https://play.google.com/store/apps/details?id=com.beeda.user" target="_blank">
@@ -272,12 +290,12 @@ export default function OtherFooter() {
                                             src="/img/Google play.jpg"
                                             alt="google store"
                                             className="googleStoreImg"
-                                            style={{ width: "100px", height: "35px" }}
+                                            style={{width:"100px", height:"35px"}}
                                         />
                                     </a>
                                     <a href="https://appgallery.huawei.com/" target="_blank">
                                         <img src="/img/Huwaei.jpg" alt="huwaei"
-                                            style={{ width: "100px", height: "35px" }}
+                                             style={{width:"100px", height:"35px"}}
                                         />
                                     </a>
                                 </div>
@@ -303,7 +321,7 @@ export default function OtherFooter() {
                     <div id="footerBottom">
                         <div className="row">
 
-                            <div className="col-md-6 d-flex align-items-center justify-content-center justify-content-lg-start">
+                            <div className="d-flex align-items-center justify-content-center">
                                 <p>
                                     Copyright © Beeda Inc . All Rights Reserved.
                                     2019-2023

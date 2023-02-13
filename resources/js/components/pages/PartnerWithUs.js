@@ -16,7 +16,7 @@ import {
 
 const PartnerWithUs = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
-    useEffect(() =>{
+    useEffect(() => {
         window.scrollTo(0, 0)
     }, []);
     return (
@@ -33,7 +33,7 @@ const PartnerWithUs = () => {
                             <div className="container-fluid d-flex align-items-center p-0">
                                 <div className="row">
                                     <div className="col-12 col-md-7 d-flex align-items-center">
-                                        <div className="contactHeadLine">
+                                        <h1 className="contactHeadLine">
                                             Become a{" "}
                                             <span
                                                 className={`aboutSubHeadLine position-relative`}
@@ -45,7 +45,7 @@ const PartnerWithUs = () => {
                                                     className="VectorImg"
                                                 />
                                             </span>
-                                        </div>
+                                        </h1>
                                     </div>
                                     <div className="col-5 d-none d-md-flex">
                                         <img
@@ -106,19 +106,17 @@ const PartnerWithUs = () => {
                                             Employees
                                         </div>
                                         <div className="cbc-details-middle text-center text-lg-left ">
-                                            There are many variations of
-                                            passages of Lorem Ipsum available,
-                                            but the majority have suffered
-                                            alteration in some form, by injecte
-                                            humour, or randomised words which
-                                            don't look even slightly believable.
-                                            If you are going to use a passage of
-                                            Lorem Ipsum, you.
+                                            Beeda is a supportive and inclusive workplace that empowers
+                                            employees to build careers and reach their full potential.
+                                            We ensure continuous learning opportunities, mentorship programs,
+                                            and more. Diversity and inclusion are valued,
+                                            and employees are treated with respect and given equal opportunities to succeed.
+                                            Join Beeda and take your career to new heights.
                                         </div>
 
                                         <div className="cbc-details-bottom d-flex justify-content-center justify-content-lg-start">
                                             <button className="cbc-details-bottom-btn">
-                                                Join <span className="text-lowercase">As</span> Employee
+                                               <a href="#" className="text-white"> Join <span className="text-lowercase">As</span> Employee </a>                                                
                                             </button>
                                         </div>
                                     </div>
@@ -138,19 +136,17 @@ const PartnerWithUs = () => {
                                             Driving Partner
                                         </div>
                                         <div className="cbc-details-middle text-center text-lg-left">
-                                            There are many variations of
-                                            passages of Lorem Ipsum available,
-                                            but the majority have suffered
-                                            alteration in some form, by injecte
-                                            humour, or randomised words which
-                                            don't look even slightly believable.
-                                            If you are going to use a passage of
-                                            Lorem Ipsum, you.
+                                            Empower your career as a driving partner with Beeda.
+                                            Enjoy the benefits of a flexible schedule, fair earnings,
+                                            and supportive work culture. Reap the rewards of professional
+                                            growth with training and resources provided. Start delivering
+                                            exceptional riding experiences to customers and attain
+                                            financial independence with Beeda.
                                         </div>
 
                                         <div className="cbc-details-bottom d-flex justify-content-center justify-content-lg-end">
                                             <button className="cbc-details-bottom-btn">
-                                                Join <span className="text-lowercase">As</span>  Driver
+                                               <a href="#" className="text-white"> Join <span className="text-lowercase">As</span>  Driver</a>                                                
                                             </button>
                                         </div>
                                     </div>
@@ -170,19 +166,15 @@ const PartnerWithUs = () => {
                                             Merchant
                                         </div>
                                         <div className="cbc-details-middle text-center text-lg-left">
-                                            There are many variations of
-                                            passages of Lorem Ipsum available,
-                                            but the majority have suffered
-                                            alteration in some form, by injecte
-                                            humour, or randomised words which
-                                            don't look even slightly believable.
-                                            If you are going to use a passage of
-                                            Lorem Ipsum, you.
+                                            Join Beeda as a merchant and expand your reach to millions of global users.
+                                            Our subscription-based system provides a cost-effective solution for
+                                            small and medium-sized businesses to connect with their target audience.
+                                            Say goodbye to commission-based systems and enjoy a seamless and efficient
+                                            process for growing your business with Beeda.
                                         </div>
-
                                         <div className="cbc-details-bottom d-flex justify-content-center justify-content-lg-start">
                                             <button className="cbc-details-bottom-btn">
-                                                Join <span className="text-lowercase">As</span>  Merchant
+                                               <a href="#" className="text-white"> Join <span className="text-lowercase">As</span>  Merchant</a>
                                             </button>
                                         </div>
                                     </div>

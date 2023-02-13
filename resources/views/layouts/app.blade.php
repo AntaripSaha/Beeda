@@ -1,29 +1,37 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <!-- Social media Meta Tags -->
-    <meta property="og:url" content="https://beeda.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Beeda Mega App- A Mega App Platform">
-    <meta property="og:description" content="Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are E-commerce, Food Delivery, Ride Sharing, Travel, and more.">
-    <meta property="og:image" content=" https://beeda.com/assets/front/img/beeda_white_logo.png">
-
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="beeda.com">
-    <meta property="twitter:url" content="https://beeda.com/">
-    <meta name="twitter:title" content="Beeda Mega App- A Mega App Platform">
-    <meta name="twitter:description" content="Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are E-commerce, Food Delivery, Ride Sharing, Travel, and more.">
-    <meta name="twitter:image" content="https://scontent.fdac99-1.fna.fbcdn.net/v/t39.30808-6/321369159_1527524304416404_7417830470071739237_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=19026a&_nc_eui2=AeHo1aAsDV2Klp0AmYOqrT0HMd1JVt_OSjAx3UlW385KMOKoRZuw4aSGgz1Z4wqJ7AhQ3Spv4cjd7pe3xDBu_xOp&_nc_ohc=P60UFx6DdvMAX_kqKaa&_nc_ht=scontent.fdac99-1.fna&oh=00_AfDKwMDuhdrLUWkltLAKfs_fQWWLh_RIjG1to-u4LIIb1Q&oe=63AF14E5">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="beeda, mega app, beeda mega app, beeda app, best mega app, best app for services, best service app, mega app platform, super app for service, ride sharing app, delivery service app">
+ <!-- Facebook Meta Tags -->
+ <meta property="og:site_name" content="Beeda Mega App" />
+ <meta property="og:image" content="https://beeda.com/img/about-us/Beeda.jpg">
+ <meta name="og:image:width" content="1472" />
+ <meta name="og:image:height" content="968" />
+ <meta property="og:url" content="https://beeda.com/">
+ <meta property="og:locale" content="en_US" />
+ <meta property="og:type" content="website">
+ <meta property="og:title" content="Mega App - Simplify Your Life with Beeda">
+ <meta property="og:description" content="Revolutionize your daily life with Beeda - the ultimate all-in-one solution. Enjoy effortless services designed to make things easier for users and vendors.">
+ 
+ 
+   <!-- Twitter Meta Tags -->
+ <meta property="twitter:site_name" content="Beeda Mega App" />
+ <meta name="twitter:card" content="summary_large_image">
+ <meta name="twitter:site" content="@Beeda_Mega_App" />
+ <meta property="twitter:domain" content="beeda.com">
+ <meta property="twitter:url" content="https://beeda.com/">
+ <meta name="twitter:title" content="Mega App - Simplify Your Life with Beeda">
+ <meta name="twitter:description" content="Revolutionize your daily life with Beeda - the ultimate all-in-one solution. Enjoy effortless services designed to make things easier for users and vendors.">
+ <meta name="twitter:image" content="https://beeda.com/img/about-us/Beeda.jpg">
+ <meta name="twitter:image:width" content="1472" />
+ <meta name="twitter:image:height" content="968" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="{{ url()->current() }}">
 
-    <title>Beeda Mega App- A Mega App Platform</title>
-    <link rel="icon" href="https://d2t5292uahafuy.cloudfront.net/public/assets/img/app+icon.png" type="image/png">
+    {{-- <title>Beeda Mega App- A Mega App Platform</title> --}}
+    {{-- <link rel="icon" href="https://d2t5292uahafuy.cloudfront.net/public/assets/img/app+icon.png" type="image/png"> --}}
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -63,47 +71,79 @@
 </head>
 <body>
   <!-- only in home page -->
-  <script>
-  {
-      "@context": "https://schema.org/",
-      "@type": "Store",
-      "name": "Beeda Mega App",
-      "url": "https://beeda.com/",
-      "legalName": "Beeda Mega App",
-      "email": "support@beedamall.com",
-      "description": "Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are E-commerce, Food Delivery, Ride Sharing, Travel, and more.",
-      "sameAs": ["https://twitter.com/beedamegaapp",
-    "https://www.facebook.com/BeedaMegaApp/",
-          "https://www.linkedin.com/company/beeda/",
-    "https://www.reddit.com/user/beedaapp/",
-          "https://www.youtube.com/@beedamegaapp",
-          "https://www.instagram.com/beedamegaapp/",
-    "https://www.pinterest.com/beedainc/",
-    "https://beeda.quora.com/"
-      ],
-      "logo": "https://beeda.com/images/Frame.png",
-      "address": {
-                              "@type": "PostalAddress",
-                              "streetAddress": "16 Madison Square West Associates, 16 Madison Square West",
-                              "addressLocality": "New York",
-                              "addressRegion": "New York",
-                              "postalCode": "NY 10010",
-                              "addressCountry": "United States"
-                          },
-                          "geo": {
-                              "@type": "GeoCoordinates",
-                              "latitude": "40.7429219",
-                              "longitude": "73.9915369"
-                          },
-                          "hasMap": "https://www.google.com/search?q=Beeda+INC+1115+Broadway+16+Madison+Square+West+12th+Floor+%E2%80%93+New+York%2C+NY+10010.&rlz=1C1CHBD_enBD1036BD1036&oq=Beeda+INC+1115+Broadway+16+Madison+Square+West+12th+Floor+%E2%80%93+New+York%2C+NY+10010.&aqs=chrome.0.69i59j69i60l3.1670j0j7&sourceid=chrome&ie=UTF-8",
-      "contactPoint": {
-          "contactType": "Customer Service",
-          "email": ["support@beedamall.com"],
-          "telephone": "+1 754-399-1127",
-          "url": "https://beeda.com/contact"
-      }
-  }
-  </script>
+  <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "Beeda Mega App",
+        "operatingSystem": "Android, iOS",
+        "applicationCategory": "Multivendor eCommerce and Delivery Service",
+        "offers": {
+            "@type": "Offer",
+            "price": "Free",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "198"
+        },
+        "screenshot": [
+            "https://beeda.com/img/banner-phone.png",
+            "https://beeda.com/img/beeda-store-woman-hand.png"
+        ],
+        "description": "Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are eCommerce, Food Delivery, Ride Sharing, Travel, and more.",
+        "url": "https://beeda.com",
+        "potentialAction": {
+            "@type": "ViewAction",
+            "target": [
+                {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "https://apps.apple.com/us/app/beeda/id1641292802",
+                    "actionPlatform": "ios"
+                },
+                {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "https://play.google.com/store/apps/details?id=com.beeda.user",
+                    "actionPlatform": "android"
+                }
+            ]
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Beeda Inc.",
+            "sameAs": ["https://twitter.com/beedamegaapp",
+      "https://www.facebook.com/BeedaMegaApp/",
+            "https://www.linkedin.com/company/beeda/",
+      "https://www.reddit.com/user/beedaapp/",
+            "https://www.youtube.com/@beedamegaapp",
+            "https://www.instagram.com/beedamegaapp/",
+      "https://www.pinterest.com/beedainc/",
+      "https://beeda.quora.com/"
+        ],
+        "logo": "https://beeda.com/images/Frame.png",
+            "location": {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "16 Madison Square West Associates, 16 Madison Square West",
+                    "addressLocality": "New York",
+                    "addressRegion": "New York",
+                    "postalCode": "NY 10010",
+                    "addressCountry": "United States"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "40.7429219",
+                    "longitude": "73.9915369"
+                },
+                "hasMap": "https://www.google.com/search?q=Beeda+INC+1115+Broadway+16+Madison+Square+West+12th+Floor+%E2%80%93+New+York%2C+NY+10010.&rlz=1C1CHBD_enBD1036BD1036&oq=Beeda+INC+1115+Broadway+16+Madison+Square+West+12th+Floor+%E2%80%93+New+York%2C+NY+10010.&aqs=chrome.0.69i59j69i60l3.1670j0j7&sourceid=chrome&ie=UTF-8",
+    "contactPoint": {
+    }
+    }
+    }
+    }
+    </script>
   <!-- only home home page end -->
 
     <!-- Messenger Chat Plugin Code -->

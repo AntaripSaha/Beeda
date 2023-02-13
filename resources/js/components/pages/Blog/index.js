@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
+import { NavLink } from "react-router-dom";
 const Blog = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
     const [blogImageUrl] = useState(
@@ -12,7 +13,7 @@ const Blog = () => {
     const [totalPage, setTotalPage] = useState();
     const [totalPost, setTotalPost] = useState([]);
     const [newPost, setNewPost] = useState([]);
-    const [isLoading,setLoading]=useState(false)
+    const [isLoading, setLoading] = useState(false)
     const navigate = useNavigate()
     useEffect(() => {
         axios
@@ -22,7 +23,7 @@ const Blog = () => {
                 setTotalPost(res.data.posts.data);
                 setNewPost(res.data.posts.data.slice(-2));
             });
-            window.scrollTo(0, 0)
+        window.scrollTo(0, 0)
     }, []);
     function nextPage(event, value) {
         setLoading(true);
@@ -34,7 +35,7 @@ const Blog = () => {
                 setLoading(false);
             });
     }
-    const goDetails = (item) =>{
+    const goDetails = (item) => {
         navigate(`/blogs-details/${item.slug}`, {
             state: {
                 item
@@ -44,8 +45,8 @@ const Blog = () => {
     useEffect(() => {
         setLoading(true);
         nextPage();
-      }, []);
-   
+    }, []);
+
     return (
         <>
             {/* <img
@@ -63,22 +64,22 @@ const Blog = () => {
                 <div className="wrapper">
                     <div className="d-flex align-items-center">
                         <div className="blog-banner-left">
-                            <div className="blogHeadLine">
-                                <div>
-                                    <span
-                                        className={`aboutSubHeadLine position-relative`}
-                                    >
-                                        Blogs
-                                        <img
-                                            src="/img/Vector.png"
-                                            alt="vector"
-                                            className="VectorImg"
-                                        />
-                                    </span>
-                                </div>
-                            </div>
+                            <h1 className="blogHeadLine">
+
+                                <span
+                                    className={`aboutSubHeadLine position-relative`}
+                                >
+                                    Blogs
+                                    <img
+                                        src="/img/Vector.png"
+                                        alt="vector"
+                                        className="VectorImg"
+                                    />
+                                </span>
+
+                            </h1>
                             <p>
-                            Read & Learn More About Beeda
+                                Read & Learn More About Beeda
                             </p>
                         </div>
 
@@ -92,83 +93,82 @@ const Blog = () => {
                     </div>
                 </div>
             </div>
-            
+
             <div className="wrapper">
                 <div id="blog-new">
                     <h3>New Blogs</h3>
                     <div className="blog-underline"></div>
 
-                    {newPost.length === 0 ?  <>
-                      <SkeletonTheme>
-                      <div>
-                          <Skeleton count={10} height={`100%`} width={`100%`}></Skeleton>
-                      </div>
-                      </SkeletonTheme>
-                    </>:     
-                    newPost.map((item, i) => {
-                        console.log(newPost);
-                        let year = new Date(item.created_at).getFullYear();
-                        let month = new Date(item.created_at).getMonth() + 1;
-                        let day = new Date(item.created_at).getDate();
-                        return (
-                            i === 0 && (
-                                <Link to={`/blogs-details/${item.slug}`}>
-                                    <div className="row">
-                                        <div className="col-sm-6 pr-sm-0 d-flex ">
-                                            <img
-                                                src={`${blogImageUrl}/${item.img.file_name}`}
-                                                className="card-img-top"
-                                                alt="blog-card-img"
-                                            />
-                                        </div>
-                                        <div className="col-sm-6 pl-sm-0 ">
-                                            <div className="card"  style={{
-                                                cursor: 'pointer',
+                    {newPost.length === 0 ? <>
+                        <SkeletonTheme>
+                            <div>
+                                <Skeleton count={10} height={`100%`} width={`100%`}></Skeleton>
+                            </div>
+                        </SkeletonTheme>
+                    </> :
+                        newPost.map((item, i) => {
+                            console.log(newPost);
+                            let year = new Date(item.created_at).getFullYear();
+                            let month = new Date(item.created_at).getMonth() + 1;
+                            let day = new Date(item.created_at).getDate();
+                            return (
+                                i === 0 && (
+                                    <Link to={`/blogs-details/${item.slug}`}>
+                                        <div className="row">
+                                            <div className="col-sm-6 pr-sm-0 d-flex ">
+                                                <img
+                                                    src={`${blogImageUrl}/${item.img.file_name}`}
+                                                    className="card-img-top"
+                                                    alt="blog-card-img"
+                                                />
+                                            </div>
+                                            <div className="col-sm-6 pl-sm-0 ">
+                                                <div className="card" style={{
+                                                    cursor: 'pointer',
                                                 }} >
-                                                <div className="card-body d-flex flex-column p-2 p-md-5 justify-content-center">
-                                                    <h5 className="card-title">
-                                                        {item.title}
-                                                    </h5>
-                                                    <div className="blog-auth-details d-flex flex-wrap justify-content-between mb-3">
-                                                        <div className="author">
-                                                            by: {item.user.name}
-                                                        </div>
-                                                        <div className="date">
-                                                            (
-                                                            {`${
-                                                                day < 10
+                                                    <div className="card-body d-flex flex-column p-2 p-md-5 justify-content-center">
+                                                        <h5 className="card-title">
+                                                            {item.title}
+                                                        </h5>
+                                                        <div className="blog-auth-details d-flex flex-wrap justify-content-between mb-3">
+                                                            <div className="author">
+                                                                by: {item.user.name}
+                                                            </div>
+                                                            <div className="date">
+                                                                (
+                                                                {`${day < 10
                                                                     ? "0" + day
                                                                     : day
-                                                            }/${
-                                                                month < 10
-                                                                    ? "0" +
-                                                                      month
-                                                                    : month
-                                                            }/${year}`}
-                                                            )
+                                                                    }/${month < 10
+                                                                        ? "0" +
+                                                                        month
+                                                                        : month
+                                                                    }/${year}`}
+                                                                )
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <p className="card-text" dangerouslySetInnerHTML={{ __html: item.short_description }}>
-                                                    </p>
+                                                        <p className="card-text">
+                                                            {item.short_description}
+                                                        </p>
 
-                                                    <div
-                                                        style={{
-                                                            cursor: 'pointer',
+                                                        <div
+                                                            style={{
+                                                                cursor: 'pointer',
                                                             }}
-                                                        onClick={() => goDetails(item)}
-                                                        className="text-white ml-auto"
-                                                    >
-                                                        Read Full {">"}
+                                                            onClick={() => goDetails(item)}
+                                                            className="text-white ml-auto"
+                                                        >
+                                                            Read Full {">"}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
-                                       
-                                    </div>
-                                </Link>
-                            )
-                        );
-                    })}
+                                    </Link>
+                                )
+                            );
+                        })}
                     {newPost.map((item, i) => {
                         console.log(newPost);
                         let year = new Date(item.created_at).getFullYear();
@@ -176,9 +176,10 @@ const Blog = () => {
                         let day = new Date(item.created_at).getDate();
                         return (
                             i > 0 && (
-                                <>
-                                    <div className="row" 
-                                      >
+                                <Link to={`/blogs-details/${item.slug}`}>
+
+                                    <div className="row"
+                                    >
                                         <div className="col-sm-6 pl-sm-0 d-flex order-1 order-sm-2">
                                             <img
                                                 src={`${blogImageUrl}/${item.img.file_name}`}
@@ -198,25 +199,24 @@ const Blog = () => {
                                                         </div>
                                                         <div className="date">
                                                             (
-                                                            {`${
-                                                                day < 10
-                                                                    ? "0" + day
-                                                                    : day
-                                                            }/${
-                                                                month < 10
+                                                            {`${day < 10
+                                                                ? "0" + day
+                                                                : day
+                                                                }/${month < 10
                                                                     ? "0" +
-                                                                      month
+                                                                    month
                                                                     : month
-                                                            }/${year}`}
+                                                                }/${year}`}
                                                             )
                                                         </div>
                                                     </div>
-                                                    <p className="card-text" dangerouslySetInnerHTML={{ __html: item.short_description }}>
+                                                    <p className="card-text">
+                                                        {item.short_description}
                                                     </p>
 
                                                     <div style={{
-                                                            cursor: 'pointer',
-                                                         }}
+                                                        cursor: 'pointer',
+                                                    }}
                                                         className="text-white ml-auto"
                                                         onClick={() => goDetails(item)}
                                                     >
@@ -226,7 +226,7 @@ const Blog = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </>
+                                </Link>
                             )
                         );
                     })}
@@ -242,77 +242,76 @@ const Blog = () => {
                     <div className="blog-underline"></div>
                     <div className="row w-100 m-0">
                         {
-                        isLoading=== false &&   
-                        totalPost.map((item) => {
-                            let year = new Date(item.created_at).getFullYear();
-                            let month =
-                                new Date(item.created_at).getMonth() + 1;
-                            let day = new Date(item.created_at).getDate();
-                            return (
-                                <>
+                            isLoading === false &&
+                            totalPost.map((item) => {
+                                let year = new Date(item.created_at).getFullYear();
+                                let month =
+                                    new Date(item.created_at).getMonth() + 1;
+                                let day = new Date(item.created_at).getDate();
+                                return (
                                     <div className="col-sm-12 col-md-6 col-lg-4 py-3">
-                                        <div className="card"  style={{
+                                        <NavLink to={`/blogs-details/${item.slug}`} className="link-primary">
+                                            <div className="card" style={{
                                                 cursor: 'pointer',
-                                                }}    onClick={() => goDetails(item)}>
-                                            <img
-                                                src={`${blogImageUrl}/${item.img.file_name}`}
-                                                className="card-img-top"
-                                                alt="blog-card-img"
-                                            />
-                                            <div className="card-body">
-                                                <h5 className="card-title">
-                                                    {item.title}
-                                                </h5>
-                                                <div className="blog-auth-details">
-                                                    <div className="author">
-                                                        by: {item.user.name}
-                                                    </div>
-                                                    <div className="date">
-                                                        (
-                                                        {`${
-                                                            day < 10
+                                            }} onClick={() => goDetails(item)}>
+                                                <img
+                                                    src={`${blogImageUrl}/${item.img.file_name}`}
+                                                    className="card-img-top"
+                                                    alt="blog-card-img"
+                                                />
+                                                <div className="card-body">
+                                                    <h5 className="card-title">
+                                                        {item.title}
+                                                    </h5>
+                                                    <div className="blog-auth-details">
+                                                        <div className="author">
+                                                            by: {item.user.name}
+                                                        </div>
+                                                        <div className="date">
+                                                            (
+                                                            {`${day < 10
                                                                 ? "0" + day
                                                                 : day
-                                                        }/${
-                                                            month < 10
-                                                                ? "0" + month
-                                                                : month
-                                                        }/${year}`}
-                                                        )
+                                                                }/${month < 10
+                                                                    ? "0" + month
+                                                                    : month
+                                                                }/${year}`}
+                                                            )
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <p className="card-text" dangerouslySetInnerHTML={{ __html: item.short_description }}>
-                                                </p>
+                                                    <p className="card-text">
+                                                        {item.short_description}
+                                                    </p>
 
-                                                <div style={{
-                                                cursor: 'pointer',
-                                                }} onClick={() => goDetails(item)}>Read Full {">"}</div>
+                                                    <div style={{
+                                                        cursor: 'pointer',
+                                                    }} onClick={() => goDetails(item)}>Read Full {">"}</div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                    </div>
+                                );
+                            })}
+
+                        {
+                            (
+                                isLoading === true &&
+                                <div className="col-12">
+                                    <SkeletonTheme>
+                                        <div className="row gx-3 gy-3 w-100">
+                                            <div className="col-sm-12 col-md-6 col-lg-4">
+                                                <Skeleton count={10}></Skeleton>
+                                            </div>
+                                            <div className="col-sm-12 col-md-6 col-lg-4">
+                                                <Skeleton count={10} ></Skeleton>
+                                            </div>
+                                            <div className="col-sm-12 col-md-6 col-lg-4">
+                                                <Skeleton count={10}></Skeleton>
                                             </div>
                                         </div>
-                                    </div>
-                                </>
-                            );
-                        })}
-                      
-                        {
-                           (
-                            isLoading === true &&
-                            <div className="col-12">
-                            <SkeletonTheme>
-                            <div className="row gx-3 gy-3 w-100">
-                           <div className="col-sm-12 col-md-6 col-lg-4">
-                               <Skeleton count={10}></Skeleton>
-                           </div>
-                           <div className="col-sm-12 col-md-6 col-lg-4">
-                               <Skeleton count={10} ></Skeleton>
-                           </div> 
-                           <div className="col-sm-12 col-md-6 col-lg-4">
-                               <Skeleton count={10}></Skeleton>
-                           </div>
-                            </div>
-                           </SkeletonTheme>
-                            </div>
-                           )
+                                    </SkeletonTheme>
+                                </div>
+                            )
                         }
                     </div>
                 </div>
