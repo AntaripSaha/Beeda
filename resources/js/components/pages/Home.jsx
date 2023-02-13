@@ -260,7 +260,7 @@ const Home = () => {
                 <NavLink to={`movies`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/frame.png" alt="film" />
+                      <img src="/img/Frame.png" alt="film" />
                     </div>
                     <p>Movies</p>
                   </div>

@@ -148,7 +148,7 @@ const Blog = () => {
                                                             </div>
                                                         </div>
                                                         <p className="card-text">
-                                                            {item.short_description}
+                                                            {item.meta_description}
                                                         </p>
 
                                                         <div
@@ -211,7 +211,7 @@ const Blog = () => {
                                                         </div>
                                                     </div>
                                                     <p className="card-text">
-                                                        {item.short_description}
+                                                        {item.meta_description}
                                                     </p>
 
                                                     <div style={{
@@ -280,7 +280,7 @@ const Blog = () => {
                                                         </div>
                                                     </div>
                                                     <p className="card-text">
-                                                        {item.short_description}
+                                                        {item.meta_description}
                                                     </p>
 
                                                     <div style={{
