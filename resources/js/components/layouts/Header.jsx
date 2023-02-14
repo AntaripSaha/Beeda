@@ -33,13 +33,13 @@ const Header = () => {
             <header id="header" className="sticky-top">
                 <div className="container">
                     <div id="logo" className="pull-left">
-                        <h1>
+                        <h2>
                             <a href="#intro" className="scrollto">
                                 <Link to="/">
                                     <img src={'assets/front/img/beeda_white_logo.png'} alt="Beeda- Mega App" />
                                 </Link>
                             </a>
-                        </h1>
+                        </h2>
                     </div>
                     <nav id="nav-menu-container">
                         <ul className="nav-menu">
