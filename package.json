@@ -32,12 +32,14 @@
         "@emotion/styled": "^11.10.5",
         "@mui/material": "^5.11.4",
         "flowbite": "^1.6.3",
+        "izitoast-react": "^1.0.19",
         "react-bootstrap": "^2.4.0",
         "react-helmet": "^6.1.0",
         "react-icon": "^1.0.0",
         "react-icons": "^4.7.1",
         "react-loading-skeleton": "^3.1.0",
         "react-router-dom": "^6.3.0",
+        "react-router-hash-link": "^2.4.3",
         "swiper": "^8.4.5"
     }
 }

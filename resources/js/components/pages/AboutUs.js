@@ -59,22 +59,11 @@ const AboutUs = () => {
             <div
                 className={`aboutUsBanner d-flex justify-content-center align-items-center`}
             >
-                {/* <img src={AboutBannerImg} alt="about-us banner" /> */}
                 <section className="w-100">
                     <div className="container">
-                        {/* <div className="row">
-                            <div className="col-6"></div>
-                            <div className="col-6 m-auto d-flex justify-content-end">
-                                <img
-                                    src={BeedaIcon}
-                                    alt="beeda icon"
-                                    className="beedaIcon"
-                                />
-                            </div>
-                        </div> */}
                         <div className="row">
                             <div className="col-8 m-auto">
-                                <div className="aboutHeadLine">
+                                <h1 className="aboutHeadLine">
                                     All about{" "}
                                     <span className={`aboutSubHeadLine`}>
                                         Beeda
@@ -85,22 +74,11 @@ const AboutUs = () => {
                                         alt="beeda icon"
                                         className="beedaIcon"
                                     />
-                                </div>
+                                </h1>
                             </div>
                         </div>
                     </div>
                 </section>
-                {/* <Container>
-                    <section id="about" className="section-bg mb-5">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-4 m-auto">
-                                    All about Beeda!!
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </Container> */}
             </div>
 
 
@@ -118,12 +96,15 @@ const AboutUs = () => {
                             <div className="col-lg-6 d-flex flex-column justify-content-start">
                                 <h3>What is Beeda?</h3>
                                 <p>
-                                    Beeda has all the services that you need in your daily life.
-                                    Users can find their needs with a single tap. Besides, the vendors can use Beeda platforms
-                                    to enlist their business and reach their audience more easily. So, whether you have
-                                    a small/medium business or need to get your needs, Beeda should be your first choice.
-                                    E-commerce, water, gas, flower, liquor, ride-sharing, food, grocery, and 50+ services are available in Beeda.
-                                    You can avail of all these services with a single tap and make your life easier.
+                                    Beeda offers a one-stop solution for all your daily needs.
+                                    With just a tap, you can access a vast array of services.
+                                    Business owners can also benefit from Beeda by listing their
+                                    businesses and easily reaching their targeted customers.
+                                    Whether you run a small to medium-sized business or simply
+                                    want to meet your personal needs, Beeda is the right choice.
+                                    From e-commerce to water and gas, flowers, liquor, ride-sharing,
+                                    food, groceries, and over 50 other services, Beeda has got you covered.
+                                    Simplify your life by utilizing our convenient services.
                                 </p>
                             </div>
                         </div>
@@ -135,12 +116,13 @@ const AboutUs = () => {
                             <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
                                 <h3>Our Motive</h3>
                                 <p>
-                                    Making life easier with a digital solution is our main motive.
-                                    We’ve introduced the subscription-based business model over the
-                                    commission-based old model. All the vendors, drivers,
-                                    and businesses can use our platforms and reach their audience
-                                    within the shortest possible time. Our expert tech team is there
-                                    to help you in every possible way.
+                                    Our motive is to revolutionize the way people live and work through
+                                    innovative digital solutions. That's why we've adopted a subscription-based
+                                    business model, which offers more value and benefits compared to the traditional
+                                    commission-based approach. By using our platforms, vendors, drivers,
+                                    and businesses can reach their targeted audience quickly and effectively
+                                    without having to worry about any technicalities. Our expert tech team is
+                                    there to help you in every possible way.
                                 </p>
                             </div>
                             <div className="col-lg-6 order-1">
@@ -166,16 +148,18 @@ const AboutUs = () => {
                             <div className="col-lg-6 d-flex flex-column justify-content-start">
                                 <h3>Small Business</h3>
                                 <p>
-                                    If you have a small local business and you’re looking for the best platform to grow,
-                                    Beeda should be your first choice. We are committed to partnering with all
-                                    the local businesses, no matter what the size is. We are creating the soil
-                                    for entrepreneurs. You can enlist your business now and reach your audience
-                                    easier than before.
+                                    At Beeda, we understand the unique challenges faced by small
+                                    local businesses in today's competitive market. That's why we're
+                                    committed to being a trusted partner and offering a platform that
+                                    helps you grow and reach your targeted audience easily. We believe
+                                    in empowering entrepreneurs and creating opportunities for local
+                                    businesses to thrive. Whether you're just starting out or looking
+                                    to expand your reach, Beeda is here to support you every step of the way.
                                 </p>
                                 <span
                                     className={`link-page d-flex align-items-center ${AboutStyle.clickToRegister}`}
                                 >
-                                    Click here to register
+                                    <a href="#" className="text-primary">Click here to register</a>
                                     <span className="material-symbols-outlined ml-2">
                                         arrow_circle_right
                                     </span>
@@ -190,10 +174,13 @@ const AboutUs = () => {
                             <div className="col-lg-6 d-flex flex-column justify-content-start order-2 order-lg-1">
                                 <h3>Grow with Beeda</h3>
                                 <p>
-                                    Beeda has millions of users across the country.
-                                    Therefore, you can easily reach your target audience and
-                                    grow your business. So, enlist your business now,
-                                    and reach your target audience easier than before.
+                                    Beeda is changing the game for businesses of all sizes and industries.
+                                    Our innovative approach connects businesses with their targeted audience,
+                                    allowing them to reach new heights and achieve their goals. Our platform
+                                    has millions of users globally, providing businesses with a vast and diverse
+                                    audience to tap into. Whether you're a local shop looking to expand,
+                                    a service provider seeking new clients, or a growing startup looking to
+                                    make a big impact, Beeda can help.
                                 </p>
                             </div>
                             <div className="col-lg-6 order-1">
