@@ -99,7 +99,7 @@ const Home = () => {
               </div>
             </div>
             <div className="hero-banner-top-right mx-auto col-12 col-md-6 desktop">
-              <img src="/img/banner-phone.png" alt="banner-phone" />
+              <img src="/img/banner-phone.png" alt="Beeda-Mega App Layout" />
             </div>
             <div className="col-sm-12 mobile">
               <img
