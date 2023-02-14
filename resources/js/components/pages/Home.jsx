@@ -25,6 +25,12 @@ const Home = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Mega App- Simplify Your Life with Beeda</title>
+        <meta name="description" content="Revolutionize your daily life with Beeda - the ultimate all-in-one solution. Enjoy effortless services designed to make things easier for users and vendors." />
+        <link rel="canonical" href="abcd" />
+      </Helmet>
       <img
         src="/img/home-top-vector-1.png"
         alt="home-top-vector"
@@ -40,7 +46,7 @@ const Home = () => {
                   <div className="heading-1">We’re the world’s</div>
                   <div className="heading-container">
                     <div className="heading-2">First & Only</div>
-                    <div className="heading-3">Mega App</div>
+                    <h1 className="heading-3">Mega App</h1>
                   </div>
                   <div className="heading-4">Explore App Now!!</div>
                 </div>
@@ -159,7 +165,7 @@ const Home = () => {
       {/* With Link Start  */}
       <section className="one-app">
         <div className="wrapper">
-          <div className="title">One App for everyday needs</div>
+          <h2 className="title">One App for everyday needs</h2>
           <div className="slider-wrapper">
             <Swiper slidesPerView={"auto"}>
               <SwiperSlide>
@@ -186,7 +192,7 @@ const Home = () => {
                 <NavLink to={`food-delivery`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/food-and-drink.png" alt="bag" />
+                      <img src="/img/food-and-drink.png" alt="bag" />
                     </div>
                     <p>Food Delivery</p>
                   </div>
@@ -196,31 +202,31 @@ const Home = () => {
                 <NavLink to={`grocery`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/Grocery-Icon-low.png" alt="bag" />
+                      <img src="/img/Grocery-Icon-low.png" alt="bag" />
                     </div>
                     <p>Grocery</p>
                   </div>
                 </NavLink>
               </SwiperSlide>
               <SwiperSlide>
-              <NavLink to={`flower`}>
+                <NavLink to={`flower`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/flower-bucket.png" alt="bag" />
+                      <img src="/img/flower-bucket.png" alt="bag" />
                     </div>
                     <p>Flower</p>
                   </div>
                 </NavLink>
               </SwiperSlide>
               <SwiperSlide>
-              <NavLink to={`water`}>
+                <NavLink to={`water`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img
-                      src="/img/water-bottle.png"
-                      alt="water bottle"
-                      className="object-contain"
-                    />
+                      <img
+                        src="/img/water-bottle.png"
+                        alt="water bottle"
+                        className="object-contain"
+                      />
                     </div>
                     <p>Water</p>
                   </div>
@@ -234,58 +240,58 @@ const Home = () => {
                 <NavLink to={`liquor`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/beer-bottles.png" alt="beer-bottles" />
+                      <img src="/img/beer-bottles.png" alt="beer-bottles" />
                     </div>
                     <p>Liquor</p>
                   </div>
                 </NavLink>
               </SwiperSlide>
               <SwiperSlide>
-              <NavLink to={`payments`}>
+                <NavLink to={`payments`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/digital-payment.png" alt="online-payment" />
+                      <img src="/img/digital-payment.png" alt="online-payment" />
                     </div>
                     <p>Payments</p>
                   </div>
                 </NavLink>
               </SwiperSlide>
               <SwiperSlide>
-              <NavLink to={`movies`}>
+                <NavLink to={`movies`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/frame.png" alt="film" />
+                      <img src="/img/Frame.png" alt="film" />
                     </div>
                     <p>Movies</p>
                   </div>
                 </NavLink>
               </SwiperSlide>
               <SwiperSlide>
-              <NavLink to={`travel`}>
+                <NavLink to={`travel`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/travel.png" alt="world-tour" />
+                      <img src="/img/travel.png" alt="world-tour" />
                     </div>
                     <p>Travel</p>
                   </div>
                 </NavLink>
-     
+
               </SwiperSlide>
               <SwiperSlide>
-              <NavLink to={`gas`}>
+                <NavLink to={`gas`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/gas.png" alt="gas" />
+                      <img src="/img/gas.png" alt="gas" />
                     </div>
                     <p>Gas</p>
                   </div>
                 </NavLink>
               </SwiperSlide>
               <SwiperSlide>
-              <NavLink to={`about-us`}>
+                <NavLink to={`about-us`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                    <img src="/img/more-option.png" alt="other" />
+                      <img src="/img/more-option.png" alt="other" />
                     </div>
                     <p>Others</p>
                   </div>
@@ -527,7 +533,7 @@ const Home = () => {
             <div className="beeda-content-wrapper">
               <div className="beeda-store-app-1">
                 <div className="w-100 pb-3">
-                  <div className="title">Beeda Store App</div>
+                  <h2 className="title">Beeda Store App</h2>
                   <p>
                     Beeda store app allows merchants to register their shop in
                     food, grocery, ride-sharing, liquor, gas, flower, pharmacy,
@@ -604,7 +610,7 @@ const Home = () => {
                   />
                 </div>
                 <div className="w-100 pb-3">
-                  <div className="title">Beeda User App</div>
+                  <h2 className="title">Beeda User App</h2>
                   <p>
                     Users are allowed to order on-demand services from nearby
                     vendors. In the Beeda platform, users can access the shops,
@@ -666,7 +672,7 @@ const Home = () => {
             <div className="beeda-content-wrapper">
               <div className="beeda-store-app-1">
                 <div className="w-100 pb-3">
-                  <div className="title">Beeda Driver App</div>
+                  <h2 className="title">Beeda Driver App</h2>
                   <p>
                     Beeda store app allows merchants to register their shop in
                     food, grocery, ride-sharing, liquor, gas, flower, pharmacy,
@@ -789,25 +795,25 @@ const Home = () => {
               <div className="row">
                 <div className="col-lg-12" style={{ paddingTop: 130 }}>
                   <div className="deliver-part">
-                    <h1 className="supperapp-tagline">
+                    <h2 className="supperapp-tagline">
                       Beeda is Crossing boundaries to deliver smiles.
-                    </h1>
+                    </h2>
                   </div>
                 </div>
                 <div className="col-lg-12 features-p"></div>
                 <div className="col-lg-12 two" style={{ paddingTop: 150 }}>
                   <div className="deliver-bottom">
-                    <h1 className="supperapp-text">
+                    <h2 className="supperapp-text">
                       Beeda{" "}
                       <a href="https://beedamegaapp.com/" target="_blank">
                         Mega App
                       </a>{" "}
                       for Life
-                    </h1>
-                    <h1 className="supperapp-text">Download</h1>
-                    <h1 className="supperapp-text" style={{ fontSize: "38px" }}>
+                    </h2>
+                    <h2 className="supperapp-text">Download</h2>
+                    <h2 className="supperapp-text" style={{ fontSize: "38px" }}>
                       The Beeda App Today
-                    </h1>
+                    </h2>
                     <div className="row">
                       <div className="col-4">
                         <a
@@ -897,7 +903,7 @@ const Home = () => {
                                             alt="Realtime Tracking Feature-Beeda"
                                         />
                                     </div>
-                                    <h1>Realtime Tracking</h1>
+                                    <h2>Realtime Tracking</h2>
                                     <div className="description">
                                         Realtime tracking your orders, rides,
                                         and services.
@@ -913,7 +919,7 @@ const Home = () => {
                                             alt="User Rating Feature-Beeda"
                                         />
                                     </div>
-                                    <h1>User Rating</h1>
+                                    <h2>User Rating</h2>
                                     <div className="description">
                                         Users can rate and write reviews for
                                         merchants.
@@ -929,7 +935,7 @@ const Home = () => {
                                             alt="50 Plus Service-Beeda"
                                         />
                                     </div>
-                                    <h1>50+ Services</h1>
+                                    <h2>50+ Services</h2>
                                     <div className="description">
                                         Beeda mega app allows to access more
                                         than 50 on-demand services.
@@ -945,7 +951,7 @@ const Home = () => {
                                             alt="Live Chat Feature-Beeda"
                                         />
                                     </div>
-                                    <h1>Live Chat</h1>
+                                    <h2>Live Chat</h2>
                                     <div className="description">
                                         Direct communication with the merchants
                                         via live chat.
@@ -1055,38 +1061,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <Helmet encodeSpecialCharacters={true}>
-        <script type="application/ld+json">{`
-                    {
-                        "@context": "http://www.schema.org/",
-                        "@type": “MobileApplication”,
-                        "name": "Beeda Mega App",
-                        "url": "https://beeda.com/",
-                        "logo": "https://beeda.com/assets/front/img/beeda_white_logo.png",
-                        "description": "Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are E-commerce, Food Delivery, Ride Sharing, Travel, and more.",
-                        "address": {
-                            "@type": "PostalAddress",
-                            "streetAddress": "16 Madison Square West Associates, 16 Madison Square West",
-                            "addressLocality": "New York",
-                            "addressRegion": "New York",
-                            "postalCode": "NY 10010",
-                            "addressCountry": "United States"
-                        },
-                        "geo": {
-                            "@type": "GeoCoordinates",
-                            "latitude": "40.7429219",
-                            "longitude": "73.9915369"
-                        },
-                        "hasMap": "https://www.google.com/search?q=Beeda+INC+1115+Broadway+16+Madison+Square+West+11th+Floor+%E2%80%93+New+York%2C+NY+10010.&rlz=1C1CHBD_enBD1036BD1036&oq=Beeda+INC+1115+Broadway+16+Madison+Square+West+11th+Floor+%E2%80%93+New+York%2C+NY+10010.&aqs=chrome.0.69i59j69i60l3.1670j0j7&sourceid=chrome&ie=UTF-8",
-                        "openingHours": "Mo, Tu, We, Th, Fr, Sa, Su 01:00-23:59",
-                        "contactPoint": {
-                            "@type": "ContactPoint",
-                            "contactType": "Customer Service",
-                            "telephone": "+1 754-399-1127"
-                        }
-                    }
-                `}</script>
-      </Helmet>
     </>
   );
 };
