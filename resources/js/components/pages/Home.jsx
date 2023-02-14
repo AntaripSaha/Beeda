@@ -674,14 +674,12 @@ const Home = () => {
                 <div className="w-100 pb-3">
                   <h2 className="title">Beeda Driver App</h2>
                   <p>
-                    Beeda store app allows merchants to register their shop in
-                    food, grocery, ride-sharing, liquor, gas, flower, pharmacy,
-                    travel, spa, real estate, courier, car sale, etc. sectors.
-                    As a vendor, you will be notified of new orders. You are
-                    allowed to view accepted and processing orders, change the
-                    basic information of your stores such as delivery time,
-                    opening and closing time, packaging charges, and product
-                    details, and manage inventory from the Beeda app.
+                    The Beeda Mega app is designed to help drivers easily manage
+                    their ridesharing services. The app allows drivers to accept ride requests,
+                    navigate to the pickup location, and track their earnings.
+                    The app provides tools to manage driver profiles, vehicle
+                    information, and documents and also allows drivers to communicate with
+                    riders through the app.
                   </p>
                   <div className="row">
                     <div className="col-12 col-sm-8">
