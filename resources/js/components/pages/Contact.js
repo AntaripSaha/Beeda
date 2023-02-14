@@ -85,7 +85,7 @@ const Contact = () => {
                                     </div>
 
                                     <div className="cbc-details-bottom d-flex justify-content-center justify-content-lg-start">
-                                       <a href="https://www.messenger.com/login.php?next=https%3A%2F%2Fwww.messenger.com%2Ft%2F108826358751069%2F%3Fmessaging_source%3Dsource%253Apages%253Amessage_shortlink%26source_id%3D1441792%26recurring_notification%3D0" target="_blank">
+                                       <a href="https://m.me/108826358751069" target="_blank">
                                        <button className="cbc-details-bottom-btn">
                                             Start Chatting
                                         </button>
