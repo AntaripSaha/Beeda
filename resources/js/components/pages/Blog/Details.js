@@ -40,7 +40,7 @@ export default function Details() {
                     <Helmet>
                         <meta charSet="utf-8" />
                         <title>{item.meta_title}</title>
-                        <meta name="description" content={item.short_description}/>
+                        <meta name="description" content={item.meta_description}/>
                     </Helmet>
                     <div id="blog-details">
                         <h1>{item.title}</h1>
