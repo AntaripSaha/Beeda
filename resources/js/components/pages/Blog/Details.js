@@ -18,7 +18,6 @@ export default function Details() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        console.log("loading");
         setLoading(true);
         axios
             .get("https://beeda.com/api/allBlogs").then((res) => {
@@ -31,10 +30,6 @@ export default function Details() {
             });
 
     }, [])
-    // // const data = item.description;
-    // useEffect(() => {
-
-    //   }, []);
     return (
         <>
 

@@ -16,6 +16,7 @@ const Blog = () => {
     const [isLoading, setLoading] = useState(false)
     const navigate = useNavigate()
     useEffect(() => {
+        window.scrollTo(0, 0)
         axios
             .get("https://beeda.com/api/all-blogs?per_page=12&page=1")
             .then((res) => {
@@ -23,7 +24,7 @@ const Blog = () => {
                 setTotalPost(res.data.posts.data);
                 setNewPost(res.data.posts.data.slice(-2));
             });
-        window.scrollTo(0, 0)
+
     }, []);
     function nextPage(event, value) {
         setLoading(true);
@@ -35,13 +36,7 @@ const Blog = () => {
                 setLoading(false);
             });
     }
-    const goDetails = (item) => {
-        navigate(`/blogs-details/${item.slug}`, {
-            state: {
-                item
-            }
-        });
-    }
+    
     useEffect(() => {
         setLoading(true);
         nextPage();
@@ -155,7 +150,7 @@ const Blog = () => {
                                                             style={{
                                                                 cursor: 'pointer',
                                                             }}
-                                                            onClick={() => goDetails(item)}
+                                                           
                                                             className="text-white ml-auto"
                                                         >
                                                             Read Full {">"}
@@ -218,7 +213,7 @@ const Blog = () => {
                                                         cursor: 'pointer',
                                                     }}
                                                         className="text-white ml-auto"
-                                                        onClick={() => goDetails(item)}
+                                                        
                                                     >
                                                         Read Full {">"}
                                                     </div>
@@ -250,10 +245,10 @@ const Blog = () => {
                                 let day = new Date(item.created_at).getDate();
                                 return (
                                     <div className="col-sm-12 col-md-6 col-lg-4 py-3">
-                                        <NavLink to={`/blogs-details/${item.slug}`} className="link-primary">
+                                        <Link to={`/blogs-details/${item.slug}`} >
                                             <div className="card" style={{
                                                 cursor: 'pointer',
-                                            }} onClick={() => goDetails(item)}>
+                                            }}>
                                                 <img
                                                     src={`${blogImageUrl}/${item.img.file_name}`}
                                                     className="card-img-top"
@@ -283,12 +278,12 @@ const Blog = () => {
                                                         {item.meta_description}
                                                     </p>
 
-                                                    <div style={{
+                                                    <div className="link-primary" style={{
                                                         cursor: 'pointer',
-                                                    }} onClick={() => goDetails(item)}>Read Full {">"}</div>
+                                                    }}>Read Full {">"}</div>
                                                 </div>
                                             </div>
-                                        </NavLink>
+                                        </Link>
                                     </div>
                                 );
                             })}

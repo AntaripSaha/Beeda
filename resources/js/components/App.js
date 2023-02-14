@@ -79,7 +79,7 @@ class App extends Component {
                             }
                         ></Route>
                         <Route
-                        
+                        exact
                             path="blogs-details/:slug"
                             element={
                                     <Details />
