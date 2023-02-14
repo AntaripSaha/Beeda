@@ -88,7 +88,7 @@ export default function OtherFooter() {
                                             </span>
                                                 <img
                                                     src="/img/send.svg"
-                                                    alt="send"
+                                                    alt="Beeda-Subscribe Icon"
                                                 />
                                             </button>
                                         </div>
@@ -189,11 +189,14 @@ export default function OtherFooter() {
                                         src="/img/clarity_chat-bubble-outline-badged.svg"
                                         alt="chat"
                                     />
+                                   
                                     <p>
-                                        Start a{" "}
-                                        <span className="highLight">
-                                            Live Chat
-                                        </span>
+                                    <a href="https://m.me/108826358751069" target="_blank">
+                                            <span className="text-white">Start a</span>{" "}
+                                            <span className="highLight">
+                                                Live Chat
+                                            </span>
+                                        </a>
                                     </p>
                                 </li>
 
@@ -272,7 +275,7 @@ export default function OtherFooter() {
                                 <div className="qrContainer">
                                     <img
                                         src="/img/qr_1.png"
-                                        alt="qr-code"
+                                        alt="Beeda-App QR Code"
                                     />
                                 </div>
                             </div>
@@ -281,7 +284,7 @@ export default function OtherFooter() {
                                     <a href="https://apps.apple.com/us/app/beeda/id1641292802" target="_blank">
                                         <img
                                             src="/img/Apple Store.jpg"
-                                            alt="apply store"
+                                            alt="Beeda-Download App Store App"
                                             style={{width:"100px", height:"35px"}}
                                         />
                                     </a>
@@ -289,12 +292,12 @@ export default function OtherFooter() {
                                         <img
                                             src="/img/Google play.jpg"
                                             alt="google store"
-                                            className="googleStoreImg"
+                                            className="Beeda-Download Google Store App"
                                             style={{width:"100px", height:"35px"}}
                                         />
                                     </a>
                                     <a href="https://appgallery.huawei.com/" target="_blank">
-                                        <img src="/img/Huwaei.jpg" alt="huwaei"
+                                        <img src="/img/Huwaei.jpg" alt="Beeda-Download Huawei App"
                                              style={{width:"100px", height:"35px"}}
                                         />
                                     </a>
@@ -303,14 +306,14 @@ export default function OtherFooter() {
                         </div>
                     </div>
                     <div className="card-container">
-                        <img src="/img/visa.jpg" alt="mastercard" />
-                        <img src="/img/mastercard.png" alt="mastercard" />
-                        <img src="/img/american-express.jpg" alt="mastercard" />
-                        <img src="/img/maestro.jpg" alt="mastercard" />
-                        <img src="/img/discover.jpg" alt="mastercard" />
-                        <img src="/img/paypal.jpg" alt="mastercard" />
-                        <img src="/img/google-pay.jpg" alt="mastercard" />
-                        <img src="/img/apple-pay.jpg" alt="mastercard" />
+                        <img src="/img/visa.jpg" alt="Beeda-Visa Payment" />
+                        <img src="/img/mastercard.png" alt="Beeda-Mastercard Payment" />
+                        <img src="/img/american-express.jpg" alt="Beeda-American Express Payment" />
+                        <img src="/img/maestro.jpg" alt="Beeda-Maestro Payment" />
+                        <img src="/img/discover.jpg" alt="Beeda-Discover Payment" />
+                        <img src="/img/paypal.jpg" alt="Beeda-Paypal Payment" />
+                        <img src="/img/google-pay.jpg" alt="Beeda-Google Pay" />
+                        <img src="/img/apple-pay.jpg" alt="Beeda-Apple Pay" />
                     </div>
                 </div>
             </div>

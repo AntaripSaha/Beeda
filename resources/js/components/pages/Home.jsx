@@ -172,7 +172,7 @@ const Home = () => {
                 <NavLink to={`beeda-mall`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/bag.png" alt="bag" />
+                      <img src="/img/bag.png" alt="Beeda-Bag Icon" />
                     </div>
                     <p>Beedamall</p>
                   </div>
@@ -182,7 +182,7 @@ const Home = () => {
                 <NavLink to={`ride-share`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/drive-icon.png" alt="bag" />
+                      <img src="/img/drive-icon.png" alt="Beeda-Ride Sharing Service Icon" />
                     </div>
                     <p>Ride Share</p>
                   </div>
@@ -192,7 +192,7 @@ const Home = () => {
                 <NavLink to={`food-delivery`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/food-and-drink.png" alt="bag" />
+                      <img src="/img/food-and-drink.png" alt="Beeda-Food Delivery Service Icon" />
                     </div>
                     <p>Food Delivery</p>
                   </div>
@@ -202,7 +202,7 @@ const Home = () => {
                 <NavLink to={`grocery`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/Grocery-Icon-low.png" alt="bag" />
+                      <img src="/img/Grocery-Icon-low.png" alt="Beeda-Grocery Delivery Icon" />
                     </div>
                     <p>Grocery</p>
                   </div>
@@ -212,7 +212,7 @@ const Home = () => {
                 <NavLink to={`flower`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/flower-bucket.png" alt="bag" />
+                      <img src="/img/flower-bucket.png" alt="Beeda-Flower Delivery Service Icon" />
                     </div>
                     <p>Flower</p>
                   </div>
@@ -224,7 +224,7 @@ const Home = () => {
                     <div className="over-slider-item-img-content">
                       <img
                         src="/img/water-bottle.png"
-                        alt="water bottle"
+                        alt="Beeda-Water Delivery Service Icon"
                         className="object-contain"
                       />
                     </div>
@@ -240,7 +240,7 @@ const Home = () => {
                 <NavLink to={`liquor`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/beer-bottles.png" alt="beer-bottles" />
+                      <img src="/img/beer-bottles.png" alt="Beeda-Liquor Delivery Service Icon" />
                     </div>
                     <p>Liquor</p>
                   </div>
@@ -250,7 +250,7 @@ const Home = () => {
                 <NavLink to={`payments`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/digital-payment.png" alt="online-payment" />
+                      <img src="/img/digital-payment.png" alt="Beeda-Online Payment Service" />
                     </div>
                     <p>Payments</p>
                   </div>
@@ -260,7 +260,7 @@ const Home = () => {
                 <NavLink to={`movies`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/Frame.png" alt="film" />
+                      <img src="/img/Frame.png" alt="Beeda-Online Movie Platform" />
                     </div>
                     <p>Movies</p>
                   </div>
@@ -270,7 +270,7 @@ const Home = () => {
                 <NavLink to={`travel`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/travel.png" alt="world-tour" />
+                      <img src="/img/travel.png" alt="Beeda-Traveling Service" />
                     </div>
                     <p>Travel</p>
                   </div>
@@ -281,7 +281,7 @@ const Home = () => {
                 <NavLink to={`gas`}>
                   <div className="over-slider-item">
                     <div className="over-slider-item-img-content">
-                      <img src="/img/gas.png" alt="gas" />
+                      <img src="/img/gas.png" alt="Beeda-LPG Gas Delivery Service" />
                     </div>
                     <p>Gas</p>
                   </div>
@@ -508,7 +508,7 @@ const Home = () => {
                       <img
                         className="profile-img-top"
                         src="/img/Merchant.png"
-                        alt="Beeda Employee Icon"
+                        alt="Beeda-Merchant"
                       />
                     </div>
                     <h3>Merchant</h3>
@@ -590,7 +590,7 @@ const Home = () => {
                 <div className="w-100 d-flex justify-content-center beeda-store-img-container">
                   <img
                     src="/img/beeda-store-woman-hand.png"
-                    alt="apply store banner"
+                    alt="Beeda-iPhone App UI"
                     className="beeda-store-img"
                   />
                 </div>
@@ -605,7 +605,7 @@ const Home = () => {
                 <div className="w-100 mb-3 d-flex justify-content-center beeda-store-img-user-container">
                   <img
                     src="/img/beeda-user.png"
-                    alt="apply store banner"
+                    alt="Beeda-Store UI"
                     className="beeda-store-img-user"
                   />
                 </div>
@@ -729,7 +729,7 @@ const Home = () => {
                 <div className="w-100 mb-3 d-flex justify-content-center beeda-store-img-container">
                   <img
                     src="/img/beeda-driver.png"
-                    alt="apply store banner"
+                    alt="Beeda-User Interface"
                     className="beeda-store-img-drive"
                   />
                 </div>
@@ -822,7 +822,7 @@ const Home = () => {
                         >
                           <img
                             src="/img/Apple Store.jpg"
-                            alt="apply store"
+                            alt="Beeda-Download iOs App"
                             className="appleStoreImg"
                           />
                         </a>
@@ -834,7 +834,7 @@ const Home = () => {
                         >
                           <img
                             src="/img/Google play.jpg"
-                            alt="google store"
+                            alt="Beeda-Download Android App"
                             className="googleStoreImg"
                           />
                         </a>
