@@ -244,10 +244,11 @@ const Blog = () => {
                                     new Date(item.created_at).getMonth() + 1;
                                 let day = new Date(item.created_at).getDate();
                                 return (
-                                    <div className="col-sm-12 col-md-6 col-lg-4 py-3">
+                                    <div className="col-sm-12 col-md-6 col-lg-4 py-2">
                                         <Link to={`/blogs-details/${item.slug}`} >
-                                            <div className="card" style={{
+                                            <div className="card " style={{
                                                 cursor: 'pointer',
+                                                width:'103%',
                                             }}>
                                                 <img
                                                     src={`${blogImageUrl}/${item.img.file_name}`}
