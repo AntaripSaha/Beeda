@@ -251,7 +251,7 @@ const Blog = () => {
                                                 width:'103%',
                                             }}>
                                                 <img
-                                                    src={`${blogImageUrl}/${item.thumbnail_img?.file_name}`}
+                                                    src={`${blogImageUrl}/${item.thumbnail_img?.file_name ?item.thumbnail_img?.file_name:item.meta_img?.file_name }`}
                                                     className="card-img-top"
                                                     alt="blog-card-img"
                                                 />
