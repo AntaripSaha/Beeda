@@ -88,7 +88,7 @@ const AboutUs = () => {
                         <div className="row">
                             <div className="col-lg-6">
                                 <img
-                                    src="/img/about-us/Beeda.jpg"
+                                    src="/img/about-us/beeda-mega-app-platform.jpg"
                                     alt="Beeda"
                                     width="490"
                                 />
