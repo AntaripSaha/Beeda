@@ -74,7 +74,7 @@ const Flower = () => {
             <div className="row">
               <div className="col-lg-6">
                 <img
-                  src="/img/flower/flower1.jpg"
+                  src="/img/flower/flower-delivery-service-with-beeda-mega-app.jpg"
                   alt="Beeda"
                   width="430px"
                 />
