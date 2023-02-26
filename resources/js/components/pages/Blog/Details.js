@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate  } from "react-router-dom";
 import axios from "axios";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -15,24 +15,25 @@ export default function Details() {
         "https://d2t5292uahafuy.cloudfront.net/public"
     );
     const { slug } = useParams()
-
+    const navigate = useNavigate();
     useEffect(() => {
         window.scrollTo(0, 0);
         setLoading(true);
         axios
             .get("https://beeda.com/api/allBlogs").then((res) => {
                 let singlePost = res.data.posts.find(item => item.slug === slug)
+                if(!singlePost){
+                    navigate('/');
+                }
                 setItem(singlePost)
                 setYear(new Date(singlePost.created_at).getFullYear());
                 setMonth(new Date(singlePost.created_at).getMonth() + 1);
                 setDay(new Date(singlePost.created_at).getDate());
                 setLoading(false)
             });
-
     }, [])
     return (
         <>
-
             {
                 isLoading === false &&
                 item &&
@@ -70,7 +71,6 @@ export default function Details() {
                 </div>
 
             }
-
             {
                 (
                     isLoading === true &&
