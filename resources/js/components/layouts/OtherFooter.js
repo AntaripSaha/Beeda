@@ -175,7 +175,7 @@ export default function OtherFooter() {
 
                             </ul>
                         </div>
-                        <div className="col-12 col-lg-3">
+                        <div className="col-6 col-lg-3">
                             <h3>Contact us</h3>
                             <div className="d-flex align-items-start ">
                                 <div>
@@ -221,22 +221,23 @@ export default function OtherFooter() {
                                         </a>
                                     </p>
                                 </li>
-                                <li>
+                                <li className=" desktop ">
                                     <a href="https://www.facebook.com/BeedaMegaApp"
                                         onMouseEnter={() => setHoverFb(true)}
                                         onMouseLeave={() => setHoverFb(false)}
-                                        className="rounded mr-2"
+                                        className="rounded mr-2 icon-anchor"
                                         style={{
                                             backgroundColor: hoverFb ? '#061880' : '#3B5998',
                                             cursor: 'pointer',
                                             color: 'inherit',
+                                            
                                         }}>
                                         <BsFacebook color='#FFFFFF' className="p-2" size="36" />
                                     </a>
                                     <a href="https://www.instagram.com/beedamegaapp/"
                                         onMouseEnter={() => setHoverInsta(true)}
                                         onMouseLeave={() => setHoverInsta(false)}
-                                        className="rounded mr-2"
+                                        className="rounded mr-2 icon-anchor"
                                         style={{
                                             backgroundColor: hoverInsta ? '#061880' : '#C13584',
                                             cursor: 'pointer',
@@ -247,7 +248,7 @@ export default function OtherFooter() {
                                     <a href="https://www.linkedin.com/company/beeda/"
                                         onMouseEnter={() => setHoverIn(true)}
                                         onMouseLeave={() => setHoverIn(false)}
-                                        className="rounded mr-2"
+                                        className="rounded mr-2 icon-anchor"
                                         style={{
                                             backgroundColor: hoverIn ? '#061880' : '#0072B1',
                                             cursor: 'pointer',
@@ -258,7 +259,7 @@ export default function OtherFooter() {
                                     <a href="https://twitter.com/BeedamegaApp"
                                         onMouseEnter={() => setHoverTwe(true)}
                                         onMouseLeave={() => setHoverTwe(false)}
-                                        className="rounded mr-2"
+                                        className="rounded mr-2 icon-anchor"
                                         style={{
                                             backgroundColor: hoverTwe ? '#061880' : '#00ACEE',
                                             cursor: 'pointer',
@@ -269,7 +270,7 @@ export default function OtherFooter() {
                                     <a href="https://www.youtube.com/@beedamegaapp"
                                         onMouseEnter={() => setHoverYou(true)}
                                         onMouseLeave={() => setHoverYou(false)}
-                                        className="rounded"
+                                        className="rounded icon-anchor"
                                         style={{
                                             backgroundColor: hoveryou ? '#061880' : '#FF0000',
                                             cursor: 'pointer',
@@ -280,6 +281,64 @@ export default function OtherFooter() {
                                 </li>
                             </ul>
                         </div>
+                        <li className="mobile ">
+                                    <a href="https://www.facebook.com/BeedaMegaApp"
+                                        onMouseEnter={() => setHoverFb(true)}
+                                        onMouseLeave={() => setHoverFb(false)}
+                                        className="rounded mr-2 icon-anchor"
+                                        style={{
+                                            backgroundColor: hoverFb ? '#061880' : '#3B5998',
+                                            cursor: 'pointer',
+                                            color: 'inherit',
+                                            
+                                        }}>
+                                        <BsFacebook color='#FFFFFF' className="p-2" size="36" />
+                                    </a>
+                                    <a href="https://www.instagram.com/beedamegaapp/"
+                                        onMouseEnter={() => setHoverInsta(true)}
+                                        onMouseLeave={() => setHoverInsta(false)}
+                                        className="rounded mr-2 icon-anchor"
+                                        style={{
+                                            backgroundColor: hoverInsta ? '#061880' : '#C13584',
+                                            cursor: 'pointer',
+                                            color: 'inherit',
+                                        }}>
+                                        <AiFillInstagram color='#FFFFFF' className="p-2" size="36" />
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/beeda/"
+                                        onMouseEnter={() => setHoverIn(true)}
+                                        onMouseLeave={() => setHoverIn(false)}
+                                        className="rounded mr-2 icon-anchor"
+                                        style={{
+                                            backgroundColor: hoverIn ? '#061880' : '#0072B1',
+                                            cursor: 'pointer',
+                                            color: 'inherit',
+                                        }}>
+                                        <AiFillLinkedin color='#FFFFFF' className="p-2" size="36" />
+                                    </a>
+                                    <a href="https://twitter.com/BeedamegaApp"
+                                        onMouseEnter={() => setHoverTwe(true)}
+                                        onMouseLeave={() => setHoverTwe(false)}
+                                        className="rounded mr-2 icon-anchor"
+                                        style={{
+                                            backgroundColor: hoverTwe ? '#061880' : '#00ACEE',
+                                            cursor: 'pointer',
+                                            color: 'inherit',
+                                        }}>
+                                        <AiOutlineTwitter color='#FFFFFF' className="p-2" size="36" />
+                                    </a>
+                                    <a href="https://www.youtube.com/@beedamegaapp"
+                                        onMouseEnter={() => setHoverYou(true)}
+                                        onMouseLeave={() => setHoverYou(false)}
+                                        className="rounded icon-anchor"
+                                        style={{
+                                            backgroundColor: hoveryou ? '#061880' : '#FF0000',
+                                            cursor: 'pointer',
+                                            color: 'inherit',
+                                        }}>
+                                        <AiFillYoutube color='#FFFFFF' className="p-2" size="36" />
+                                    </a>
+                                </li>
                         <div className="col-6 col-lg-3 m-auto m-lg-0">
                             <div className="qrCode d-none  d-md-flex justify-content-center">
                                 <div className="qrContainer">

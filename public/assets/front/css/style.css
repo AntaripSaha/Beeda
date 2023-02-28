@@ -3944,6 +3944,10 @@ color: #F1951C;
         padding-left: 50px;
     }
 }
+.icon-anchor {
+    padding: 3px;
+    padding-bottom: 5px;
+}
 @media (min-width: 1024px) {
     .over-slider {
         display: flex;
