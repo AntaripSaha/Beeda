@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 import { NavLink } from "react-router-dom";
+
 const Blog = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
     const [blogImageUrl] = useState(
@@ -315,7 +316,7 @@ const Blog = () => {
 
             <div className="wrapper">
                 <div id="blog-footer">
-                    <Pagination count={totalPage} onChange={nextPage} />
+                    <Pagination count={totalPage} onChange={nextPage} color="secondary" />
                 </div>
             </div>
         </>
