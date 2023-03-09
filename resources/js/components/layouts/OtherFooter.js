@@ -338,7 +338,7 @@ export default function OtherFooter() {
                                         }}>
                                         <AiFillYoutube color='#FFFFFF' className="p-2" size="36" />
                                     </a>
-                                </li>
+                        </li>
                         <div className="col-6 col-lg-3 m-auto m-lg-0">
                             <div className="qrCode d-none  d-md-flex justify-content-center">
                                 <div className="qrContainer">

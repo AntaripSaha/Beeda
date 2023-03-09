@@ -59,7 +59,7 @@ export default function Details() {
                         <img
                             src={`${blogImageUrl}/${item.img.file_name}`}
                             className="card-img-top"
-                            alt="blog-card-img"
+                            alt="{item.meta_image_alt}"
                         />
                     </div>
                     <div className="blog-details-rich-text">
