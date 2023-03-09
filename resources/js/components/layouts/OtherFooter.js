@@ -281,7 +281,7 @@ export default function OtherFooter() {
                                 </li>
                             </ul>
                         </div>
-                        <li className="mobile ">
+                        <li className="mobile text-center">
                                     <a href="https://www.facebook.com/BeedaMegaApp"
                                         onMouseEnter={() => setHoverFb(true)}
                                         onMouseLeave={() => setHoverFb(false)}
