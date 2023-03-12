@@ -7,6 +7,7 @@ import {
     Route,
     Link,
     NavLink,
+    Navigate,
 } from "react-router-dom";
 import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
@@ -49,6 +50,7 @@ import Travel from "./pages/Travel";
 import Gas from "./pages/Gas";
 import Others from "./pages/Others";
 import Disclaimer from "./pages/Disclaimer";
+import { Redirect } from "react-router-dom";
 
 class App extends Component {
     render() {
@@ -414,6 +416,11 @@ class App extends Component {
                                     {" "}
                                     <TrustAndSafety />{" "}
                                 </>
+                            }
+                        ></Route>
+                        <Route
+                            path={`*`}
+                            element={<Navigate to="/" />
                             }
                         ></Route>
                     </>

@@ -20,8 +20,10 @@ export default function Details() {
         window.scrollTo(0, 0);
         setLoading(true);
         axios
-            .get("https://beeda.com/api/allBlogs").then((res) => {
-                let singlePost = res.data.posts.find(item => item.slug === slug)
+            .get(`https://beeda.com/api/blogs/${slug}`).then((res) => {
+                // let singlePost = res.data.posts.find(item => item.slug === slug)
+                let singlePost = res.data.post
+
                 if(!singlePost){
                     navigate('/');
                 }
@@ -30,6 +32,8 @@ export default function Details() {
                 setMonth(new Date(singlePost.created_at).getMonth() + 1);
                 setDay(new Date(singlePost.created_at).getDate());
                 setLoading(false)
+            }).catch(() => {
+                navigate('/');
             });
     }, [])
     return (
@@ -59,7 +63,7 @@ export default function Details() {
                         <img
                             src={`${blogImageUrl}/${item.img.file_name}`}
                             className="card-img-top"
-                            alt="{item.meta_image_alt}"
+                            alt={item.meta_image_alt}
                         />
                     </div>
                     <div className="blog-details-rich-text">

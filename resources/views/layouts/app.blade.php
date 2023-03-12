@@ -63,47 +63,116 @@
 </head>
 <body>
   <!-- only in home page -->
-  <script>
-  {
-      "@context": "https://schema.org/",
-      "@type": "Store",
-      "name": "Beeda Mega App",
-      "url": "https://beeda.com/",
-      "legalName": "Beeda Mega App",
-      "email": "support@beedamall.com",
-      "description": "Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are E-commerce, Food Delivery, Ride Sharing, Travel, and more.",
-      "sameAs": ["https://twitter.com/beedamegaapp",
-    "https://www.facebook.com/BeedaMegaApp/",
-          "https://www.linkedin.com/company/beeda/",
-    "https://www.reddit.com/user/beedaapp/",
-          "https://www.youtube.com/@beedamegaapp",
-          "https://www.instagram.com/beedamegaapp/",
-    "https://www.pinterest.com/beedainc/",
-    "https://beeda.quora.com/"
-      ],
-      "logo": "https://beeda.com/images/Frame.png",
-      "address": {
-                              "@type": "PostalAddress",
-                              "streetAddress": "16 Madison Square West Associates, 16 Madison Square West",
-                              "addressLocality": "New York",
-                              "addressRegion": "New York",
-                              "postalCode": "NY 10010",
-                              "addressCountry": "United States"
-                          },
-                          "geo": {
-                              "@type": "GeoCoordinates",
-                              "latitude": "40.7429219",
-                              "longitude": "73.9915369"
-                          },
-                          "hasMap": "https://www.google.com/search?q=Beeda+INC+1115+Broadway+16+Madison+Square+West+12th+Floor+%E2%80%93+New+York%2C+NY+10010.&rlz=1C1CHBD_enBD1036BD1036&oq=Beeda+INC+1115+Broadway+16+Madison+Square+West+12th+Floor+%E2%80%93+New+York%2C+NY+10010.&aqs=chrome.0.69i59j69i60l3.1670j0j7&sourceid=chrome&ie=UTF-8",
-      "contactPoint": {
-          "contactType": "Customer Service",
-          "email": ["support@beedamall.com"],
-          "telephone": "+1 754-399-1127",
-          "url": "https://beeda.com/contact"
-      }
-  }
-  </script>
+  <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Beeda Mega App",
+    "operatingSystem": "Android, iOS",
+    "applicationCategory": "Multivendor eCommerce and Delivery Service",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "198"
+    },
+    "screenshot": [
+        "https://beeda.com/img/banner-phone.png",
+        "https://beeda.com/img/beeda-store-woman-hand.png"
+    ],
+    "description": "Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are eCommerce, Food Delivery, Ride Sharing, Travel, and more.",
+    "url": "https://beeda.com",
+    "potentialAction": {
+        "@type": "ViewAction",
+        "target": [
+            {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://apps.apple.com/us/app/beeda/id1641292802",
+                "actionPlatform": "ios"
+            },
+            {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://play.google.com/store/apps/details?id=com.beeda.user",
+                "actionPlatform": "android"
+            }
+        ]
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Beeda Inc.",
+        "sameAs": [
+            "https://twitter.com/beedamegaapp",
+            "https://www.facebook.com/BeedaMegaApp/",
+            "https://www.linkedin.com/company/beeda/",
+            "https://www.reddit.com/user/beedaapp/",
+            "https://www.youtube.com/@beedamegaapp",
+            "https://www.instagram.com/beedamegaapp/",
+            "https://www.pinterest.com/beedainc/",
+            "https://beeda.quora.com/"
+        ],
+        "logo": "https://beeda.com/images/Frame.png",
+        "location": {
+            "@type": "Place",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "16 Madison Square West Associates, 16 Madison Square West",
+                "addressLocality": "New York",
+                "addressRegion": "New York",
+                "postalCode": "NY 10010",
+                "addressCountry": "United States"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "40.7429219",
+                "longitude": "73.9915369"
+            },
+            "hasMap": "https://www.google.com/search?q=Beeda+INC+1115+Broadway+16+Madison+Square+West+12th+Floor+%E2%80%93+New+York%2C+NY+10010.&rlz=1C1CHBD_enBD1036BD1036&oq=Beeda+INC+1115+Broadway+16+Madison+Square+West+12th+Floor+%E2%80%93+New+York%2C+NY+10010.&aqs=chrome.0.69i59j69i60l3.1670j0j7&sourceid=chrome&ie=UTF-8",
+            "contactPoint": {}
+        }
+    },
+    "mainEntity": {
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is Beeda Mega App?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Revolutionize your daily life with Beeda - the ultimate all-in-one solution. Enjoy effortless services designed to make things easier for users and vendors. Beeda Mega App is Currently Available in United States and United Arab Emirates only."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What Services does Beeda Mega App have?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Beeda Mega App offers a wide range of services, including e-commerce, ride sharing service, food delivery service, flower delivery service, online liquor delivery service, cooking gas delivery and more. It also supports various payment options for user and vendors."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is Beeda Mega App free to use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, Beeda Mega App is completely free to download and use. You can download Beeda App from Google Play Store and Apple App Store."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How can I get support for Beeda Mega App?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "If you have any questions or issues with Beeda Mega App, you can contact the support team through the app or visit the official website for more information. "
+                }
+            }
+        ]
+    }
+}
+</script>
   <!-- only home home page end -->
 
     <!-- Messenger Chat Plugin Code -->
