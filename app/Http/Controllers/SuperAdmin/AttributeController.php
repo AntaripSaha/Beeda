@@ -18,7 +18,7 @@ class AttributeController extends Controller
     public function attributeList(Request $request)
     {
         if($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 /*
                 $attributes = Http::withHeaders([
@@ -59,7 +59,7 @@ class AttributeController extends Controller
         $validate = $request->validate([
             'name' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             /*
             $data = [
@@ -81,7 +81,7 @@ class AttributeController extends Controller
 
     public function deleteAttribute(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             /*
             $data = [
@@ -102,7 +102,7 @@ class AttributeController extends Controller
 
     public function editAttribute($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         /*
         $attribute = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
@@ -128,7 +128,7 @@ class AttributeController extends Controller
         $validate = $request->validate([
             'name' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             /*
             $data = [

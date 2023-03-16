@@ -4,6 +4,8 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Constants\CategoryType;
 use App\Http\Controllers\Controller;
+use App\Models\VehicleIcon;
+use App\Models\VehicleSubTypeIcon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
@@ -24,7 +26,7 @@ class VehicleTypeController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $data = TransportVehicleType::with('service_category')->get();
                 return Datatables::of($data)
@@ -131,7 +133,7 @@ class VehicleTypeController extends Controller
                 'no_of_seats' => 'required'
             ]);
             $trransportVehicleType = TransportVehicleType::find($request->id);
-            
+
             $data = [
                 'service_category_id' => $request->service_category_id,
                 'name' => $request->name,
@@ -178,7 +180,7 @@ class VehicleTypeController extends Controller
     public function vehicleTypeList(Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $data = VehicleType::with('serviceCategories')->get();
                 return Datatables::of($data)
@@ -295,11 +297,11 @@ class VehicleTypeController extends Controller
         $vehicleType = json_decode($vehicleType);
         return $vehicleType;
     }
-    
+
     public function assignVehicleSubType($id, Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $vehicleSubTypes = VehicleSubType::where('vehicle_type_id', $id)->get();
                 return Datatables::of($vehicleSubTypes)
@@ -317,7 +319,8 @@ class VehicleTypeController extends Controller
                             $checked = 'checked';
                         }
                         $btn = '';
-                        $btn .= '<a href="javascript:;" style="color:#061880;" title="Edit" onclick="setValue('
+                        $btn .= '<a href="'.route('transport.vehicle-sub-type.assign.vehicle.icon', ['id' => $vehicleSubTypes->id]).'" style="color:#061880;" title="Assign Vehicle Icon"><i class="material-icons">add</i></a>
+                                <a href="javascript:;" style="color:#061880;" title="Edit" onclick="setValue('
                         .$vehicleSubTypes->id.','.'`'
                         .$vehicleSubTypes->name.'`,`'
                         .$vehicleSubTypes->image.'`,`'
@@ -408,5 +411,124 @@ class VehicleTypeController extends Controller
         $vehicleSubType->update();
         $vehicleSubType = json_decode($vehicleSubType);
         return $vehicleSubType;
+    }
+
+    public function vehicleIconCreate()
+    {
+        $page = 'manage_vehicle_icon';
+        return view('superadmin.transport.vehicle_icon.create', compact('page'));
+    }
+
+    public function vehicleIconStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'icon' => 'required'
+        ]);
+        try{
+            $file = Storage::disk('s3')->put('public/uploads/all', $request->file('icon'));
+            $path = Storage::disk('s3')->url($file);
+            VehicleIcon::create([
+                'name' => $request->name,
+                'icon' => substr($path, 45, 200)
+            ]);
+            $message = "Vehicle icon added successfully!";
+            return redirect()->route('transport.vehicle-icon.list')->with('success_message', $message);
+        }catch(\Exception $e){
+            return redirect()->back()->with('error_message', 'Something Went Wrong!');
+        }
+    }
+
+    public function vehicleIconList(Request $request)
+    {
+        if ($request->ajax()) {
+            $token = getToken();
+            if ($token) {
+                $data = VehicleIcon::all();
+                return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->editColumn('icon', function ($data) {
+                        if (!$data->icon) return 'N/A';
+                        return '<img height="50px" width="50px" src="' . env('AWS_MEDIA_URL') . $data->icon . '" >';
+                    })
+                    ->editColumn('action', function ($data) {
+                        return '<a href="' . route('transport.vehicle-icon.edit', ['id'=>$data->id]) . '" style="color:#061880;" title="Edit"><i class="material-icons">edit</i></a> ';
+                    })
+                    ->rawColumns(['action', 'icon'])
+                    ->make(true);
+            } else {
+                return redirect()->route('super.admin.login');
+            }
+        }
+        $page = 'manage_vehicle_icon';
+        return view('superadmin.transport.vehicle_icon.index', compact('page'));
+    }
+
+    public function vehicleIconEdit($id)
+    {
+        $vehicleIcon = VehicleIcon::find($id);
+        $page = 'manage_vehicle_icon';
+        return view('superadmin.transport.vehicle_icon.edit', compact('page', 'vehicleIcon'));
+    }
+
+    public function vehicleIconUpdate(Request $request)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+        try{
+            $vehicleIcon = VehicleIcon::find($request->id);
+            if($request->file('icon'))
+            {
+                if(Storage::disk('s3')->exists('public/'.$vehicleIcon->icon))
+                {
+                    Storage::disk('s3')->delete('public/'.$vehicleIcon->icon);
+                }
+                $file = Storage::disk('s3')->put('public/uploads/all', $request->file('icon'));
+                $path = Storage::disk('s3')->url($file);
+                $vehicleIcon->icon = substr($path, 45, 200);
+            }
+            $vehicleIcon->name = $request->name;
+            $vehicleIcon->update();
+            $message = "Vehicle icon updated successfully!";
+            return redirect()->route('transport.vehicle-icon.list')->with('success_message', $message);
+        }catch(\Exception $e){
+            return redirect()->back()->with('error_message', 'Something went wrong!');
+        }
+    }
+
+    public function assignVehicleIcon($id)
+    {
+        $vehicleIcons = VehicleIcon::all();
+        $vehicleSubTypeId = $id;
+        $assignedVehicleIcon = VehicleSubTypeIcon::where('vehicle_sub_type_id', $id)->first();
+        $page = 'manage_vehicle_type';
+        return view('superadmin.transport.vehicle_type.assign_vehicle_icon', compact('page', 'vehicleIcons', 'vehicleSubTypeId', 'assignedVehicleIcon'));
+    }
+
+    public function assignVehicleIconSubmit(Request $request)
+    {
+        $request->validate([
+            'icon' => 'required'
+        ]);
+        try{
+            $existVehicleIcon = VehicleSubTypeIcon::where('vehicle_sub_type_id', $request->id)->first();
+            if($existVehicleIcon)
+            {
+                $existVehicleIcon->vehicle_icon_id = $request->icon;
+                $existVehicleIcon->update();
+            }
+            else
+            {
+                VehicleSubTypeIcon::create([
+                    'vehicle_sub_type_id' => $request->id,
+                    'vehicle_icon_id' => $request->icon
+                ]);
+            }
+            $message = "Vehicle icon assigned successfully!";
+            return redirect()->back()->with('success_message', $message);
+        }catch(\Exception $e){
+            return redirect()->back()->with('error_message', 'Something went wrong!');
+        }
     }
 }

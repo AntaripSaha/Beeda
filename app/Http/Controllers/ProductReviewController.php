@@ -15,7 +15,7 @@ class ProductReviewController extends Controller
 
     public function productReviews(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             /*
             $product_reviews = Http::withHeaders([

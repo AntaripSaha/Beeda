@@ -1027,41 +1027,84 @@
             z-index: 999;
         }
     </style>
-    @if(Route::currentRouteName() == 'home.index')
-        <script type='application/ld+json'> 
-        {
-            "@context": "http://www.schema.org/",
-            "@type": “MobileApplication”,
-            "name": "Beeda Mega App",
-            "url": "https://beeda.com/",
-            "logo": "https://beeda.com/assets/front/img/beeda_white_logo.png",
-            "description": "Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are E-commerce, Food Delivery, Ride Sharing, Travel, and more.",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "16 Madison Square West Associates, 16 Madison Square West",
-                "addressLocality": "New York",
-                "addressRegion": "New York",
-                "postalCode": "NY 10010",
-                "addressCountry": "United States"
-            },
-            "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": "40.7429219",
-                "longitude": "73.9915369"
-            },
-            "hasMap": "https://www.google.com/search?q=Beeda+INC+1115+Broadway+16+Madison+Square+West+11th+Floor+%E2%80%93+New+York%2C+NY+10010.&rlz=1C1CHBD_enBD1036BD1036&oq=Beeda+INC+1115+Broadway+16+Madison+Square+West+11th+Floor+%E2%80%93+New+York%2C+NY+10010.&aqs=chrome.0.69i59j69i60l3.1670j0j7&sourceid=chrome&ie=UTF-8",
-            "openingHours": "Mo, Tu, We, Th, Fr, Sa, Su 01:00-23:59",
-            "contactPoint": {
-                "@type": "ContactPoint",
-                "contactType": "Customer Service",
-                "telephone": "+1 754-399-1127"
-            }
-        }
-        </script>
-    @endif
 </head>
 <!-- english -->
     <body>
+    @if(Route::currentRouteName() == 'home.index')
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "MobileApplication",
+            "name": "Beeda Mega App",
+            "operatingSystem": "Android, iOS",
+            "applicationCategory": "Multivendor eCommerce and Delivery Service",
+            "offers": {
+                "@type": "Offer",
+                "price": "Free",
+                "priceCurrency": "USD"
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5.0",
+                "reviewCount": "198"
+            },
+            "screenshot": [
+                "https://beeda.com/img/banner-phone.png",
+                "https://beeda.com/img/beeda-store-woman-hand.png"
+            ],
+            "description": "Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are eCommerce, Food Delivery, Ride Sharing, Travel, and more.",
+            "url": "https://beeda.com",
+            "potentialAction": {
+                "@type": "ViewAction",
+                "target": [
+                    {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "https://apps.apple.com/us/app/beeda/id1641292802",
+                        "actionPlatform": "ios"
+                    },
+                    {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "https://play.google.com/store/apps/details?id=com.beeda.user",
+                        "actionPlatform": "android"
+                    }
+                ]
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Beeda Inc.",
+                "sameAs": ["https://twitter.com/beedamegaapp",
+            "https://www.facebook.com/BeedaMegaApp/",
+                "https://www.linkedin.com/company/beeda/",
+            "https://www.reddit.com/user/beedaapp/",
+                "https://www.youtube.com/@beedamegaapp",
+                "https://www.instagram.com/beedamegaapp/",
+            "https://www.pinterest.com/beedainc/",
+            "https://beeda.quora.com/"
+            ],
+            "logo": "https://beeda.com/images/Frame.png",
+                "location": {
+                    "@type": "Place",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "16 Madison Square West Associates, 16 Madison Square West",
+                        "addressLocality": "New York",
+                        "addressRegion": "New York",
+                        "postalCode": "NY 10010",
+                        "addressCountry": "United States"
+                    },
+                    "geo": {
+                        "@type": "GeoCoordinates",
+                        "latitude": "40.7429219",
+                        "longitude": "73.9915369"
+                    },
+                    "hasMap": "https://www.google.com/search?q=Beeda+INC+1115+Broadway+16+Madison+Square+West+12th+Floor+%E2%80%93+New+York%2C+NY+10010.&rlz=1C1CHBD_enBD1036BD1036&oq=Beeda+INC+1115+Broadway+16+Madison+Square+West+12th+Floor+%E2%80%93+New+York%2C+NY+10010.&aqs=chrome.0.69i59j69i60l3.1670j0j7&sourceid=chrome&ie=UTF-8",
+        "contactPoint": {
+        }
+        }
+        }
+        }
+    </script>    
+    @endif
     <header id="header">
         <div class="container">
             <div id="logo" class="pull-left">
@@ -1754,37 +1797,6 @@
     </footer>
 
     <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
-
-    <script type='application/ld+json'> 
-    {
-        "@context": "http://www.schema.org",
-        "@type": “MobileApplication”,
-        "name": "Beeda Mega App",
-        "url": "https://beeda.com/",
-        "logo": "https://beeda.com/assets/front/img/beeda_white_logo.png",
-        "description": "Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are E-commerce, Food Delivery, Ride Sharing, Travel, and more.",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "16 Madison Square West Associates, 16 Madison Square West",
-            "addressLocality": "New York",
-            "addressRegion": "New York",
-            "postalCode": "NY 10010",
-            "addressCountry": "United States"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "40.741909",
-            "longitude": "-73.987267"
-        },
-        "hasMap": "https://goo.gl/maps/MZ9BhbTFjsqpHj1W7",
-        "openingHours": "Mo, Tu, We, Th, Fr, Sa, Su 01:00-23:59",
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "Customer Service Phone Number",
-            "telephone": "+1 754-399-1127"
-        }
-    }
- </script>
 
 
     <!-- JavaScript Libraries -->

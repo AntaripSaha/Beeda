@@ -20,7 +20,7 @@ export default function Details() {
         window.scrollTo(0, 0);
         setLoading(true);
         axios
-            .get(`https://beeda.com/api/blogs/${slug}`).then((res) => {
+            .get(`${window.location.href.split('/blogs-details').shift()}/api/blogs/${slug}`).then((res) => {
                 // let singlePost = res.data.posts.find(item => item.slug === slug)
                 let singlePost = res.data.post
 
@@ -61,7 +61,7 @@ export default function Details() {
                                 }/${year}`})</div>
                         </div>
                         <img
-                            src={`${blogImageUrl}/${item.img.file_name}`}
+                            src={`${item.img?.file_name}`}
                             className="card-img-top"
                             alt={item.meta_image_alt}
                         />

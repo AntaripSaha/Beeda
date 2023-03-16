@@ -94,6 +94,7 @@ Banner List
                     <th>Shop</th>
                     <th>Product</th>
                     <th>Position</th>
+                    <th>Slider Section</th>
                     <th>Published</th>
                     <th>Action</th>
                   </tr>
@@ -163,6 +164,7 @@ function customShowNotification (from, align, custom_message) {
           {data: 'shop', name: 'shop'},
           {data: 'product', name: 'product'},
           {data: 'position', name: 'position'},
+          {data: 'slider_section', name: 'slider_section'},
           {data: 'published', name: 'published'},
           {data: 'action', name: 'action'}
           

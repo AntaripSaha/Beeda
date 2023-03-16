@@ -44,29 +44,18 @@ Edit Category
                           <span style="color:red;float:left;font-size:13px;">{{ $errors->first('name') }}</span>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group ">
-                          <label class="bmd-label-floating">Parent Category <small>(Optional)</small></label>
-                          <select class="form-control" name="parent_category" id="parent_category">
-                              <option value="">Select Option</option>
-                              @foreach($category_list as $singleCategory)                         
-                                @if(count($singleCategory->child_categories)>0)
-                                <option value="{{$singleCategory->id}}" @if($category->parent) @if($singleCategory->id == $category->parent->id) selected @endif @endif>{{$singleCategory->name}}</option>
-                                    @php 
-                                        $parent_id = null;
-                                        if($category->parent)
-                                        {
-                                            $parent_id = $category->parent->id;
-                                        }    
-                                    @endphp
-                                    @include('store_owner.service_item.subcategory', ['child_categories'=>$singleCategory->child_categories, 'parent_category_id' => $parent_id])
-                                @else
-                                <option value="{{$singleCategory->id}}">{{$singleCategory->name}}</option>
-                                @endif
-                              @endforeach
-                          </select>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="bmd-label-floating">Service Category</label>
+                                <select class="form-control" name="service_category" id="service_category">
+                                    <option value="0">Select Option</option>
+                                    @foreach($service_category_list as $service)
+                                        <option value="{{$service->id}}" @if($category->service_category_id) @if($category->service_category_id == $service->id) selected @endif @endif>{{$service->name}}</option>
+                                    @endforeach
+                                </select>
+                                <span style="color:red;float:left;font-size:13px;">{{ $errors->first('service_category') }}</span>
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
@@ -80,18 +69,30 @@ Edit Category
                           <span style="color:red;float:left;font-size:13px;">{{ $errors->first('type') }}</span>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group ">
-                          <label class="bmd-label-floating">Service Category</label>
-                          <select class="form-control" name="service_category" id="service_category">
-                              <option value="">Select Option</option>
-                              @foreach($service_category_list as $service)
-                                <option value="{{$service->id}}" @if($category->service_category_id) @if($category->service_category_id == $service->id) selected @endif @endif>{{$service->name}}</option>
-                              @endforeach
-                          </select>
-                          <span style="color:red;float:left;font-size:13px;">{{ $errors->first('service_category') }}</span>
+
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="bmd-label-floating">Parent Category <small>(Optional)</small></label>
+                                <select class="form-control" name="parent_category" id="parent_category">
+                                    <option value="">Select Option</option>
+                                    @foreach($category_list as $singleCategory)
+                                        @if(count($singleCategory->childCategories)>0)
+                                            <option value="{{$singleCategory->id}}" @if($category->parent) @if($singleCategory->id == $category->parent->id) selected @endif @endif>{{$singleCategory->name}}</option>
+                                            @php
+                                                $parent_id = null;
+                                                if($category->parent)
+                                                {
+                                                    $parent_id = $category->parent->id;
+                                                }
+                                            @endphp
+                                            @include('store_owner.service_item.subcategory', ['child_categories'=>$singleCategory->childCategories, 'parent_category_id' => $parent_id])
+                                        @else
+                                            <option value="{{$singleCategory->id}}">{{$singleCategory->name}}</option>
+                                         @endif
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
@@ -99,8 +100,8 @@ Edit Category
                         <div class="">
                           <label class="bmd-label-floating">Banner (670x270) <small>(Optional)</small></label>
                           <br>
-                          @if($category->banner)
-                            <img src="{{assetUrl().$category->banner->file_name}}" style="width:100px;height:100px;"/>
+                          @if($category->bannerImg)
+                            <img src="{{assetUrl().$category->bannerImg->file_name}}" style="width:100px;height:100px;"/>
                           @endif
                           <br>
                           <br>
@@ -112,8 +113,8 @@ Edit Category
                         <div class="">
                           <label class="bmd-label-floating">Icon <small>(Optional)</small></label>
                           <br>
-                          @if($category->icon)
-                            <img src="{{assetUrl().$category->icon->file_name}}" style="width:100px;height:100px;"/>
+                          @if($category->iconImg)
+                            <img src="{{assetUrl().$category->iconImg->file_name}}" style="width:100px;height:100px;"/>
                           @endif
                           <br>
                           <br>
@@ -159,7 +160,58 @@ Edit Category
     customShowNotification('top', 'right', "{{Session::get('error_message')}}");
 </script>
 @endif
+<script>
+    $(document).ready(function() {
+        let childCategory;
+        $('#service_category').on('change', function() {
+            var service_category_id = $(this).val();
+            $.ajax({
+                url: '{{route("category.of.service")}}',
+                type: "POST",
+                data: {'service_category_id': service_category_id, '_token': '{{csrf_token()}}'},
+                dataType: "json",
+                success:function(data)
+                {
+                    if(data.status){
+                        $("#parent_category").html('');
+                        $("#parent_category").append(`<option value="">Select Option</option>`);
+                        $.each(data.categories, function (key, category) {
+                            if(category.child_categories.length>0)
+                            {
+                                childCategory = category.child_categories;
+                                var sub = '';
+                                $.each(childCategory, function (key, subcategory) {
+                                    // console.log("yes: ",subcategory);
+                                    sub+='<option value="'+ subcategory.id +'">--' +subcategory.name+'</option>';
+                                });
 
+                                // console.log(childCategory[0]);
+
+                                $("#parent_category").append(
+                                    `
+                                        <option value="${category.id}">${category.name}</option>
+                                        ${sub}
+                                    `
+                                );
+
+                            }
+                            else
+                            {
+                                $("#parent_category").append(
+                                    `<option value="${category.id}">${category.name}</option>`
+                                );
+
+                                console.log("No");
+                            }
+                        });
+                    }else{
+                        console.log(data);
+                    }
+                }
+            });
+        });
+    });
+</script>
 @endsection
 
 

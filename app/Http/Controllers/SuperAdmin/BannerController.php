@@ -16,7 +16,7 @@ class BannerController extends Controller
     public function bannerList(Request $request)
     {
         if($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $banners = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -43,6 +43,9 @@ class BannerController extends Controller
                     ->editColumn('product', function ($data) {
                         return $data->product ? $data->product->name : '---';
                     })
+                    ->editColumn('slider_section', function ($data) {
+                        return $data->slider_section ? $data->slider_section : '---';
+                    })
                     ->editColumn('published', function ($data) {
                         $active = '';
                         $checked = '';
@@ -63,7 +66,7 @@ class BannerController extends Controller
                         // $btn .= '<a href="javascript:;" title="Delete" style="color:#061880;" onclick="deleteAttribute('.$data->id.')"><i class="material-icons">delete</i></a>';
                         return $btn;
                     })
-                    ->rawColumns(['banner', 'url', 'service', 'published', 'action'])
+                    ->rawColumns(['banner', 'url', 'service', 'slider_section', 'published', 'action'])
                     ->make(true);
             } else {
                 return redirect()->route('super.admin.login');
@@ -75,7 +78,7 @@ class BannerController extends Controller
 
     public function editBanner($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $banner = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -110,13 +113,14 @@ class BannerController extends Controller
             'position' => 'required',
             'published' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $data = [
                 'id' => $request->id,
                 'position' => $request->position,
                 'published' => $request->published,
-                'url' => $request->url ? $request->url : '#'
+                'url' => $request->url ? $request->url : '#',
+                'slider_section' => $request->slider_section,
             ];
             $banner = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -136,7 +140,7 @@ class BannerController extends Controller
 
     public function addBanner()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $service_categories = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
@@ -164,7 +168,7 @@ class BannerController extends Controller
             'published' => 'required',
             'service_category' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $data = [
                 'position' => $request->position,
@@ -173,7 +177,8 @@ class BannerController extends Controller
                 'url' => $request->url ? $request->url : '#',
                 'product_id' => $request->product,
                 'shop_id' => $request->shop,
-                'type' => $request->type
+                'type' => $request->type,
+                'slider_section' => $request->slider_section,
             ];
             $banner = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -193,7 +198,7 @@ class BannerController extends Controller
 
     public function publishBanner(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $data = [
                 'id' => $request->banner_id
@@ -210,7 +215,7 @@ class BannerController extends Controller
 
     public function serviceCategoryProducts(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $products = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -224,7 +229,7 @@ class BannerController extends Controller
 
     public function serviceCategoryShops(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $shops = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token

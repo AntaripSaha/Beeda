@@ -180,7 +180,7 @@ ul.thumb-Images li {
   }
   .preview {
     overflow: hidden;
-    width: 290px; 
+    width: 290px;
     height: 300px;
     margin: 10px;
     border: 1px solid red;
@@ -254,7 +254,7 @@ ul.thumb-Images li {
                       <option value="" disabled selected>Select</option>
                         @if($data)
                           @foreach($data->category as $category)
-                          
+
                               @if(count($category->child_categories)>0)
                               <option value="{{$category->id}}" @if($product->category_id == $category->id) selected @endif>{{$category->name}}</option>
                                 @include('store_owner.service_item.subcategory', ['child_categories'=>$category->child_categories, 'pre_category_id'=>$product->category_id])
@@ -262,7 +262,7 @@ ul.thumb-Images li {
                               <option value="{{$category->id}}" @if($product->category_id == $category->id) selected @endif>{{$category->name}}</option>
                               @endif
                           @endforeach
-                        @endif                                     
+                        @endif
                     </select>
                     <span style="color:red;font-size:13px;">{{ $errors->first('category') }}</span>
                   </div>
@@ -274,7 +274,7 @@ ul.thumb-Images li {
                         @foreach($data->brand as $brand)
                           <option value="{{$brand->id}}" @if($product->brand_id == $brand->id) selected @endif>{{$brand->name}}</option>
                         @endforeach
-                      @endif 
+                      @endif
                     </select>
                   </div>
                   <div class="form-group">
@@ -287,6 +287,21 @@ ul.thumb-Images li {
                     <input type="number" min="1" class="form-control" name="min_quantity" value="{{$product->min_qty}}"  id="min_quantity" placeholder="0" required>
                     <span style="color:red;font-size:13px;">{{ $errors->first('min_quantity') }}</span>
                   </div>
+                    <div class="form-group">
+                        @php
+                            $region_ids = [];
+                            foreach($product->regions as $region)
+                            {
+                                $region_ids[] = $region->region_id;
+                            }
+                        @endphp
+                        <label for="description">Regions</label>
+                        <select class="multiple-region form-control" name="regions[]" multiple="multiple">
+                            @foreach($regions as $region)
+                                <option value="{{$region->id}}" @if(in_array($region->id, $region_ids)) selected @endif>{{$region->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                   {{-- <div class="form-group">
                     <label for="packaging_charge">Packaging Charge</label>
                     <input type="number" min="0" class="form-control" name="packaging_charge" value="{{$product->packing_cost}}" id="packaging_charge" placeholder="0">
@@ -294,21 +309,15 @@ ul.thumb-Images li {
                   </div> --}}
                   <div class="form-group">
                     <label for="description">Short Description</label>
-                    <textarea class="summernote" name="short_description">
-                      {{ $product->short_description }}
-                    </textarea>
+                    <textarea class="summernote"  name="short_description">{{$product->short_description}}</textarea>
                   </div>
                   <div class="form-group">
                     <label for="description">Full Description</label>
-                    <textarea class="summernote" name="description">
-                        {{$product->description}}
-                    </textarea>
+                    <textarea id="editor" name="description">{{$product->description}}</textarea>
                   </div>
                   <div class="form-group">
                     <label for="service_description">Service Description</label>
-                    <textarea class="summernote" name="service_description">
-                        {{$product->service_description}}
-                    </textarea>
+                    <textarea class="summernote"  name="service_description">{{$product->service_description}}</textarea>
                   </div>
                   <div class="form-group">
                     <label for="tags">Tags</label>
@@ -347,7 +356,7 @@ ul.thumb-Images li {
                 </div>
 
                     <div>
-        
+
                   </div>
                   {{-- <div class="form-group">
                     <label for="thumbnail_image">Thumbnail Image <span class="text-danger" title="Required">*</span></label>
@@ -448,7 +457,7 @@ ul.thumb-Images li {
 
                     <label class="col-md-3 col-from-label mt-1">Video File</label>
 
-                    
+
 
                     <div class="col-md-8 mt-1">
 
@@ -499,7 +508,7 @@ ul.thumb-Images li {
                       </div>
                     </div>
                   </div>
-                 
+
                   <div class="form-group no-variant" @if($product->variant_product == 1) style="display:none;"  @endif>
                     <label for="quantity">Stock Quantity</label>
                     <input type="number" min="0" class="form-control" name="normal_quantity" value="{{$product->stocks[0]->qty}}" id="quantity" placeholder="0">
@@ -508,7 +517,7 @@ ul.thumb-Images li {
                     <label for="sku">SKU</label>
                     <input type="text" class="form-control" name="sku" id="sku" value="{{$product->stocks[0]->sku}}" placeholder="Product Sku">
                   </div>
-                 
+
                   <div class="form-group variant" @if($product->variant_product == 0) style="display:none;"  @endif>
                     <table class="table table-hover" id="participantTable">
                             <thead>
@@ -541,7 +550,7 @@ ul.thumb-Images li {
                               @endforeach
                               @endif
                             </tbody>
-                            
+
                             <!-- <tr class="participantRow">
                                 <td><input type="text" class="form-control" name="variant_name[]" readonly/></td>
                                 <td><input type="number" step="any" min="1" class="form-control" name="variant_price[]"/></td>
@@ -555,7 +564,7 @@ ul.thumb-Images li {
                             </tr> -->
                     </table>
                   </div>
-                  
+
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -596,14 +605,14 @@ ul.thumb-Images li {
               <div class="card-header">
                 <h3 class="card-title">PDF Specification</h3>
               </div>
-              
+
                 <div class="card-body">
                   <div class="form-group">
                     <label for="pdf_specification_file">Upload PDF</label>
                     @if($pdf)
                       &nbsp;&nbsp;<embed src="{{assetUrl().$pdf->file_name}}" style="width:150px;height:100px" />
                     @endif
-                    <input type="file" class="form-control" name="pdf_specification_file" id="pdf_specification_file" accept="pdf/*"> 
+                    <input type="file" class="form-control" name="pdf_specification_file" id="pdf_specification_file" accept="pdf/*">
                   </div>
                 card-body -->
 
@@ -681,11 +690,11 @@ ul.thumb-Images li {
                 </div>
                 <div class="form-group">
                   <label for="show_stock_text_only"> <input type="radio" name="stock_visibility" id="show_stock_text_only" value="text" @if($product->stock_visibility_state == 'text') checked @endif> Show Stock With Text Only</label>
-                 
+
                 </div>
                 <div class="form-group">
                   <label for="hide_stock">  <input type="radio" name="stock_visibility" id="hide_stock" value="hide" @if($product->stock_visibility_state == 'hide') checked @endif> Hide Stock</label>
-                 
+
                 </div>
               </div>
           </div> --}}
@@ -830,7 +839,7 @@ ul.thumb-Images li {
                     </div>
                   </div>
                 </div>
-                
+
               </div>
               <!-- /.card-body -->
           </div>
@@ -875,7 +884,7 @@ ul.thumb-Images li {
   </div>
 </div>
 <!-- MODAL END -->
-<!-- MODAL END -->  
+<!-- MODAL END -->
 @endsection
 
 @section('css_js_down')
@@ -891,9 +900,153 @@ ul.thumb-Images li {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/super-build/ckeditor.js"></script>
+<script>
+     // This sample still does not showcase all CKEditor 5 features (!)
+            // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+            CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+                // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+                toolbar: {
+                    items: [
+                        'exportPDF','exportWord', '|',
+                        'findAndReplace', 'selectAll', '|',
+                        'heading', '|',
+                        'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                        'bulletedList', 'numberedList', 'todoList', '|',
+                        'outdent', 'indent', '|',
+                        'undo', 'redo',
+                        '-',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                        'alignment', '|',
+                        'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                        'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                        'textPartLanguage', '|',
+                        'sourceEditing',
+                    ],
+                    shouldNotGroupWhenFull: true
+                },
+                // Changing the language of the interface requires loading the language file using the <script> tag.
+                // language: 'es',
+                list: {
+                    properties: {
+                        styles: true,
+                        startIndex: true,
+                        reversed: true
+                    }
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                        { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                        { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                        { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+                    ]
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+                placeholder: 'Description here..',
+                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+                fontFamily: {
+                    options: [
+                        'default',
+                        'Arial, Helvetica, sans-serif',
+                        'Courier New, Courier, monospace',
+                        'Georgia, serif',
+                        'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                        'Tahoma, Geneva, sans-serif',
+                        'Times New Roman, Times, serif',
+                        'Trebuchet MS, Helvetica, sans-serif',
+                        'Verdana, Geneva, sans-serif'
+                    ],
+                    supportAllValues: true
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+                fontSize: {
+                    options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+                    supportAllValues: true
+                },
+                // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+                // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+                htmlSupport: {
+                    allow: [
+                        {
+                            name: /.*/,
+                            attributes: true,
+                            classes: true,
+                            styles: true
+                        }
+                    ]
+                },
+                // Be careful with enabling previews
+                // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+                htmlEmbed: {
+                    showPreviews: true
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+                link: {
+                    decorators: {
+                        addTargetToExternalLinks: true,
+                        defaultProtocol: 'https://',
+                        toggleDownloadable: {
+                            mode: 'manual',
+                            label: 'Downloadable',
+                            attributes: {
+                                download: 'file'
+                            }
+                        }
+                    }
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+                mention: {
+                    feeds: [
+                        {
+                            marker: '@',
+                            feed: [
+                                '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                                '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                                '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                                '@sugar', '@sweet', '@topping', '@wafer'
+                            ],
+                            minimumCharacters: 1
+                        }
+                    ]
+                },
+                // The "super-build" contains more premium features that require additional configuration, disable them below.
+                // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+                removePlugins: [
+                    // These two are commercial, but you can try them out without registering to a trial.
+                    // 'ExportPdf',
+                    // 'ExportWord',
+                    'CKBox',
+                    'CKFinder',
+                    'EasyImage',
+                    // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+                    // Storing images as Base64 is usually a very bad idea.
+                    // Replace it on production website with other solutions:
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+                    // 'Base64UploadAdapter',
+                    'RealTimeCollaborativeComments',
+                    'RealTimeCollaborativeTrackChanges',
+                    'RealTimeCollaborativeRevisionHistory',
+                    'PresenceList',
+                    'Comments',
+                    'TrackChanges',
+                    'TrackChangesData',
+                    'RevisionHistory',
+                    'Pagination',
+                    'WProofreader',
+                    // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+                    // from a local file system (file://) - load this site via HTTP server if you enable MathType
+                    'MathType'
+                ]
+            });
+</script>
 
-
-<script>       
+<script>
   //modal crop logo
   var image = document.getElementById('image');
   var $modal1 = $('#modal');
@@ -966,22 +1119,22 @@ ul.thumb-Images li {
       canvas.toBlob(function(blob) {
           url = URL.createObjectURL(blob);
           var reader = new FileReader();
-          reader.readAsDataURL(blob); 
+          reader.readAsDataURL(blob);
           reader.onloadend = function() {
-              var base64data = reader.result; 
+              var base64data = reader.result;
               $modal1.modal('hide');
-   
-              $("." +copped).val(base64data);  
-  
+
+              $("." +copped).val(base64data);
+
               document.getElementById(preview).style.display = 'block';
               document.getElementById(preview).src = base64data;
-  
+
           }
       });
   })
   </script>
-  
-  <script type="text/javascript">  
+
+  <script type="text/javascript">
       $("#crop_modal_cancel").click(function() {
           $("#modal").modal("hide");
       });
@@ -1173,7 +1326,10 @@ $(function () {
     //Initialize Select2 Elements
     $('.select2bs4').select2({
       theme: 'bootstrap4'
-    })
+    });
+    $(document).ready(function() {
+        $('.multiple-region').select2();
+    });
 
     // $("#inputTag").tagsinput('items');
 
@@ -1184,7 +1340,7 @@ $(function () {
 
   // $('#participantTable').hide();
 
-//  multiple image upload 
+//  multiple image upload
 // $(document).ready(function() {
 //   if (window.File && window.FileList && window.FileReader) {
 //     $("#files").on("change", function(e) {
@@ -1202,14 +1358,14 @@ $(function () {
 //           $(".remove").click(function(){
 //             $(this).parent(".pip").remove();
 //           });
-          
+
 //           // Old code here
 //           /*$("<img></img>", {
 //             class: "imageThumb",
 //             src: e.target.result,
 //             title: file.name + " | Click to remove"
 //           }).insertAfter("#files").click(function(){$(this).remove();});*/
-          
+
 //         });
 //         fileReader.readAsDataURL(f);
 //       }
@@ -1244,7 +1400,7 @@ var attribute_value = [];
   $('#choise_attributes').val(choice_attributes);
 
 
- 
+
 function setAttributeField()
 {
   var attribute_value = [];
@@ -1290,7 +1446,7 @@ function setAttributeField()
         $("."+all_attributes[i]).remove();
       }
   }
-  
+
   // variant_name
     $('#choise').val(attributes);
     $('#choise_attributes').val(choice_attributes);
@@ -1312,10 +1468,10 @@ function getAttributeValue()
       selected_attribute.push($this.text());
     }
   });
-  
+
   for(var i=0;i<selected_attribute.length;i++)
   {
-    
+
     if($("#"+selected_attribute[i+1]).tagsinput('items'))
     {
       all_variant = [];
@@ -1396,7 +1552,7 @@ function getAttributeValue()
         {
           if($("#"+selected_attribute[i]).tagsinput('items'))
           {
-            
+
             for(var k = 0; k < $("#"+selected_attribute[i]).tagsinput('items').length; k++)
             {
               variant_name = selected_colors[m];
@@ -1404,10 +1560,10 @@ function getAttributeValue()
               all_variant.push(variant_name);
             }
           }
-          
-          
+
+
         }
-       
+
       }
       else
       {
@@ -1420,15 +1576,15 @@ function getAttributeValue()
             all_variant.push(variant_name);
           }
         }
-        
+
       }
     }
     break;
   }
- 
+
   if(selected_attribute.length == 0)
   {
-    
+
     var mainParent = $('.color_field').parent('.toggle-btn');
     if($(mainParent).find('input.color_field').is(':checked')) {
         var selected_colors = [];
@@ -1457,7 +1613,7 @@ function getAttributeValue()
           total_attribute_values = 1;
         }
       }
-      
+
     }
     if(total_attribute_values == 0)
     {
@@ -1507,7 +1663,7 @@ function getAttributeValue()
   // {
   //   $('#is_variant').val(0);
   // }
-  $('#is_variant').val(1);
+  // $('#is_variant').val(1);
   console.log(all_variant);
 }
 
@@ -1872,7 +2028,7 @@ function FillAttachmentArray(e, readerEvt) {
           $(".upload").hide();
           $(".provide").show();
         }
-        
+
         $('input[type="radio"]').click(function(){
             var inputValue = $(this).attr("value");
             var targetBox = $("." + inputValue);

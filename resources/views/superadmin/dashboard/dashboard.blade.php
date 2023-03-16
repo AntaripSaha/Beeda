@@ -154,6 +154,9 @@ Dashboard
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
+            <a href="{{ route('super.admin.description.update') }}" class="btn btn-circle btn-info">
+                <span>Update description</span>
+            </a>
                 <!--Div that will hold the pie chart-->
                 <!-- <div id="chart_div"></div> -->
             </div>

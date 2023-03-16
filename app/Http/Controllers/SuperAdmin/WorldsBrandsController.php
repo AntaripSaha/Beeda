@@ -17,7 +17,7 @@ class WorldsBrandsController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $worldsBrands = WorldsBrand::get();
                 $data = [];

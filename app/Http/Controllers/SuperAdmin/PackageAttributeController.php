@@ -16,7 +16,7 @@ class PackageAttributeController extends Controller
     {
         try{
             if($request->ajax()) {
-                $token = Cache::get('api_token');
+                $token = getToken();
                 if ($token) {
                     $packageAttributes = PackageAttribute::with('packageTypes','packageAttributeValue')->get();
                     $data = [];
@@ -143,7 +143,7 @@ class PackageAttributeController extends Controller
 
     public function getPackageAttributeValues($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $packageAttributeValues = PackageAttributeValue::where('package_attribute_id', $id)->get();
             return Datatables::of($packageAttributeValues)

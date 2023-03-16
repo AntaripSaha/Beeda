@@ -42,8 +42,32 @@ class DashboardController extends Controller
         $page = "movie";
         return view('movie.index', compact('video', 'slideVideos', 'page'));
     }
+    public function descriptionUpdate()
+    {
+        $token = getToken();
+        if ($token) {
+            $data = [
+                'id' => 1
+            ];
+            $feature = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token
+            ]); 
+            $feature = $feature->get($this->getApiUrl() . 'description-update');
+            $feature = json_decode($feature);
+            if($feature){
+                return redirect()->back()->with('success_message', "Updated successfully.");
+            }
+            else{
+                return redirect()->back()->with('success_message', "Failed to update!");
+            }
+            return redirect()->back()->with('success_message', 'Updated');
+        }
+        else{
+            return redirect()->back()->with('success_message', 'Authorization Problem!');
+        }
+    }
     public function update(Request $request){
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $data = [
                 'id' => 1

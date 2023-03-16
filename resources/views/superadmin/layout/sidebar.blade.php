@@ -113,7 +113,7 @@
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse @if($page == 'manage_milestone' || $page == 'manage_transport_service' || $page == 'manage_vehicle_type' || $page == 'manage_vehicle_category' || $page == 'manage_rider_list' || $page == 'manage_ride_list' || $page == 'subscriptions') show @endif" id="transport_menu">
+        <div class="collapse @if($page == 'manage_vehicle_icon' || $page == 'manage_milestone' || $page == 'manage_transport_service' || $page == 'manage_vehicle_type' || $page == 'manage_vehicle_category' || $page == 'manage_rider_list' || $page == 'manage_ride_list' || $page == 'subscriptions') show @endif" id="transport_menu">
           <ul class="nav">
             <li class="nav-item @if($page == 'manage_transport_service') active @endif">
               <a class="nav-link" href="{{route('transport.service.list')}}">
@@ -139,6 +139,12 @@
                 <span class="sidebar-normal">Manage Vehicle Type</span>
               </a>
             </li>
+              <li class="nav-item @if($page == 'manage_vehicle_icon') active @endif">
+                  <a class="nav-link" href="{{route('transport.vehicle-icon.list')}}">
+                      <span class="sidebar-mini"><i class="material-icons">commute</i></span>
+                      <span class="sidebar-normal">Manage Vehicle Icon</span>
+                  </a>
+              </li>
             <li class="nav-item @if($page == 'manage_milestone') active @endif">
               <a class="nav-link" href="{{route('transport.milestone.list')}}">
                 <span class="sidebar-mini"><i class="material-icons">star</i></span>
@@ -333,6 +339,36 @@
               <a class="nav-link" href="{{route('loan.types')}}">
                 <span class="sidebar-mini"><i class="material-icons">commute</i></span>
                 <span class="sidebar-normal">Loan Types</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item @if($page == 'ecommerce-subscription') active @endif">
+        <a class="nav-link" data-toggle="collapse" href="#ecommerce_subscription" aria-expanded="true">
+          <i class="material-icons">money_bag</i>
+          <p>E-commerce subscription
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse @if($page == 'ecommerce_subscription' || $page == 'option' || $page == 'seller_subscriptions') show @endif" id="ecommerce_subscription">
+          <ul class="nav">
+            <li class="nav-item @if($page == 'ecommerce_subscription') active @endif">
+              <a class="nav-link" href="{{route('ecommerce_subscription.index')}} ">
+                <span class="sidebar-mini"><i class="material-icons">storefront</i></span>
+                <span class="sidebar-normal">All Subscription</span>
+              </a>
+            </li>
+            <li class="nav-item @if($page == 'seller_subscriptions') active @endif">
+              <a class="nav-link" href="{{route('ecommerce_subscription.seller')}} ">
+                <span class="sidebar-mini"><i class="material-icons">storefront</i></span>
+                <span class="sidebar-normal">Seller Subscription</span>
+              </a>
+            </li>
+            <li class="nav-item @if($page == 'option') active @endif">
+              <a class="nav-link" href="{{route('option.index')}}">
+                <span class="sidebar-mini"><i class="material-icons">commute</i></span>
+                <span class="sidebar-normal">Subscription Option</span>
               </a>
             </li>
           </ul>

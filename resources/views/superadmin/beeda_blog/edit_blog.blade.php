@@ -47,7 +47,7 @@ Edit Brand
                     </div>
 
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group ">
                             <label class="bmd-label-floating">Category <span class="text-danger">*</span></label>
@@ -60,7 +60,8 @@ Edit Brand
                             <span style="color:red;float:left;font-size:13px;">{{ $errors->first('category_id') }}</span>
                             </div>
                         </div>
-                      </div>
+                      </div> --}}
+                      <input type="hidden" name="category_id" value="7">
 
                       <div class="row">
                         <div class="col-md-6">
@@ -85,6 +86,44 @@ Edit Brand
                           </div>
                         </div>
                       </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="">
+                            <label class="bmd-label-floating">Thumbnail <small>(381x240)</small></label>
+                            <br />
+                            <input type="file" name="thumbnail" id="thumbnail" />   
+                          </div>
+                          <div style="margin-top: 10px; margin-bottom: 10px;">
+                            @if(isset($blog->thumbnail_img))
+                              <img src="{{$blog->thumbnail_img->file_name}}" style="width:100px;height:100px;"/>
+                            @endif
+                          </div>
+                        </div>
+                      </div>
+
+                      {{-- <div class="row mb-3">
+                        <div class="col-md-6">
+                            <br>
+                          <div class="">
+                            <label class="bmd-label-floating">Thumbnail Alt<small></label>
+                            <br>
+                            <input type="text" value="{{ $blog->thumbnail_alt }}" name="thumbnail_alt" id="thumbnail_alt" class="form-control">
+                          </div>
+                        </div>
+                      </div> --}}
+                      <input type="hidden" name="thumbnail_alt">
+                      {{-- <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                              <label>Thumbnail Meta description</label>
+                              <div class="form-group">
+                                <textarea id="thumbnail_meta_description" name="thumbnail_meta_description" rows="5" cols="142">{{ $blog->thumbnail_meta_description }}</textarea>
+                              </div>
+                            </div>
+                          </div>
+                      </div> --}}
+                      <input type="hidden" name="thumbnail_meta_description">
   
                       <div class="row">
                         <div class="col-md-6">
@@ -94,12 +133,35 @@ Edit Brand
                             <input type="file" name="banner" id="banner" />   
                           </div>
                           <div style="margin-top: 10px; margin-bottom: 10px;">
-                            @if($blog->banner)
-                              <img src="{{assetUrl().$blog->img->file_name}}" style="width:100px;height:100px;"/>
+                            @if(isset($blog->img))
+                              <img src="{{$blog->img->file_name}}" style="width:100px;height:100px;"/>
                             @endif
                           </div>
                         </div>
                       </div>
+
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                            <br>
+                          <div class="">
+                            <label class="bmd-label-floating">Banner Alt<small></label>
+                            <br>
+                            <input type="text" value="{{ $blog->banner_alt }}" name="banner_alt" id="banner_alt" class="form-control">
+                          </div>
+                        </div>
+                      </div>
+  
+                      {{-- <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                              <label>Banner Meta description</label>
+                              <div class="form-group">
+                                <textarea id="banner_meta_description" name="banner_meta_description" rows="7" cols="190">{{ $blog->banner_meta_description }}</textarea>
+                              </div>
+                            </div>
+                          </div>
+                      </div> --}}
+                      <input type="hidden" name="banner_meta_description">
                       
                       <div class="row">
                         <div class="col-md-12">
@@ -141,9 +203,20 @@ Edit Brand
                             <input type="file" name="meta_img" id="meta_img" />
                           </div>
                           <div style="margin-top: 10px; margin-bottom: 10px;">
-                            @if($blog->meta_img)
-                              <img src="{{assetUrl().$blog->metaImg->file_name}}" style="width:100px;height:100px;"/>
+                            @if(isset($blog->metaImg))
+                              <img src="{{$blog->metaImg->file_name}}" style="width:100px;height:100px;"/>
                             @endif
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                            <br>
+                          <div class="">
+                            <label class="bmd-label-floating">Meta Image Alt<small></label>
+                            <br>
+                            <input type="text" value="{{ $blog->meta_image_alt }}" name="meta_image_alt" id="meta_image_alt" class="form-control">
                           </div>
                         </div>
                       </div>
@@ -153,7 +226,7 @@ Edit Brand
                             <div class="form-group">
                               <label>Meta description</label>
                               <div class="form-group">
-                                <textarea id="editor2" name="meta_description" rows="5">{{ $blog->meta_description }}</textarea>
+                                <textarea id="meta_description" name="meta_description" rows="5" cols="142">{{ $blog->meta_description }}</textarea>
                               </div>
                             </div>
                           </div>

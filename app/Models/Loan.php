@@ -9,7 +9,13 @@ class Loan extends Model
 {
     use HasFactory;
     protected $table = "loans";
-    protected $fillable = ['total_payable_amount'];
+    protected $fillable =
+        [
+            'total_payable_amount',
+            'approval_date',
+            'total_payable_amount',
+            'ending_date'
+        ];
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }

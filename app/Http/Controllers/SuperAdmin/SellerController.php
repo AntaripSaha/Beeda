@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Traits\ApiUrl;
+use App\Models\SellerDocument;
+use App\Models\SellerRequiredDocument;
 use Yajra\DataTables\Facades\DataTables;
 use App\User;
 use App\Seller;
@@ -16,12 +18,13 @@ class SellerController extends Controller
     use ApiUrl;
     public function sellerList(Request $request)
     {
+
+        $data = User::with('seller_shops','seller')->where('user_type', 'seller')->orWhere('state', 'seller_not_verified')->get();
         if($request->ajax())
         {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if($token)
             {
-                $data = User::with('shop','seller')->where('user_type', 'seller')->get();
 
                 return Datatables::of($data)
                     // ->addIndexColumn()
@@ -29,14 +32,15 @@ class SellerController extends Controller
                         return '<a href="/seller-details/'. $data->id .'" title="View Details" style="color:#061880;" onclick="deleteCoupon('.$data->id.')">'.$data->name.'</a>';
                     })
                     ->editColumn('store_name', function($data){
-                        if($data->shop)
+                        $shop_names = '';
+                        foreach($data->seller_shops as $shop)
                         {
-                            return $data->shop->name;
+                            $shop_names .= $shop->name."<br>";
                         }
-                        else
-                        {
-                            return '---';
-                        }
+                        return $shop_names;
+                    })
+                    ->editColumn('documents', function($data){
+                        return '<a href="' . route('seller.document.list', ['id' => $data->id]) . '" style="color:#061880;"><i class="material-icons">description</i></a>';
                     })
                     ->editColumn('status', function($data){
                         $active = '';
@@ -52,7 +56,7 @@ class SellerController extends Controller
                                     </div>';
                         return $switch;
                     })
-                    ->rawColumns(['store_name', 'status', 'name'])
+                    ->rawColumns(['store_name', 'documents', 'status', 'name'])
                     ->make(true);
 
             }
@@ -65,14 +69,36 @@ class SellerController extends Controller
         return view('superadmin.sellers.manage_seller.seller_list', compact('page'));
     }
 
+    public function sellerDocumentList($id)
+    {
+        $token = getToken();
+        if ($token) {
+            $documents = SellerDocument::with(['seller', 'document_name', 'document_img'])
+                ->select('id', 'seller_id', 'seller_required_document_id', 'document_image')
+                ->where('seller_id', $id)->get();
+            $required_docs = SellerRequiredDocument::all();
+            $page = 'manage_service';
+            return view('superadmin.sellers.manage_seller.seller_document_list', compact('page', 'documents', 'required_docs'));
+        } else {
+            return redirect()->route('super.admin.login');
+        }
+    }
+
     public function approveSeller(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
 
             $seller = Seller::where('user_id', $request->seller_id)->first();
             $seller->verification_status = !$seller->verification_status;
             $seller->update();
+            if ($seller->verification_status) {
+                $user = User::where('id', $request->seller_id)->first();
+                $user->state = 'active';
+                $user->user_type = 'seller';
+                $user->save();
+                SellerDocument::where('seller_id', $request->seller_id)->update(['status'=> 1]);
+            }
             return 1;
         } else {
             return redirect()->route('super.admin.login');
@@ -91,7 +117,7 @@ class SellerController extends Controller
     public function login($id){
         session()->forget('user_info');
         $logout = Http::withHeaders([
-            'Authorization' => 'Bearer ' . Cache::get('api_token')
+            'Authorization' => 'Bearer ' . getToken()
         ])->post($this->getApiUrl() . 'auth/logout');
         Cache::forget('api_token');
         auth()->logout();
@@ -116,7 +142,7 @@ class SellerController extends Controller
             // Auth::attempt($modifiedRequest);
 
             Cache::put('api_token', $response->access_token);
-            $token = Cache::get('api_token');
+            $token = getToken();
             session()->put('user_info', $response);
             $seller_services = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
@@ -146,9 +172,9 @@ class SellerController extends Controller
                 } else {
                     return redirect()->route('register.storeRegisterGet');
                 }
-                    
+
             }
-      
+
 
         }
         else

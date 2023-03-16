@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Traits\ApiUrl;
 use App\ServiceCategory;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Brand;
+use DB;
 
 class BrandController extends Controller
 {
@@ -17,7 +19,7 @@ class BrandController extends Controller
 
     public function brandList(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             // $brands = Http::withHeaders([
             //     'Authorization' => 'Bearer ' . $token
@@ -26,7 +28,7 @@ class BrandController extends Controller
             $data = Brand::with('logo')->get();
             $data = json_decode($data);
             if ($request->ajax()) {
-           
+
                 return Datatables::of($data)
                     ->editColumn('logo', function ($data) {
                         if ($data->logo) {
@@ -46,7 +48,7 @@ class BrandController extends Controller
                     })
                     ->rawColumns(['logo', 'action'])
                     ->make(true);
-           
+
         }
         $page = 'manage_brand';
         return view('superadmin.sellers.manage_brand.brand_list', compact('page'));
@@ -58,7 +60,7 @@ class BrandController extends Controller
 
     public function addBrand()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $service_categories = ServiceCategory::where('status',1)->get();
             $service_category_list = [];
@@ -76,50 +78,44 @@ class BrandController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required',
-            'service_category' => 'required'
+            'service_category' => 'required',
+            'logo' => 'required'
         ]);
-        $token = Cache::get('api_token');
-        if ($token) {
-            $data = [
-                'name' => $request->name,
-                'service_category_id' => $request->service_category,
-                'parent_category' => $request->parent_category,
-                'type' => $request->type,
-                'meta_title' => $request->meta_title,
-                'meta_description' => $request->meta_description
-            ];
-            $brand = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ]);
-            if ($request->file('logo')) {
-                $brand = $brand->attach('logo_img', file_get_contents($request->file('logo')), $request->file('logo')->getClientOriginalName());
-            }
-            $brand = $brand->post($this->getApiUrl() . 'superadmin/addbrand', $data);
-            $brand = json_decode($brand);
-            if ($brand) {
-                return redirect()->route('brand.list')->with('success_message', $brand->message);
+        try {
+            $token = getToken();
+            if ($token) {
+                DB::beginTransaction();
+                $brand = Brand::create([
+                    'service_category_id' => $request->service_category,
+                    'name' => $request->name,
+                    'logo' => uploadImage($request->logo),
+                    'top' => 0,
+                    'slug' => preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name)).'-'.Str::random(5),
+                    'meta_title' => $request->meta_title,
+                    'meta_description' => $request->meta_description,
+                ]);
+                if ($brand) {
+                    DB::commit();
+                    return redirect()->route('brand.list')->with('success_message', $brand->message);
+                } else {
+                    DB::rollback();
+                    return redirect()->back()->with('error_message', 'Something went wrong');
+                }
             } else {
-                return redirect()->back()->with('error_message', 'Something went wrong');
+                return redirect()->route('super.admin.login');
             }
-        } else {
-            return redirect()->route('super.admin.login');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->with('error_message', $e->getMessage());
         }
     }
 
     public function deleteBrand(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
-            /*
-            $data = [
-                'id' => $request->id
-            ];
-            $brand = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ]);
-            $brand = $brand->post($this->getApiUrl() . 'superadmin/deletebrand', $data);
-            $brand = json_decode($brand);
-            */
             $deleted_at = false;
             $brand = Brand::where('id', $request->id)->first();
             $brand->delete();
@@ -137,7 +133,7 @@ class BrandController extends Controller
 
     public function editBrand($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $brand = Brand::with('logo_image')->find($id);
             $service_categories = ServiceCategory::where('status',1)->get();
@@ -158,32 +154,33 @@ class BrandController extends Controller
             'name' => 'required',
             'service_category' => 'required'
         ]);
-        $token = Cache::get('api_token');
-        if ($token) {
-            $data = [
-                'id' => $request->id,
-                'name' => $request->name,
-                'service_category_id' => $request->service_category,
-                'meta_title' => $request->meta_title,
-                'meta_description' => $request->meta_description
-            ];
-            $brand = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ]);
-            if ($request->file('logo_img')) {
-                $brand = $brand->attach('logo_img', file_get_contents($request->file('logo_img')), $request->file('logo_img')->getClientOriginalName());
-            }
-            $brand = $brand->post($this->getApiUrl() . 'superadmin/updatebrand', $data);
-            $brand = json_decode($brand);
-
-            
-            if ($brand) {
-                return redirect()->route('brand.list')->with('success_message', $brand->message);
+        try{
+            $token = getToken();
+            DB::beginTransaction();
+            if ($token) {
+                $brand = Brand::find($request->id);
+                $update = $brand->update([
+                    'service_category_id' => $request->service_category,
+                    'name' => $request->name,
+                    'logo' => $request->file('logo_img') ? updateImage($brand->logo, $request->logo_img) : $brand->logo,
+                    'meta_title' => $request->meta_title,
+                    'meta_description' => $request->meta_description
+                ]);
+                if ($update) {
+                    DB::commit();
+                    return redirect()->route('brand.list')->with('success_message', $brand->message);
+                } else {
+                    DB::rollback();
+                    return redirect()->back()->with('error_message', 'Something went wrong');
+                }
             } else {
-                return redirect()->back()->with('error_message', 'Something went wrong');
+                return redirect()->route('super.admin.login');
             }
-        } else {
-            return redirect()->route('super.admin.login');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->with('error_message', $e->getMessage());
         }
     }
 }

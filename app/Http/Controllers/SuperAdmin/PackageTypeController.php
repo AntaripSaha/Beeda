@@ -18,7 +18,7 @@ class PackageTypeController extends Controller
     public function index(Request $request)
     {   
         if($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $packageTypes = PackageType::get();
                 return Datatables::of($packageTypes)

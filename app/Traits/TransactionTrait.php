@@ -24,7 +24,8 @@ trait TransactionTrait
     private function usdToUsersCurrency($userId,$amount)
     {
         $user = User::find($userId);
-        $exchangeRate = Currency::where('symbol',$user->currency)->first()->exchange_rate;
+        $filed = is_int($user->currency) ? 'id' : 'symbol';
+        $exchangeRate = Currency::where('id',$user->currency)->first()->exchange_rate;
         return $amount * $exchangeRate;
     }
     public function loanTransaction($user_id, $loan_id, $loan_status, $deposit_in, $amount)
@@ -39,7 +40,7 @@ trait TransactionTrait
             if($user->state != UserStates::ACTIVE) return $this->loanTransferabilityResponse(false, "User is not active");
             if(!$user->currency) return $this->loanTransferabilityResponse(false, "User's currency is not defined.");
             $data = [];
-            
+
             if($loan_status == LoanStatus::APPROVED)
             {
                 if($deposit_in == "Wallet")
@@ -48,7 +49,7 @@ trait TransactionTrait
                     $data = [
                         'user_id'       =>  $user_id,
                         'type'          =>  1, //in
-                        'ammount'       =>  $user->currency == "$" ? $amount : $this->usdToUsersCurrency($user_id, $amount),
+                        'ammount'       =>  $user->currency == "$" ? $amount : $this->usdToUsersCurrency($user->id, $amount),
                         'payment_type'  =>  1, //Online
                         'status'        =>  2 //success
                     ];
@@ -60,7 +61,7 @@ trait TransactionTrait
                     $data = [
                         'user_id'       =>  $user_id,
                         'type'          =>  1,
-                        'amount'        =>  $user->currency == "$" ? $amount : $this->usdToUsersCurrency($user_id, $amount),
+                        'amount'        =>  $user->currency == "$" ? $amount : $this->usdToUsersCurrency($user->id, $amount),
                         'payment_type'  =>  1,
                         'status'        =>  2
                     ];
@@ -89,13 +90,13 @@ trait TransactionTrait
                     ]);
                 }
                 Loan::where('id',$loan_id)->update([
-                    'approval_date' => now(), 
+                    'approval_date' => now(),
                     'total_payable_amount' => ($loan->amount+ (($loan->amount*$loan->interest_rate)/100) + $loan->loan_type->processing_fee),
                     'ending_date' => Carbon::now()->addMonths($terms),
                 ]);
                 $notificationService->sendLoanNotification($loan_notification);
-                
-                
+
+
             }
             elseif($loan_status == LoanStatus::PROCESSING || $loan_status == LoanStatus::REJECTED || $loan_status == LoanStatus::ON_HOLD)
             {

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\ServiceCategoryType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Traits\ApiUrl;
 use App\Models\User;
+use App\SellerService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -41,14 +43,28 @@ class LoginController extends Controller
             $response = $response->data;
             $modifiedRequest = ['phone' => $request->full_number, 'password' => $request->password];
             Auth::attempt($modifiedRequest);
-
-            Cache::put('api_token', $response->access_token);
-            $token = Cache::get('api_token');
+            // set token in cookie
+            setToken($response->access_token);
+            $token = getToken();
             session()->put('user_info', $response);
-            $seller_services = Http::withHeaders([
-                'Authorization' => 'Bearer '.$token
-            ])->get($this->getApiUrl().'sellerservices/'.session()->get('user_info')->user_id);
-            $seller_services = json_decode($seller_services)->seller_services;
+
+
+            $seller_services = SellerService::with(['service_category', 'shop'=>function($query){
+                $query->with(['logo_img', 'banner_img']);
+            }, 'seller'])->where('seller_id', session()->get('user_info')->user_id)->whereIn('service_category_id', [
+                ServiceCategoryType::FOOD,
+                ServiceCategoryType::BEEDA_MALL,
+                ServiceCategoryType::GROCERY,
+                ServiceCategoryType::EXPRESS,
+                ServiceCategoryType::PHARMACY,
+                ServiceCategoryType::LIQUOR,
+                ServiceCategoryType::WATER,
+                ServiceCategoryType::GAS,
+                ServiceCategoryType::CAR_SALES,
+                ServiceCategoryType::REAL_ESTATE,
+                ServiceCategoryType::FLOWER
+                ])->get();
+
             $selected_services_ids = [];
             $total_shops = 0;
             foreach($seller_services as $service)
@@ -89,9 +105,9 @@ class LoginController extends Controller
     {
         session()->forget('user_info');
         $logout = Http::withHeaders([
-            'Authorization' => 'Bearer ' . Cache::get('api_token')
+            'Authorization' => 'Bearer ' . getToken()
         ])->post($this->getApiUrl() . 'auth/logout');
-        Cache::forget('api_token');
+        forgetToken();
         auth()->logout();
         return redirect()->route('home.index');
     }

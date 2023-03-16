@@ -41,7 +41,7 @@ class RegisterController extends Controller
             'password' => 'required | confirmed',
             'password_confirmation' => 'required'
         ]);
-        
+
         $data = [
             'email' => $request->email,
             'phone' => $request->full_number,
@@ -55,34 +55,32 @@ class RegisterController extends Controller
         ];
         $register = Http::post($this->getApiUrl().'auth/seller_signup', $data);
         $response = json_decode($register);
-
-        if($response && $response->status == false)
+        if($response && !$response->status)
         {
             return redirect()->back()->with('error_message', $response->message[0]);
         }
         if($response->message == "successfully!")
         {
-            Cache::put('api_token', $response->data->access_token);
+            setToken($response->data->access_token);
             session()->put('user_info', $response->data);
-
-            if ($response->data->state == 'email_not_verified')
-            {
-                $user = User::find($response->data->user_id);
-                $this->emailDispatchService->send(EmailTypes::OTP_MAIL,'pial.coder@gmail.com',$user);
-
-                return redirect()->route('register.storeEmailVerifyGet');
-            } elseif ($response->data->state == 'phone_not_verified') {
-                return redirect()->route('register.storePhoneVerifyGet');
-            } else {
+//            if ($response->data->state == 'email_not_verified')
+//            {
+//                $user = User::find($response->data->user_id);
+//                $this->emailDispatchService->send(EmailTypes::OTP_MAIL,'pial.coder@gmail.com',$user);
+//                return redirect()->route('register.storeEmailVerifyGet');
+//            } elseif ($response->data->state == 'phone_not_verified') {
+//                return redirect()->route('register.storePhoneVerifyGet');
+//            }
+//            else {
                 return redirect()->route('register.storeRegisterGet', ['page_type' => 'service']);
-            }
+//            }
         }
         return redirect()->back()->with('error_message', $response->message);
     }
 
     public function storeEmailVerifyGet(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $user = Http::withHeaders([
@@ -94,7 +92,7 @@ class RegisterController extends Controller
             {
                 return redirect()->route('dashboard.index');
             } elseif ($user->state == 'phone_not_verified') {
-                
+
                 return redirect()->route('register.storePhoneVerifyGet');
             } else {
                 return view('store_register.store_email_verify', compact('user'));
@@ -107,14 +105,14 @@ class RegisterController extends Controller
 
     public function storePhoneVerifyGet(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $user = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
             ])->get($this->getApiUrl().'seller/info/'.session()->get('user_info')->user_id);
             $user = json_decode($user)->data[0];
-            
+
             if ($user->state == 'active')
             {
                 return redirect()->route('dashboard.index');
@@ -131,14 +129,14 @@ class RegisterController extends Controller
 
     public function resent_otp(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $verifyOtp = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
             ])->post($this->getApiUrl().'auth/signup/send-otp', ['type' => $request->type]);
             $response = json_decode($verifyOtp);
-            
+
             return response()->json([
                 'status' => $response->status,
                 'message' =>$response->message
@@ -148,18 +146,18 @@ class RegisterController extends Controller
 
     public function storeEmailVerify(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $verifyOtp = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
             ])->post($this->getApiUrl().'auth/signup/verify-otp', ['type' => 'email', 'device_type' => 'web', 'verification_code' => $request->verification_code]);
             $response = json_decode($verifyOtp);
-            
-            return $response && $response->status == true ? 
+
+            return $response && $response->status == true ?
             redirect()->route('register.storePhoneVerifyGet')->with('success_message', $response->message) :
             redirect()->route('register.storeEmailVerifyGet')->with('error_message', $response->message);
-            
+
         } else {
             return redirect()->route('login.login');
         }
@@ -167,18 +165,18 @@ class RegisterController extends Controller
 
     public function storePhoneVerify(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
-        {           
+        {
             $verifyOtp = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
             ])->post($this->getApiUrl().'auth/signup/verify-otp', ['type' => 'phone','verification_code' => $request->verification_code]);
             $response = json_decode($verifyOtp);
-            
-            return $response && $response->status == true ? 
-            redirect()->route('register.storeRegisterGet', ['page_type' => 'service'])->with('success_message', $response->message) : 
+
+            return $response && $response->status == true ?
+            redirect()->route('register.storeRegisterGet', ['page_type' => 'service'])->with('success_message', $response->message) :
             redirect()->route('register.storePhoneVerifyGet')->with('error_message', $response->message);
-            
+
         } else {
             return redirect()->route('login.login');
         }
@@ -186,7 +184,7 @@ class RegisterController extends Controller
 
     public function updatePersonalDetails(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $data = [
@@ -236,7 +234,7 @@ class RegisterController extends Controller
 
     public function storeRegisterGet($page_type = null)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $user = Http::withHeaders([
@@ -263,12 +261,12 @@ class RegisterController extends Controller
         {
             return redirect()->route('login.login');
         }
-        
+
     }
 
     public function addServices(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $data = [
@@ -280,28 +278,28 @@ class RegisterController extends Controller
             ])->post($this->getApiUrl().'add-seller-service-category', $data);
             $page_type = 'store';
             return redirect()->route('register.storeRegisterGet', ['page_type' => $page_type])->with('success_message', 'Service category added successfully');
-        }  
+        }
         else
         {
             return redirect()->route('login.login');
-        }  
+        }
     }
 
     public function getServiceDocument($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $service_documents = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
             ])->post($this->getApiUrl().'service-category-info/'.$id);
-        }  
+        }
         return response()->json(['service_documents'=>json_decode($service_documents)]);
     }
 
     public function addStoreDetails(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $store_details = Http::withHeaders([
@@ -318,13 +316,18 @@ class RegisterController extends Controller
             // ->attach('store_banner', file_get_contents($request->file('store_banner')), $request->file('store_banner')->getClientOriginalName())
             // ->attach('store_banner_mobile', file_get_contents($request->file('store_banner_mobile')), $request->file('store_banner_mobile')->getClientOriginalName());
 
-            if($request->service_document_files && count($request->service_document_files)>0)  
+            if($request->service_document_files && count($request->service_document_files)>0)
             {
                 foreach($request->service_document_files as $key => $value)
                 {
                     $store_details = $store_details->attach('service_document_files['.$key.']', file_get_contents($value), $value->getClientOriginalName());
                 }
-            }  
+            }
+
+            $test_file = public_path().'/'.'test.png';
+            $test_file = str_replace("/public","", $test_file);
+            $store_details = $store_details->attach('test_img', file_get_contents($test_file), 'test.png');
+//            dd($request->user_id);
             $store_details = $store_details->post($this->getApiUrl().'shop/add_seller_shop', [
                 ['name' => 'user_id', 'contents' => $request->user_id],
                 ['name' => 'service_category_id', 'contents' => $request->service_category_id],
@@ -351,21 +354,20 @@ class RegisterController extends Controller
                 ['name' => 'crop_mobile_logo', 'contents' => $request->crop_mobile_logo],
                 ['name' => 'request_agent', 'contents' => 'web']
             ]);
-
             $store_details = json_decode($store_details);
-            
+
             if($store_details->result && $store_details->result == true)
             {
                 return redirect()->back()->with('success_message', $store_details->message);
             } else {
                 return redirect()->back()->with('error_message', $store_details->message);
             }
-                    
+
             return redirect()->back();
-        }  
+        }
         else
         {
             return redirect()->route('login.login');
-        } 
+        }
     }
 }

@@ -97,7 +97,7 @@ Add Banner
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group ">
+                            <div class="form-group">
                             <label class="bmd-label-floating">Published</label>
                             <select class="form-control" name="published" id="published">
                                 <option value="">Select Option</option>
@@ -107,6 +107,20 @@ Add Banner
                             <span style="color:red;float:left;font-size:13px;">{{ $errors->first('published') }}</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                          <label class="bmd-label-floating">Slider Section</label>
+                          <select class="form-control" name="slider_section" id="slider_section">
+                              <option value="">Select section</option>
+                              @for ($i = 1; $i <= 10; $i++)
+                              <option value="{{ $i }}">{{ $i }}</option>
+                              @endfor
+                          </select>
+                          <span style="color:red;float:left;font-size:13px;">{{ $errors->first('slider_section') }}</span>
+                          </div>
+                      </div>
                     </div>
                     <button type="submit" class="btn btn-primary pull-right">Add</button>
                     <div class="clearfix"></div>

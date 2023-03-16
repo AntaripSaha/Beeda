@@ -43,22 +43,18 @@ Add Category
                           <span style="color:red;float:left;font-size:13px;">{{ $errors->first('name') }}</span>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group ">
-                          <label class="bmd-label-floating">Parent Category <small>(Optional)</small></label>
-                          <select class="form-control" name="parent_category" id="parent_category">
-                              <option value="">Select Option</option>
-                              @foreach($category_list as $category)                         
-                                @if(count($category->child_categories)>0)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                                    @include('store_owner.service_item.subcategory', ['child_categories'=>$category->child_categories])
-                                @else
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endif
-                              @endforeach
-                          </select>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="bmd-label-floating">Service Category</label>
+                                <select class="form-control" name="service_category" id="service_category">
+                                    <option value="0">Select Option</option>
+                                    @foreach($service_category_list as $service)
+                                        <option value="{{$service->id}}">{{$service->name}}</option>
+                                    @endforeach
+                                </select>
+                                <span style="color:red;float:left;font-size:13px;">{{ $errors->first('service_category') }}</span>
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
@@ -72,18 +68,23 @@ Add Category
                           <span style="color:red;float:left;font-size:13px;">{{ $errors->first('type') }}</span>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group ">
-                          <label class="bmd-label-floating">Service Category</label>
-                          <select class="form-control" name="service_category" id="service_category">
-                              <option value="">Select Option</option>
-                              @foreach($service_category_list as $service)
-                                <option value="{{$service->id}}">{{$service->name}}</option>
-                              @endforeach
-                          </select>
-                          <span style="color:red;float:left;font-size:13px;">{{ $errors->first('service_category') }}</span>
+
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label class="bmd-label-floating">Parent Category <small>(Optional)</small></label>
+                                <select class="form-control" name="parent_category" id="parent_category">
+                                    <option value="">Select Option</option>
+{{--                                    @foreach($category_list as $category)--}}
+{{--                                        @if(count($category->childCategories)>0)--}}
+{{--                                            <option value="{{$category->id}}">{{$category->name}}</option>--}}
+{{--                                            @include('store_owner.service_item.subcategory', ['child_categories'=>$category->childCategories])--}}
+{{--                                        @else--}}
+{{--                                            <option value="{{$category->id}}">{{$category->name}}</option>--}}
+{{--                                        @endif--}}
+{{--                                    @endforeach--}}
+                                </select>
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <div class="row">
                       <div class="col-md-6">
@@ -136,11 +137,85 @@ Add Category
 
 @section('css_js_down')
 
+<script>
+    function customShowNotification (from, align, custom_message) {
+        type = ['', 'info', 'danger', 'success', 'warning', 'rose', 'primary'];
+
+        color = Math.floor((Math.random() * 6) + 1);
+
+        $.notify({
+            icon: "add_alert",
+            message: custom_message
+
+        }, {
+            type: type[color],
+            timer: 3000,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+    }
+
+</script>
+
 @if(Session::get('error_message'))
 <script>
     customShowNotification('top', 'right', "{{Session::get('error_message')}}");
 </script>
 @endif
+<script>
+    $(document).ready(function() {
+        let childCategory;
+        $('#service_category').on('change', function() {
+            var service_category_id = $(this).val();
+            $.ajax({
+                url: '{{route("category.of.service")}}',
+                type: "POST",
+                data: {'service_category_id': service_category_id, '_token': '{{csrf_token()}}'},
+                dataType: "json",
+                success:function(data)
+                {
+                    if(data.status){
+                        $("#parent_category").html('');
+                        $("#parent_category").append(`<option value="">Select Option</option>`);
+                        $.each(data.categories, function (key, category) {
+                            if(category.child_categories.length>0)
+                            {
+                                childCategory = category.child_categories;
+                                var sub = '';
+                                $.each(childCategory, function (key, subcategory) {
+                                    // console.log("yes: ",subcategory);
+                                    sub+='<option value="'+ subcategory.id +'">--' +subcategory.name+'</option>';
+                                });
+
+                                // console.log(childCategory[0]);
+
+                                $("#parent_category").append(
+                                    `
+                                        <option value="${category.id}">${category.name}</option>
+                                        ${sub}
+                                    `
+                                );
+
+                            }
+                            else
+                            {
+                                $("#parent_category").append(
+                                    `<option value="${category.id}">${category.name}</option>`
+                                );
+
+                                console.log("No");
+                            }
+                        });
+                    }else{
+                        console.log(data);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 @endsection
 

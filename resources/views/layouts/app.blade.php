@@ -38,8 +38,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i"
           rel="stylesheet">
-          <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <!-- Bootstrap CSS File -->
     <link href="{{ asset('assets/front/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -62,8 +62,8 @@
     <meta name="google-site-verification" content="8RdCGTombcALg4qMaxCBKFyexZC12x8TnwI6-VB7VYI" />
 </head>
 <body>
-  <!-- only in home page -->
-  <script type="application/ld+json">
+<!-- only in home page -->
+<script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "MobileApplication",
@@ -173,28 +173,28 @@
     }
 }
 </script>
-  <!-- only home home page end -->
+<!-- only home home page end -->
 
-    <!-- Messenger Chat Plugin Code -->
-      <script src="//code.tidio.co/hfly7cg3gifeoojlmi58lbfijw6wo1oi.js" async></script>
-    <!-- Messenger Chat Plugin Code -->
-    <div id="app">
-    </div>
+<!-- Messenger Chat Plugin Code -->
+<script src="//code.tidio.co/hfly7cg3gifeoojlmi58lbfijw6wo1oi.js" async></script>
+<!-- Messenger Chat Plugin Code -->
+<div id="app">
+</div>
 
-    <!-- JavaScript Libraries -->
-    <script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/front/js/jquery-migrate.min.js') }}"></script>
-    <script src="{{ asset('assets/front/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/front/js/easing.min.js') }}"></script>
-    <script src="{{ asset('assets/front/js/wow.min.js') }}"></script>
-    <script src="{{ asset('assets/front/js/hoverIntent.js') }}"></script>
-    <script src="{{ asset('assets/front/js/superfish.min.js') }}"></script>
-    <script src="{{ asset('assets/front/js/magnific-popup.min.js') }}"></script>
+<!-- JavaScript Libraries -->
+<script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/jquery-migrate.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/easing.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/wow.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/hoverIntent.js') }}"></script>
+<script src="{{ asset('assets/front/js/superfish.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/magnific-popup.min.js') }}"></script>
 
-    <!-- Contact Form JavaScript File -->
-    <script src="{{ asset('assets/front/js/contactform.js') }}"></script>
+<!-- Contact Form JavaScript File -->
+<script src="{{ asset('assets/front/js/contactform.js') }}"></script>
 
-    <!-- Template Main Javascript File -->
-    <script src="{{ asset('assets/front/js/main.js') }}"></script>
+<!-- Template Main Javascript File -->
+<script src="{{ asset('assets/front/js/main.js') }}"></script>
 </body>
 </html>

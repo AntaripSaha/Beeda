@@ -17,7 +17,7 @@ class ColorController extends Controller
     public function colorList(Request $request)
     {
         if($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 /*
                 $colors = Http::withHeaders([
@@ -62,7 +62,7 @@ class ColorController extends Controller
             'name' => 'required',
             'color' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             /*
             $data = [
@@ -86,7 +86,7 @@ class ColorController extends Controller
 
     public function deleteColor(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             /*
             $data = [
@@ -107,7 +107,7 @@ class ColorController extends Controller
 
     public function editColor($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             /*
             $color = Http::withHeaders([
@@ -134,7 +134,7 @@ class ColorController extends Controller
             'name' => 'required',
             'color' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             /*
             $data = [

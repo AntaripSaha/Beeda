@@ -50,6 +50,16 @@ Cuisine Brand
                         </div>
                       </div>
                     </div>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <br>
+                              <div class="">
+                                  <label class="bmd-label-floating">Icon</label>
+                                  <br>
+                                  <input type="file" name="icon" id="icon" />
+                              </div>
+                          </div>
+                      </div>
                     <div class="row">
                       <div class="col-md-6">
                           <br>

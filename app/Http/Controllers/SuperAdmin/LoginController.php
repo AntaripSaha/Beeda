@@ -29,13 +29,12 @@ class LoginController extends Controller
         ];
         $login = Http::post($this->getApiUrl().'auth/seller-login', $data);
         $response = json_decode($login);
-        if($response && $response->status == true)
+        if($response && $response->status)
         {
-            Cache::put('api_token', $response->data->access_token);
-            $token = Cache::get('api_token');
+            setToken($response->data->access_token);
             session()->put('super_user_info', $response->data);
             return redirect()->route('super.admin.dashbaord')->with('success_message', $response->message);
-            
+
         }
         else
         {
@@ -47,9 +46,9 @@ class LoginController extends Controller
     {
         session()->forget('super_user_info');
         $logout = Http::withHeaders([
-            'Authorization' => 'Bearer ' . Cache::get('api_token')
+            'Authorization' => 'Bearer ' . getToken()
         ])->post($this->getApiUrl() . 'auth/logout');
-        Cache::forget('api_token'); 
+        forgetToken();
         return redirect()->route('super.admin.login');
     }
 }

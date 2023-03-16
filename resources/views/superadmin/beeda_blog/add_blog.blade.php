@@ -98,7 +98,7 @@ Add Blog
                       </div>
                     </div>
 
-                    <div class="row">
+                    {{-- <div class="row">
                       <div class="col-md-6">
                           <div class="form-group ">
                           <label class="bmd-label-floating">Category <span class="text-danger">*</span></label>
@@ -111,7 +111,8 @@ Add Blog
                           <span style="color:red;float:left;font-size:13px;">{{ $errors->first('category_id') }}</span>
                           </div>
                       </div>
-                    </div>
+                    </div> --}}
+                    <input type="hidden" name="category_id" value="7">
 
                     <div class="row">
                       <div class="col-md-6">
@@ -141,12 +142,69 @@ Add Blog
                       <div class="col-md-6">
                           <br>
                         <div class="">
+                          <label class="bmd-label-floating">Thumbnail <small>(381x240)</small></label>
+                          <br>
+                          <input type="file" name="thumbnail" id="thumbnail" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {{-- <div class="row mb-3">
+                      <div class="col-md-6">
+                          <br>
+                        <div class="">
+                          <label class="bmd-label-floating">Thumbnail Alt<small></label>
+                          <br>
+                          <input type="text" name="thumbnail_alt" id="thumbnail_alt" class="form-control">
+                        </div>
+                      </div>
+                    </div> --}}
+                    <input type="hidden" name="thumbnail_alt">
+                    {{-- <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Thumbnail Meta description</label>
+                            <div class="form-group">
+                              <textarea id="thumbnail_meta_description" name="thumbnail_meta_description" rows="5" cols="142"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                    </div> --}}
+                    <input type="hidden" name="thumbnail_meta_description">
+
+                    <div class="row">
+                      <div class="col-md-6">
+                          <br>
+                        <div class="">
                           <label class="bmd-label-floating">Banner <small>(1300x650)</small></label>
                           <br>
                           <input type="file" name="banner" id="banner" />
                         </div>
                       </div>
                     </div>
+
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                          <br>
+                        <div class="">
+                          <label class="bmd-label-floating">Banner Alt<small></label>
+                          <br>
+                          <input type="text" name="banner_alt" id="banner_alt" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+
+                    {{-- <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Banner Meta description</label>
+                            <div class="form-group">
+                              <textarea id="banner_meta_description" name="banner_meta_description" rows="7" cols="190"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                    </div> --}}
+                    <input type="hidden" name="banner_meta_description">
                     
                     <div class="row">
                       <div class="col-md-12">
@@ -189,13 +247,24 @@ Add Blog
                         </div>
                       </div>
                     </div>
+                    
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                          <br>
+                        <div class="">
+                          <label class="bmd-label-floating">Meta Image Alt<small></label>
+                          <br>
+                          <input type="text" name="meta_image_alt" id="meta_image_alt" class="form-control">
+                        </div>
+                      </div>
+                    </div>
 
                     <div class="row">
                       <div class="col-md-12">
                           <div class="form-group">
                             <label>Meta description</label>
                             <div class="form-group">
-                              <textarea id="editor2" name="meta_description" rows="5"></textarea>
+                              <textarea id="meta_description" name="meta_description" rows="5" cols="142"></textarea>
                             </div>
                           </div>
                         </div>

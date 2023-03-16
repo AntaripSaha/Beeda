@@ -1,7 +1,7 @@
 @extends('superadmin.master')
 
 @section('page_title')
-Edit Service
+Create Loan Type
 @endsection
 
 @section('css_js_up')
@@ -35,15 +35,15 @@ Edit Service
             <p class="card-category">(Service information)</p>
           </div>
           <div class="card-body">
-            <form action="{{route('service.edit.submit')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('loan.type.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="id" value="" />
-                <input type="hidden" name="category_type" value="" />
+                <!-- <input type="hidden" name="id" value="" />
+                <input type="hidden" name="category_type" value="" /> -->
                 <div class="row">
                     <div class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">Loan Name</label>
-                        <input type="text" name="loan_type" class="form-control" required>
+                        <input type="text" name="loan_type" class="form-control" >
                         <span style="color:red;float:left;font-size:13px;">{{ $errors->first('loan_type') }}</span>
                     </div>
                     </div>
@@ -52,7 +52,7 @@ Edit Service
                     <div class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">Loan Basis</label>
-                        <select class="form-control" name="basis" required>
+                        <select class="form-control" name="basis" >
                             <option value="Month">Month</option>
                             <option value="Day">Day</option>
                         </select>
@@ -92,7 +92,7 @@ Edit Service
                     <div class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">Max Amount</label>
-                        <input type="text" name="max_amount" class="form-control" required>
+                        <input type="text" name="max_amount" class="form-control" >
                     </div>
                     </div>
                 </div>
@@ -100,9 +100,9 @@ Edit Service
                     <div class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">Max EMI Term</label>
-                        <select class="form-control" name="max_emi_term_id" required>
+                        <select class="form-control" name="max_emi_term_id" >
                             @foreach($emi_terms as $term)
-                                <option value="{{ $term->term_month }}">{{ $term->term_month }}</option>
+                                <option value="{{ $term->id }}">{{ $term->term_month }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -112,7 +112,7 @@ Edit Service
                     <div class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">Interest Rate</label>
-                        <input type="text" name="interest_rate" class="form-control" required>
+                        <input type="text" name="interest_rate" class="form-control" >
                     </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@ Edit Service
                     <div class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">Processing Fee</label>
-                        <input type="text" name="processing_fee" class="form-control" required>
+                        <input type="text" name="processing_fee" class="form-control" >
                     </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@ Edit Service
                     <div class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">Type</label>
-                        <select class="form-control" name="type" required>
+                        <select class="form-control" name="type" >
                             <option value="Package" selected>Package</option>
                             <option value="Regular">Regular</option>
                         </select>
@@ -139,7 +139,7 @@ Edit Service
                     <div class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">Late Penalty Percentage</label>
-                        <input type="text" name="late_penalty_percentage" class="form-control" required>
+                        <input type="text" name="late_penalty_percentage" class="form-control" >
                     </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ Edit Service
                     <div class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">advance Pay Decrease Percentage</label>
-                        <input type="text" name="advance_pay_decrease_percentage" class="form-control" required>
+                        <input type="text" name="advance_pay_decrease_percentage" class="form-control" >
                     </div>
                     </div>
                 </div>
@@ -155,26 +155,37 @@ Edit Service
                     <div class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">Min EMI Percentage</label>
-                        <input type="text" name="min_emi_percentage" class="form-control" required>
+                        <input type="text" name="min_emi_percentage" class="form-control" >
                     </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">  
-                        <label class="bmd-label-floating">Choose Rerquired Documentrs</label><br>
-                        <div class="row">
-                            @foreach($required_document as $documents)
-                                <div class="col-md-6"> 
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check" type="checkbox" name="required_document[]" id="inlineRadio1" value="{{ $documents->id }}" />
-                                        <label class="form-check-label" for="inlineRadio1">{{ $documents->name }}</label>
+                <div >
+                    <div class="row" >
+                        <div class="col-md-6"  id="more">
+                            <label class="bmd-label-floating">Choose Rerquired Documentrs</label><br>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="form-check-label" for="doc_name">Name</label>
+                                        <input type="text" class="form-check" name="doc_name[]" />
                                     </div>
                                 </div>
-                            @endforeach
+                                <div class="col-md-5">
+                                    <div >
+                                        <label class="form-check-label" for="demo_image">Demo Image</label>
+                                        <input type="file" class="form-check"  name="demo_image[]"  />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <button id="rowAdder" type="button"
+                        class="btn btn-dark">
+                        <span class="bi bi-plus-square-dotted">
+                        </span> + Add More
+                    </button>
                 </div>
-                <button type="submit" class="btn btn-primary pull-right">Update</button>
+                <button type="submit" class="btn btn-primary pull-right">Upload</button>
                 <div class="clearfix"></div>
             </form>
           </div>
@@ -186,7 +197,40 @@ Edit Service
 @endsection
 
 @section('css_js_down')
+<script type="text/javascript">
 
+        $("#rowAdder").click(function () {
+            newRowAdd =
+            `
+                <div class="row" id="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="form-check-label" for="doc_name">Name</label>
+                            <input type="text" class="form-check" name="doc_name[]" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div >
+                            <label class="form-check-label" for="demo_image">Demo Image</label>
+                            <input type="file" class="form-check"  name="demo_image[]" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-danger"
+                            id="DeleteRow" type="button">
+                            <i class="bi bi-trash"></i>
+                            X
+                        </button>
+                    </div>
+                </div>`;
+
+            $('#more').append(newRowAdd);
+        });
+
+        $("body").on("click", "#DeleteRow", function () {
+            $(this).parents("#row").remove();
+        })
+    </script>
 @if(Session::get('error_message'))
 <script>
   customShowNotification('top', 'right', "{{Session::get('error_message')}}");

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\ServiceCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
@@ -11,6 +12,7 @@ use App\Http\Traits\ApiUrl;
 use App\Models\BusinessSetting;
 use DataTables;
 use DB;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -20,7 +22,7 @@ class CategoryController extends Controller
     {
         if ($request->ajax()) {
             $mediaUrl = env('AWS_MEDIA_URL');
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $categories = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -112,7 +114,7 @@ class CategoryController extends Controller
 
     public function featureCategory(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $feature = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -127,7 +129,7 @@ class CategoryController extends Controller
 
     public function unfeatureCategory(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $unfeature = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -142,7 +144,7 @@ class CategoryController extends Controller
 
     public function tabCategory(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $feature = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -157,7 +159,7 @@ class CategoryController extends Controller
 
     public function untabCategory(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $feature = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -171,7 +173,7 @@ class CategoryController extends Controller
 
     public function mobileTopCategory(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $feature = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -186,7 +188,7 @@ class CategoryController extends Controller
 
     public function unMobileTopCategory(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $feature = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -200,30 +202,42 @@ class CategoryController extends Controller
 
     public function addCategory()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
-            $categories = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ])->get($this->getApiUrl() . 'superadmin/categorylist');
-            $categories = json_decode($categories);
-            $category_list = [];
-            if ($categories) {
-                $category_list = $categories->option_categories;
-            }
 
-            $service_categories = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ])->post($this->getApiUrl() . 'service-category-x');
-
-            $service_categories = json_decode($service_categories);
+            $service_categories = ServiceCategory::orderBy('display_order', 'asc')->where('status', '!=', 0)->get();
             $service_category_list = [];
             if ($service_categories) {
-                $service_category_list = $service_categories->data->Sercice_Categorise;
+                $service_category_list = $service_categories;
             }
             $page = 'manage_category';
-            return view('superadmin.sellers.manage_category.add_category', compact('category_list', 'service_category_list', 'page'));
+            return view('superadmin.sellers.manage_category.add_category', compact('service_category_list', 'page'));
         } else {
             return redirect()->route('super.admin.login');
+        }
+    }
+
+    public function categoryOfService(Request $request)
+    {
+        $token = getToken();
+        if($token)
+        {
+            $categories = \App\Models\Category::with(['childCategories'=>function($q){
+                $q->orderBy('name', 'asc');
+            }, 'banner', 'icon', 'parent', 'serviceCategory'])->where([['service_category_id', $request->service_category_id], ['parent_id', 0]])->get();
+            return response()->json([
+                'status' => true,
+                'message' => 'Data found',
+                'categories' => $categories,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'Data not found',
+                'category' => []
+            ]);
         }
     }
 
@@ -234,42 +248,42 @@ class CategoryController extends Controller
             'service_category' => 'required',
             'type' => 'required'
         ]);
-        $token = Cache::get('api_token');
-        if ($token) {
-            $data = [
-                'name' => $request->name,
-                'service_category_id' => $request->service_category,
-                'parent_category' => $request->parent_category,
-                'type' => $request->type,
-                'meta_title' => $request->meta_title,
-                'meta_description' => $request->meta_description
-            ];
-            $category = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ]);
-            if ($request->file('banner')) {
-                $category = $category->attach('banner_img', file_get_contents($request->file('banner')), $request->file('banner')->getClientOriginalName());
-            }
-            if ($request->file('icon')) {
-                $category = $category->attach('icon_img', file_get_contents($request->file('icon')), $request->file('icon')->getClientOriginalName());
-            }
-            $category = $category->post($this->getApiUrl() . 'superadmin/addcategory', $data);
-
-            $category = json_decode($category);
-            // return $category;
-            if ($category) {
-                return redirect()->route('category.list')->with('success_message', $category->message);
+        try{
+            $token = getToken();
+            DB::beginTransaction();
+            if ($token) {
+                $category = Category::create([
+                    'parent_id' => $request->parent_category,
+                    'service_category_id' => $request->service_category,
+                    'name' => $request->name,
+                    'digital' => $request->type,
+                    'slug' =>  preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name)).'-'.Str::random(5),
+                    'meta_title' => $request->meta_title,
+                    'meta_description' => $request->meta_description,
+                    'banner' => $request->file('banner') ? uploadImage($request->banner) : null,
+                    'icon' => $request->file('icon') ? uploadImage($request->icon) : null,
+                ]);
+                if ($category) {
+                    DB::commit();
+                    return redirect()->route('category.list')->with('success_message', $category->message);
+                } else {
+                    DB::rollback();
+                    return redirect()->back()->with('error_message', 'Something went wrong');
+                }
             } else {
-                return redirect()->back()->with('error_message', 'Something went wrong');
+                return redirect()->route('super.admin.login');
             }
-        } else {
-            return redirect()->route('super.admin.login');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollback();
+            return redirect()->back()->with('error_message', $e->getMessage());
         }
     }
 
     public function deleteCategory(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $data = [
                 'id' => $request->id
@@ -292,31 +306,11 @@ class CategoryController extends Controller
 
     public function editCategory($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
-            $category = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ])->get($this->getApiUrl() . 'superadmin/categorybyid/' . $id);
-            $category = json_decode($category);
-            if ($category) {
-                $category = $category->category;
-            }
-            $categories = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ])->get($this->getApiUrl() . 'superadmin/categorylist');
-            $categories = json_decode($categories);
-            $category_list = [];
-            if ($categories) $category_list = $categories->option_categories;
-
-            $service_categories = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ])->post($this->getApiUrl() . 'service-category-x');
-
-            $service_categories = json_decode($service_categories);
-            $service_category_list = [];
-            if ($service_categories) {
-                $service_category_list = $service_categories->data->Sercice_Categorise;
-            }
+            $category = \App\Models\Category::with(['childCategories', 'bannerImg', 'iconImg', 'parent'])->where('id', $id)->first();
+            $category_list = \App\Models\Category::with(['childCategories', 'bannerImg', 'iconImg', 'parent', 'serviceCategory'])->where('service_category_id', $category->service_category_id)->get();
+            $service_category_list = ServiceCategory::orderBy('display_order', 'asc')->where('status', '!=', 0)->get();
             $page = 'manage_category';
             return view('superadmin.sellers.manage_category.edit_category', compact('category', 'category_list', 'service_category_list', 'page'));
         } else {
@@ -331,13 +325,13 @@ class CategoryController extends Controller
             'service_category' => 'required',
             'type' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $data = [
                 'id' => $request->id,
                 'name' => $request->name,
                 'service_category_id' => $request->service_category,
-                'parent_category' => $request->parent_category,
+                'parent_category' => isset($request->parent_category) ? $request->parent_category : 0,
                 'type' => $request->type,
                 'meta_title' => $request->meta_title,
                 'meta_description' => $request->meta_description
@@ -368,7 +362,7 @@ class CategoryController extends Controller
         $section_1 = Category::find(get_setting('home_category_section_1'));
         $section_2 = Category::find(get_setting('home_category_section_2'));
         $section_3 = Category::find(get_setting('home_category_section_3'));
-        $categories = Category::where([['parent_id', '=', 0], ['service_category_id', '=', 6]])->get();
+        $categories = Category::where('parent_id', 0)->where('service_category_id', 6)->get();
         return view('superadmin.section_banner.index', compact('page','categories', 'section_1', 'section_3', 'section_3'));
     }
     public function updateBeedamalHomeSectionCategories(Request $request)
@@ -388,7 +382,7 @@ class CategoryController extends Controller
         $section_value_1 = BusinessSetting::where('type', 'home_category_section_1')->first();
         $section_value_1->value = $request->section_1_value;
         $section_value_1->save();
-        
+
         $section_name_2 = BusinessSetting::where('type', 'home_category_section_2_name')->first();
         $section_name_2->value = $request->section_name_2;
         $section_name_2->save();
@@ -406,6 +400,51 @@ class CategoryController extends Controller
         $section_value_3->save();
 
         return redirect()->back()->with('success_message','Blog post has been created successfully');
+    }
+
+    public function pharmacyHomeSectionCategories(){
+        $page = 'dashboard';
+        $section_1 = Category::find(get_setting('pharmacy_category_section_1'));
+        $section_2 = Category::find(get_setting('pharmacy_category_section_2'));
+        $section_3 = Category::find(get_setting('pharmacy_category_section_3'));
+        $categories = Category::where('parent_id', 0)->where('service_category_id', 9)->get();
+        return view('superadmin.pharmacy_category.index', compact('page','categories', 'section_1', 'section_3', 'section_3'));
+    }
+    public function updatePharmacyHomeSectionCategories(Request $request)
+    {
+        $validate = $request->validate([
+            'section_name_1' => 'required',
+            'section_1_value' => 'required',
+            'section_name_2' => 'required',
+            'section_2_value' => 'required',
+            'section_name_3' => 'required',
+            'section_3_value' => 'required',
+        ]);
+        $section_name_1 = BusinessSetting::where('type', 'pharmacy_category_name_1')->first();
+        $section_name_1->value = $request->section_name_1;
+        $section_name_1->save();
+
+        $section_value_1 = BusinessSetting::where('type', 'pharmacy_category_section_1')->first();
+        $section_value_1->value = $request->section_1_value;
+        $section_value_1->save();
+
+        $section_name_2 = BusinessSetting::where('type', 'pharmacy_category_name_2')->first();
+        $section_name_2->value = $request->section_name_2;
+        $section_name_2->save();
+
+        $section_value_2 = BusinessSetting::where('type', 'pharmacy_category_section_2')->first();
+        $section_value_2->value = $request->section_2_value;
+        $section_value_2->save();
+
+        $section_name_3 = BusinessSetting::where('type', 'pharmacy_category_name_3')->first();
+        $section_name_3->value = $request->section_name_3;
+        $section_name_3->save();
+
+        $section_value_3 = BusinessSetting::where('type', 'pharmacy_category_section_3')->first();
+        $section_value_3->value = $request->section_3_value;
+        $section_value_3->save();
+
+        return redirect()->back()->with('success_message','Pharmacy home category successfully');
 
     }
 }

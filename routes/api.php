@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdmin\VoucherController;
 use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\SubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/voucher-otp', [VoucherController::class, 'sendVoucherOTP']);
 
 Route::get('/all-blogs', [BlogController::class, 'index']);
+Route::get('/allBlogs', [BlogController::class, 'allBlogs']);
 Route::get('/blogs/{slug}', [BlogController::class, 'show']);
+Route::get('/subscribe/index', [SubscriberController::class, 'index']);
+Route::post('/subscribe/store', [SubscriberController::class, 'store']);
+

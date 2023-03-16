@@ -37,7 +37,7 @@ class ServiceController extends Controller
 
     public function serviceList()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $service_category_list = ServiceCategory::where('category_type', 2)->get();
             $page = 'manage_service';
@@ -66,7 +66,7 @@ class ServiceController extends Controller
             'color' => $request->color,
             'category_type' => $request->category_type
         ];
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $add_service = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -88,21 +88,19 @@ class ServiceController extends Controller
 
     public function editService($id)
     {
-        $token = Cache::get('api_token');
-        if ($token) {
-            $service_category = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ])->get($this->getApiUrl() . 'superadmin/servicebyid/' . $id);
-
-            $service_category = json_decode($service_category);
-            $service = null;
-            if ($service_category) {
-                $service = $service_category->service;
+        try{
+            $token = getToken();
+            if ($token) {
+                $service = ServiceCategory::find($id);
+                $page = 'manage_service';
+                return view('superadmin.sellers.manage_service.edit_service', compact('service', 'page'));
+            } else {
+                return redirect()->route('super.admin.login');
             }
-            $page = 'manage_service';
-            return view('superadmin.sellers.manage_service.edit_service', compact('service', 'page'));
-        } else {
-            return redirect()->route('super.admin.login');
+        }
+        catch(\Exception $e)
+        {
+            return redirect()->back()->with('error_message', $e->getMessage());
         }
     }
 
@@ -119,7 +117,7 @@ class ServiceController extends Controller
             'color' => $request->color,
             'category_type' => $request->category_type
         ];
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $update_service = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -141,7 +139,7 @@ class ServiceController extends Controller
 
     public function serviceStatus(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $data = [
                 'id' => $request->service_id
@@ -159,7 +157,7 @@ class ServiceController extends Controller
 
     public function storeDashboard($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $dashboard_info = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -172,7 +170,6 @@ class ServiceController extends Controller
             $service_category = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
             ])->get($this->getApiUrl() . 'superadmin/servicebyid/' . $id);
-
             $service_category = json_decode($service_category);
             $service = null;
             if ($service_category) {
@@ -200,13 +197,29 @@ class ServiceController extends Controller
                     'section_3_cat_name' => Category::find(get_setting('home_category_section_3')),
                     'section_3_name' =>  BusinessSetting::where('type', 'home_category_section_3_name')->first(),
                 ];
-                
+
+                $total_web_blogs = Blog::where('device_type', 'web')->get()->count();
+                $total_mobile_blogs = Blog::where('device_type', 'mobile')->get()->count();
+            }
+
+            $pharmacy_category_section =[];
+            if ($id ==  ServiceCategoryType::PHARMACY)
+            {
+                $pharmacy_category_section = [
+                    'pharmacy_category_section_1' =>  Category::find(get_setting('pharmacy_category_section_1')),
+                    'pharmacy_category_section_2' => Category::find(get_setting('pharmacy_category_section_2')),
+                    'pharmacy_category_section_3' => Category::find(get_setting('pharmacy_category_section_3')),
+                    'pharmacy_category_name_1' =>  BusinessSetting::where('type', 'pharmacy_category_name_1')->first(),
+                    'pharmacy_category_name_2' =>  BusinessSetting::where('type', 'pharmacy_category_name_2')->first(),
+                    'pharmacy_category_name_3' =>  BusinessSetting::where('type', 'pharmacy_category_name_3')->first(),
+                ];
+
                 $total_web_blogs = Blog::where('device_type', 'web')->get()->count();
                 $total_mobile_blogs = Blog::where('device_type', 'mobile')->get()->count();
             }
 
             $page = 'manage_service';
-            return view('superadmin.sellers.manage_service.store_dashboard', compact('info', 'service', 'category_section', 'page', 'total_agents', 'total_properties', 'total_web_blogs', 'total_mobile_blogs'));
+            return view('superadmin.sellers.manage_service.store_dashboard', compact('info', 'service', 'category_section', 'pharmacy_category_section', 'page', 'total_agents', 'total_properties', 'total_web_blogs', 'total_mobile_blogs'));
         } else {
             return redirect()->route('super.admin.login');
         }
@@ -216,7 +229,7 @@ class ServiceController extends Controller
     {
         $start = microtime(true);
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $data = SellerService::with(['shop' => function ($query) {
                     $query->with(['totalProducts'=>function($q){
@@ -284,7 +297,7 @@ class ServiceController extends Controller
                     })
                     ->rawColumns(['logo', 'products', 'orders', 'documents', 'status', 'featured'])
                     ->make(true);
-            } 
+            }
         }
         $service = $service = ServiceCategory::where('id', $id)->first();
         $page = 'manage_service';
@@ -295,7 +308,7 @@ class ServiceController extends Controller
     public function storeProductList($id, Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $data = Product::with(['shop', 'thumbnail_image', 'category'])->where('shop_id', $id)->get();
                 return Datatables::of($data)
@@ -382,7 +395,7 @@ class ServiceController extends Controller
 
     public function superAdminPublishProduct(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $product = Product::where('id', $request->product_id)->first();
             $product->published = !$product->published;
@@ -395,7 +408,7 @@ class ServiceController extends Controller
 
     public function superAdminTabProduct(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $product = Product::where('id', $request->product_id)->first();
             $product->tabed = !$product->tabed;
@@ -407,7 +420,7 @@ class ServiceController extends Controller
 
     public function superAdminFeatureProduct(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $product = Product::where('id', $request->product_id)->first();
             $product->featured = !$product->featured;
@@ -420,7 +433,7 @@ class ServiceController extends Controller
 
     public function superAdminTodaysDealProduct(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $product = Product::where('id', $request->product_id)->first();
             $product->todays_deal = !$product->todays_deal;
@@ -433,7 +446,7 @@ class ServiceController extends Controller
 
     public function storeApprove(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $seller_service = SellerService::where('id', $request->seller_service_id)->first();
             $seller_service->status = !$seller_service->status;
@@ -453,7 +466,7 @@ class ServiceController extends Controller
 
     public function storeFeature(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $shop = Shop::where('id', $request->shop_id)->first();
             $shop->is_featured = !$shop->is_featured;
@@ -479,11 +492,11 @@ class ServiceController extends Controller
                 {
                     $user->state = 'active';
                     $user->update();
+                    // $driver = TransportDriver::where('user_id',$request->user_id)->first();
+                    // $driver->varification_status = 1;
+                    // $driver->update();
                 }
             }
-            $driver = TransportDriver::where('user_id',$request->user_id)->first();
-            $driver->varification_status = !$driver->varification_status;
-            $driver->update();
             DB::commit();
             // Free trial create start
             if($user->state == 'active')
@@ -496,7 +509,7 @@ class ServiceController extends Controller
                     if ($subscription && $service->status == 1) {
                         $startDate = date('Y-m-d');
                         $endDate   = date('Y-m-d', strtotime('+ 7 day'));
-        
+
                         $data = [
                             'user_id' => $request->user_id,
                             'service_category_id' => $subscription->service_category_id,
@@ -509,14 +522,15 @@ class ServiceController extends Controller
                             'discount' => $subscription->discount,
                             'is_active' => $subscription->is_active,
                         ];
-        
+
                         UserSubscription::create($data);
                     }
                 }
 
             }
             // Free trial create end
-            return [$seller,$driver];
+            // return [$seller,$driver];
+            return [$seller];
         }catch (\Exception $e) {
             return failedResponse($e->getMessage());
         }
@@ -524,7 +538,7 @@ class ServiceController extends Controller
 
     public function driverApproveGlobal(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $driver = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -539,14 +553,15 @@ class ServiceController extends Controller
     {
         $shop = Shop::where('id', $id)->first();
         $seller_id = $shop->user_id;
-        // return $seller_id;
-        // $product_ids = Product::where('shop_id', $id)->pluck('id');
-        // // return $product_ids;
-        // $data = OrderDetail::with(['order' => function ($query) {
-        //     $query->with(['user', 'orderDetails' => function ($query) {
-        //         $query->with('product');
-        //     }]);
-        // }])->whereIn('product_id', $product_ids)->groupBy('order_id')->get();
+//         return $seller_id;
+//         $product_ids = Product::where('shop_id', $id)->pluck('id');
+//         // return $product_ids;
+//         $data = OrderDetail::with(['order' => function ($query) {
+//             $query->with(['user', 'orderDetails' => function ($query) {
+//                 $query->with('product');
+//             }]);
+//         }])->whereIn('product_id', $product_ids)->groupBy('order_id')->get();
+//         return $data;
         // $data = DB::table('orders')
         //             ->orderBy('code', 'desc')
         //             ->join('order_details', 'orders.id', '=', 'order_details.order_id')
@@ -554,19 +569,24 @@ class ServiceController extends Controller
         //             ->where('order_details.seller_id', $shop->user_id)
         //             ->select('orders.id')
         //             ->distinct();
+        $order_ids = OrderDetail::where('seller_id', $seller_id)->pluck('order_id');
+//        return gettype($order_ids);
         $data = Order::with(['orderDetails'=>function($q)use($seller_id){
                 $q->where('seller_id', $seller_id);
-            }, 
+            },
             'user'=>function($q){
                 $q->select('id', 'name');
             }])
+            ->whereIn('id',$order_ids )
             ->get();
-        // return $data;
-        // foreach($data as $d){
-        //     if(!isset($d->orderDetails[0])) return $data[0];
-        // }
+//        return $data;
+//         return $data[0];
+//         foreach($data as $d){
+//             if($d->orderDetails =='[]') unset($d->orderDetails);
+//             return $d;
+//         }
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 // $orders = Http::withHeaders([
                 //     'Authorization' => 'Bearer ' . $token
@@ -576,15 +596,12 @@ class ServiceController extends Controller
                 // if ($orders) {
                 //     $data = $orders->orders;
                 // }
-                
+
                 return Datatables::of($data)
                     // ->addIndexColumn()
                     ->editColumn('customer_name', function ($data) {
-                        if (isset($data->user->name)) {
-                            return $data->user->name;
-                        } else {
-                            return '---';
-                        }
+                        if(isset($data->user->name))  return $data->user->name;
+                        else  return '---';
                     })
                     ->editColumn('total_cost', function ($data) {
                             $price = 0;
@@ -628,7 +645,7 @@ class ServiceController extends Controller
 
     public function storeOrderDetails($id, $order_id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             /*
             $order_details = Http::withHeaders([
@@ -664,7 +681,7 @@ class ServiceController extends Controller
 
     public function storeDocumentList($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $document_list = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -685,27 +702,27 @@ class ServiceController extends Controller
 
     public function serviceOrderList($id, Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         //$seller_ids = SellerService::where('service_category_id', $id)->pluck('seller_id');
         $product_ids = Product::where('service_category_id', $id)->pluck('id');
         $data = OrderDetail::with(['product', 'order' => function ($query) {
             $query->with(['user', 'orderDetails' => function ($query) {
-                $query->with('product');
+                $query->with(['product'=>function($q){
+                    $q->with(['shop'=>function($q){
+                        $q->select('id', 'name');
+                    }]);
+                }]);
             }]);
         }, 'shop'])
         ->whereHas('order')
         ->whereIn('product_id', $product_ids)->groupBy('order_id')->get();
+//        return $data[344]->order->orderDetails;
 
         if ($request->ajax()) {
             if ($token) {
                 return Datatables::of($data)
                     // ->addIndexColumn()
                     ->editColumn('code', function ($data) {
-                        // if ($data->order->user) {
-                        //     return $data->order->user->name;
-                        // } else {
-                        //     return '---';
-                        // }
                         return $data->order->code;
                     })
                     ->editColumn('customer_name', function ($data) {
@@ -716,11 +733,19 @@ class ServiceController extends Controller
                         }
                     })
                     ->editColumn('store_name', function ($data) {
-                        if ($data->product->shop) {
-                            return $data->product->shop->name;
-                        } else {
-                            return '---';
+                        $shops = [];
+                        foreach($data->order->orderDetails as $orderDetails){
+                            if(isset($orderDetails->product)) {
+                                if (isset($orderDetails->product->shop->name)) $shops[] = $orderDetails->product->shop->name;
+                            }
+                            else $shops[] = "--";
                         }
+                        return array_unique($shops);
+//                        if ($data->product->shop) {
+//                            return $data->product->shop->name;
+//                        } else {
+//                            return '---';
+//                        }
                     })
                     ->editColumn('total_cost', function ($data) {
                         // $total_cost = 0;
@@ -762,7 +787,7 @@ class ServiceController extends Controller
     //Transport..
     public function transportServiceList()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $service_category_list = ServiceCategory::whereIn('category_type', [1,5])->get();
             $page = 'manage_transport_service';
@@ -791,7 +816,7 @@ class ServiceController extends Controller
             'color' => $request->color,
             'category_type' => $request->category_type
         ];
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $add_service = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -813,7 +838,7 @@ class ServiceController extends Controller
 
     public function editTransportService($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $service_category = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -844,7 +869,7 @@ class ServiceController extends Controller
             'color' => $request->color,
             'category_type' => $request->category_type
         ];
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $update_service = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -868,7 +893,7 @@ class ServiceController extends Controller
     {
         try{
             if ($request->ajax()) {
-                $token = Cache::get('api_token');
+                $token = getToken();
                 if ($token) {
                     $categoryFilter = SellerService::where('service_category_id', $id)->distinct()->pluck('seller_id');
                     $data = User::with('driver.vehicle_type')->with('seller_services')
@@ -923,7 +948,7 @@ class ServiceController extends Controller
 
     public function transportDashboard($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $dashboard_info = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -953,7 +978,7 @@ class ServiceController extends Controller
     public function driverRidesList($serviceCategoryId, $driverId, Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $drivers = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -1001,7 +1026,7 @@ class ServiceController extends Controller
                 return redirect()->route('super.admin.login');
             }
         }
-        $token = Cache::get('api_token');
+        $token = getToken();
         $service_category = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->get($this->getApiUrl() . 'superadmin/servicebyid/' . $serviceCategoryId);
@@ -1018,7 +1043,7 @@ class ServiceController extends Controller
 
     public function rideDetails($rideId)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $rideDetails = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->get($this->getApiUrl() . 'superadmin/' . 'ride/' . $rideId);
@@ -1031,7 +1056,7 @@ class ServiceController extends Controller
     public function rideList($serviceCategoryId, Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $drivers = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -1079,7 +1104,7 @@ class ServiceController extends Controller
                 return redirect()->route('super.admin.login');
             }
         }
-        $token = Cache::get('api_token');
+        $token = getToken();
         $service_category = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->get($this->getApiUrl() . 'superadmin/servicebyid/' . $serviceCategoryId);
@@ -1097,7 +1122,7 @@ class ServiceController extends Controller
     public function driverRatingList($servicecategoryId, $driverId, Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 /*
                 $drivers = Http::withHeaders([
@@ -1143,7 +1168,7 @@ class ServiceController extends Controller
                 return redirect()->route('super.admin.login');
             }
         }
-        $token = Cache::get('api_token');
+        $token = getToken();
         $service_category = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->get($this->getApiUrl() . 'superadmin/servicebyid/' . $servicecategoryId);
@@ -1160,14 +1185,14 @@ class ServiceController extends Controller
 
     public function allDrivers(Request $request)
     {
-        // $token = Cache::get('api_token');
+        // $token = getToken();
         // $drivers = Http::withHeaders([
         //     'Authorization' => 'Bearer ' . $token
         // ])->get($this->getApiUrl() . 'superadmin/all-drivers');
         // $drivers = json_decode($drivers);
         // return $drivers;
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $drivers = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -1209,7 +1234,7 @@ class ServiceController extends Controller
     public function allRideList(Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $drivers = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -1281,7 +1306,7 @@ class ServiceController extends Controller
     //Worker Start..
     public function workerServiceList()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $service_category_list = ServiceCategory::whereIn('category_type', [3])->get();
             $page = 'manage_worker_service';
@@ -1311,7 +1336,7 @@ class ServiceController extends Controller
             'color' => $request->color,
             'category_type' => $request->category_type
         ];
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $add_service = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -1333,7 +1358,7 @@ class ServiceController extends Controller
 
     public function editWorkerService($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $service_category = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -1364,7 +1389,7 @@ class ServiceController extends Controller
             'color' => $request->color,
             'category_type' => $request->category_type
         ];
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $update_service = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -1383,11 +1408,11 @@ class ServiceController extends Controller
             return redirect()->route('super.admin.login');
         }
     }
-    // 
+    //
     public function workerStoreList($id, Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $stores = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -1458,7 +1483,7 @@ class ServiceController extends Controller
                 return redirect()->route('super.admin.login');
             }
         }
-        $token = Cache::get('api_token');
+        $token = getToken();
         $service_category = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->get($this->getApiUrl() . 'superadmin/servicebyid/' . $id);
@@ -1477,7 +1502,7 @@ class ServiceController extends Controller
     public function workerProductList($id, Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $products = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token

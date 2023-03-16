@@ -78,7 +78,7 @@ const OtherHeader = () => {
                             </li> */}
                             <li>
                                 <a
-                                    href={`${CDN_URL}login`}
+                                    href={`login`}
                                     target="_blank"
                                     rel="noreferrer"
                                 >

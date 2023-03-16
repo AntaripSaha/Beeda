@@ -20,13 +20,8 @@ class ShopSettingController extends Controller
 
     public function shopSetting(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
-            /*
-            $seller_services = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ])->get($this->getApiUrl() . 'sellerservices/' . session()->get('user_info')->user_id);
-            */
             $id = session()->get('user_info')->user_id;
             $seller_services = SellerService::with(['service_category', 'shop'=>function($query){
                 $query->with(['logo_img', 'banner_img']);
@@ -41,11 +36,10 @@ class ShopSettingController extends Controller
                 ServiceCategoryType::GAS,
                 ServiceCategoryType::CAR_SALES,
                 ServiceCategoryType::REAL_ESTATE,
-                ServiceCategoryType::FLOWER
+                ServiceCategoryType::FLOWER,
+                ServiceCategoryType::FARMERS
                 ])->get();
 
-            // if($seller_services && isset(json_decode($seller_services)->error))  return redirect()->route('login.login');
-            // $seller_services = json_decode($seller_services)->seller_services;
             $parent = 'seller';
             $page = 'shop_setting';
             return view('store_owner.shop_setting.shop_setting', compact('seller_services', 'page', 'parent'));
@@ -56,19 +50,12 @@ class ShopSettingController extends Controller
 
     public function editShop($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
-            /*
-            $shop = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token
-            ])->get($this->getApiUrl() . 'shops/details/' . $id);
-            if($shop && isset(json_decode($shop)->error))  return redirect()->route('login.login');
-            $shop = json_decode($shop)->shop;
-            */
             $shop = Shop::with(['logo_img','banner_img', 'banner_img_mobile', 'shop_timing','seller_documents'=>function($query){
                 $query->with('doc_file');
             }, 'seller_service'])->where('id', $id)->first();
-            
+
             $shop_id = $id;
             $store_open_timings = [];
             $store_close_timings = [];
@@ -91,7 +78,10 @@ class ShopSettingController extends Controller
     }
     public function updateShop(Request $request)
     {
-        $token = Cache::get('api_token');
+        $validate = $request->validate([
+            'day' => 'required',
+        ]);
+        $token = getToken();
         if ($token) {
             $store_details = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
@@ -181,7 +171,7 @@ class ShopSettingController extends Controller
 
     public function deleteCuisine(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $cuisine = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->post($this->getApiUrl() . 'cuisines/delete', ['id' => $request->id]);
@@ -210,7 +200,7 @@ class ShopSettingController extends Controller
         return view('store_owner.shop_setting.addons', compact('page', 'shopId', 'parent'));
         /*
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $addons = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -244,7 +234,7 @@ class ShopSettingController extends Controller
     public function storeAddon(Request $request)
     {
         /*
-        $token = Cache::get('api_token');
+        $token = getToken();
         $addon = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->post($this->getApiUrl() . 'addons/add', ['shop_id' => $request->shop_id, 'name' => $request->name, 'id' => $request->id, 'price' => $request->price]);

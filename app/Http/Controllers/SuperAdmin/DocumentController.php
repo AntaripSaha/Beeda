@@ -18,7 +18,7 @@ class DocumentController extends Controller
     {
         try{
             if ($request->ajax()) {
-                $token = Cache::get('api_token');
+                $token = getToken();
                 if ($token) {
                     $data = RequiredDocument::with('service')->get();
                     return Datatables::of($data)
@@ -60,7 +60,7 @@ class DocumentController extends Controller
 
     public function addDocument()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $service_categories = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -84,7 +84,7 @@ class DocumentController extends Controller
             'name' => 'required',
             'service_category' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $document = new RequiredDocument();
             $document->name = $request->name;
@@ -97,7 +97,7 @@ class DocumentController extends Controller
 
     public function approveDocument(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             RequiredDocument::find($request->document_id)->toggleStatus()->update();
             return 1;
@@ -107,7 +107,7 @@ class DocumentController extends Controller
 
     public function editDocument($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $service_categories = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -142,7 +142,7 @@ class DocumentController extends Controller
             'name' => 'required',
             'service_category' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $document = RequiredDocument::find($request->id);
             $document->name = $request->name;

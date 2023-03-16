@@ -18,7 +18,7 @@ class DashboardController extends Controller
     /*
     public function index()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $dashboard_info = Http::withHeaders([
@@ -38,7 +38,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $user_id = session()->get('user_info')->user_id;
 
         if($token)

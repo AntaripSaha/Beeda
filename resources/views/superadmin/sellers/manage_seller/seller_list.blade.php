@@ -81,6 +81,7 @@ Seller List
                     <th>Store Name</th>
                     <th>Email</th>
                     <th>Contact No.</th>
+                    <th>Documents</th>
                     <th>Status</th>
                   </tr>
                   </thead>
@@ -147,6 +148,7 @@ function customShowNotification (from, align, custom_message) {
           {data: 'store_name', name: 'store_name'},
           {data: 'email', name: 'email'},
           {data: 'phone', name: 'phone'},
+          {data: 'documents', name: 'documents'},
           {data: 'status', name: 'status'}
           
       ]

@@ -99,7 +99,7 @@ Customer List
                     <th>Late Penalty Percentage</th>
                     <th>Advance Pay Intrest Decrement</th>
                     <th>Min EMI Percentage</th>
-                    <!-- <th>Action</th> -->
+                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -175,7 +175,7 @@ function customShowNotification (from, align, custom_message) {
           {data: 'late_penalty_percentage', name: 'late_penalty_percentage'},
           {data: 'advance_pay_decrease_percentage', name: 'advance_pay_decrease_percentage'},
           {data: 'min_emi_percentage', name: 'min_emi_percentage'},
-        //   {data: 'action', name: 'action'}
+          {data: 'action', name: 'action'}
           
       ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');

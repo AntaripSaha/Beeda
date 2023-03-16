@@ -19,7 +19,7 @@ class WalletController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $transections = Transaction::with('user')->with('service_category')->orderBy('id','desc')->get();
                 foreach($transections as $transection)
@@ -81,7 +81,7 @@ class WalletController extends Controller
     public function bankTransfer(Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $transections = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -126,7 +126,7 @@ class WalletController extends Controller
 
     public function bankTransferStatus(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -141,7 +141,7 @@ class WalletController extends Controller
 
     public function qrCode()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -155,7 +155,7 @@ class WalletController extends Controller
     public function pinResetRequests(Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $pinResetRequests = WalletPinResetRequest::with('user')->orderBy('id', 'desc')->get();
                 if ($pinResetRequests) {

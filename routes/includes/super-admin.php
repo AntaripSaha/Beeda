@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboardController;
@@ -24,10 +24,12 @@ use App\Http\Controllers\SuperAdmin\BeedaBlogController;
 
 Route::middleware(['SuperAdminMiddleware'])->group(function () {
     Route::get('/super-admin/dashboard', [SuperAdminDashboardController::class, 'dashboard'])->name('super.admin.dashbaord');
+    Route::get('/super-admin/dashboard/description-update', [SuperAdminDashboardController::class, 'descriptionUpdate'])->name('super.admin.description.update');
     Route::get('/category-list', [CategoryController::class, 'categoryList'])->name('category.list');
     Route::post('/feature-category', [CategoryController::class, 'featureCategory'])->name('category.feature');
     Route::post('/unfeature-category', [CategoryController::class, 'unfeatureCategory'])->name('category.unfeature');
     Route::get('/add-category', [CategoryController::class, 'addCategory'])->name('category.add');
+    Route::post('/category-of-service', [CategoryController::class, 'categoryOfService'])->name('category.of.service');
     Route::post('/add-category', [CategoryController::class, 'addCategorySubmit'])->name('category.add.submit');
     Route::post('/tab-category', [CategoryController::class, 'tabCategory'])->name('category.tab');
     Route::post('/untab-category', [CategoryController::class, 'untabCategory'])->name('category.untab');
@@ -88,6 +90,7 @@ Route::middleware(['SuperAdminMiddleware'])->group(function () {
     Route::post('/edit-document', [DocumentController::class, 'editDocumentSubmit'])->name('document.edit.submit');
     Route::get('/service-order-list/{id}', [ServiceController::class, 'serviceOrderList'])->name('service.order.list');
     Route::get('/seller-list', [SellerController::class, 'sellerList'])->name('seller.list');
+    Route::get('/seller-document-list/{id}', [SellerController::class, 'sellerDocumentList'])->name('seller.document.list');
     Route::get('/seller-details/{id}', [SellerController::class, 'details'])->name('seller.details');
     Route::get('/seller-login/{id}', [SellerController::class, 'login'])->name('seller.login');
     Route::post('/approve-seller', [SellerController::class, 'approveSeller'])->name('seller.approve');
@@ -124,15 +127,21 @@ Route::middleware(['SuperAdminMiddleware'])->group(function () {
     Route::resource('blog', BlogController::class);
     Route::post('/blog/destroy/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
     Route::post('/blog/change-status', [BlogController::class, 'change_status'])->name('blog.change-status');
-    
+
     Route::get('/beeda/section_banner', [CategoryController::class, 'beedamalHomeSectionCategories'])->name('home.section.category');
     Route::post('/beeda/section_banner/update', [CategoryController::class, 'updateBeedamalHomeSectionCategories'])->name('update.home.section.category');
+
+    Route::get('/beeda/pharmacy_section_category', [CategoryController::class, 'pharmacyHomeSectionCategories'])->name('pharmacy.section.category');
+    Route::post('/beeda/pharmacy_section_category/update', [CategoryController::class, 'updatePharmacyHomeSectionCategories'])->name('update.pharmacy.section.category');
 
     //loan
     Route::prefix('loan')->group(function () {
         Route::get('/index', [LoanController::class, 'index'])->name('loan.index');
         Route::get('/loan-types', [LoanController::class, 'loanTypes'])->name('loan.types');
         Route::get('/add-loan-types', [LoanController::class, 'addLoanTypes'])->name('loan.type.add');
+        Route::post('/store-loan-types', [LoanController::class, 'storeLoanType'])->name('loan.type.store');
+        Route::post('/update-loan-types', [LoanController::class, 'updateLoanType'])->name('loan.type.update');
+        Route::get('/edit/{id}', [LoanController::class, 'edit'])->name('loan.edit');
         Route::get('/show/{id}', [LoanController::class, 'show'])->name('loan.show');
         Route::post('/status-change', [LoanController::class, 'changeStatus'])->name('loan.status');
     });
@@ -170,22 +179,16 @@ Route::middleware(['SuperAdminMiddleware'])->group(function () {
         Route::get('{id}/login-activity', [CustomerController::class, 'loginActivity'])->name('login-activity');
         Route::get('{id}/order-list', [CustomerController::class, 'orderList'])->name('order.list');
         Route::get('{id}/order_details', [CustomerController::class, 'orderDetails'])->name('customer.order.details');
-        
         Route::get('{id}/ride-list', [CustomerController::class, 'rideList'])->name('ride.list');
         Route::get('{id}/ride-details', [CustomerController::class, 'rideDetails'])->name('ride.details');
-
         Route::get('{id}/login', [CustomerController::class, 'login'])->name('login');
     });
-  
-    Route::prefix('superadmin/transport')->as('superadmin.transport.')->group(function () {
 
+    Route::prefix('superadmin/transport')->as('superadmin.transport.')->group(function () {
         Route::prefix('vehicle-category')->as('vehicle-category.')->group(function () {
             Route::get('/', [VehicleTypeController::class, 'index'])->name('index');
         });
-
     });
-
-
 });
 
 Route::get('/super-admin', [SuperAdminLoginController::class, 'login'])->name('super.admin.login');

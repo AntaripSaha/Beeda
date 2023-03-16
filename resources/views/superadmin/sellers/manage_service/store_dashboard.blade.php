@@ -170,9 +170,9 @@ Store Dashboard
             <div class="col-lg-6">
                 <h4 class="order_history_heading mt-2 text-uppercase font-weight-bold">{{$service->name}} Manage Blog</h4>
             </div>
-            
+
             <div class="col-lg-6 text-right">
-                <a href="{{ route('blog.index') }}" class="btn btn-primary">Ad & Promotions</a>
+                <a href="{{ route('blog.index') }}" class="btn btn-primary">Blogs</a>
             </div>
         </div>
         <br/>
@@ -221,7 +221,7 @@ Store Dashboard
                     <h4 class="card-title">
                         Category Name: {{ $category_section['section_1_cat_name']->name }}
                     </h4>
-                    <h4 class="card-title">  
+                    <h4 class="card-title">
                         Section Name: {{ $category_section['section_1_name']->value }}
                     </h4>
                 </div>
@@ -237,7 +237,7 @@ Store Dashboard
                     <h4 class="card-title">
                         Category Name:  {{ $category_section['section_2_cat_name']->name }}
                     </h4>
-                    <h4 class="card-title">  
+                    <h4 class="card-title">
                         Section Name: {{ $category_section['section_3_name']->value }}
                     </h4>
                 </div>
@@ -253,7 +253,7 @@ Store Dashboard
                     <h4 class="card-title">
                         Category Name:  {{ $category_section['section_3_cat_name']->name }}
                     </h4>
-                    <h4 class="card-title">  
+                    <h4 class="card-title">
                         Section Name: {{ $category_section['section_3_name']->value }}
                     </h4>
                 </div>
@@ -273,6 +273,73 @@ Store Dashboard
             </div>
         </div>
         @endif
+
+
+        {{-- Pharmacy home category start --}}
+        <br>
+        @if($service->id == \App\Constants\ServiceCategoryType::PHARMACY)
+        {{-- @dd($pharmacy_category_section); --}}
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="order_history_heading mt-2 text-uppercase font-weight-bold">Pharmacy Home Page Section Categories(Mobile APP)</h4>
+            </div>
+            <div class="col-lg-6 text-right">
+                <a href="{{ route('pharmacy.section.category') }}" class="btn btn-primary">Set Category</a>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">check_circle</i>
+                    </div>
+                    <p class="card-category">Category section 1</p>
+                    <h4 class="card-title">
+                        Category Name: {{ $pharmacy_category_section['pharmacy_category_name_1']->value }}
+                    </h4>
+                    <h4 class="card-title">
+                        Section Name: {{ $pharmacy_category_section['pharmacy_category_section_1']->name }}
+                    </h4>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">check_circle</i>
+                    </div>
+                    <p class="card-category">Category section 2</p>
+                    <h4 class="card-title">
+                        Category Name:  {{ $pharmacy_category_section['pharmacy_category_name_2']->value }}
+                    </h4>
+                    <h4 class="card-title">
+                        Section Name: {{ $pharmacy_category_section['pharmacy_category_section_2']->name }}
+                    </h4>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">check_circle</i>
+                    </div>
+                    <p class="card-category">Category section 3</p>
+                    <h4 class="card-title">
+                        Category Name:  {{ $pharmacy_category_section['pharmacy_category_name_3']->value }}
+                    </h4>
+                    <h4 class="card-title">
+                        Section Name: {{ $pharmacy_category_section['pharmacy_category_section_3']->name }}
+                    </h4>
+                </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        {{-- Pharmacy home category end --}}
 
 
     </div>

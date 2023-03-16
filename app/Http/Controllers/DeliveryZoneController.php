@@ -16,7 +16,7 @@ class DeliveryZoneController extends Controller
     {
         if($request->ajax())
         {
-            $token = Cache::get('api_token');
+            $token = getToken();
             $zones = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
             ])->get($this->getApiUrl().'delivery_zone/list/'.session()->get('user_info')->user_id);
@@ -43,7 +43,7 @@ class DeliveryZoneController extends Controller
 
     public function addDeliveryZone()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $countries = Http::withHeaders([
             'Authorization' => 'Bearer '.$token
         ])->get($this->getApiUrl().'countrylist');
@@ -65,7 +65,7 @@ class DeliveryZoneController extends Controller
             'country' => 'required',
             'cost' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         $data = [
             'name' => $request->city,
             'country_id' => $request->country,
@@ -81,7 +81,7 @@ class DeliveryZoneController extends Controller
 
     public function editDeliveryZone($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $countries = Http::withHeaders([
             'Authorization' => 'Bearer '.$token
         ])->get($this->getApiUrl().'countrylist');
@@ -112,7 +112,7 @@ class DeliveryZoneController extends Controller
             'country' => 'required',
             'cost' => 'required'
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         $data = [
             'name' => $request->city,
             'id' => $request->id,
@@ -128,7 +128,7 @@ class DeliveryZoneController extends Controller
 
     public function deleteDeliveryZone(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $data = [
             'id' => $request->id
         ];

@@ -19,7 +19,11 @@ class BeedaBlog extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    
+    public function thumbnail_img()
+    {
+        return $this->belongsTo(Upload::class, 'thumbnail');
+    }
+
     public function img()
     {
         return $this->belongsTo(Upload::class, 'banner');

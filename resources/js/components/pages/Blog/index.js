@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 import { NavLink } from "react-router-dom";
-
 const Blog = () => {
     const [URL, setUrl] = useState("beeda-frontend/");
     const [blogImageUrl] = useState(
@@ -16,10 +15,11 @@ const Blog = () => {
     const [newPost, setNewPost] = useState([]);
     const [isLoading, setLoading] = useState(false)
     const navigate = useNavigate()
+    
     useEffect(() => {
         window.scrollTo(0, 0)
         axios
-            .get("https://beeda.com/api/all-blogs?per_page=12&page=1")
+            .get(`${window.location.href.replace('blogs', '')}api/all-blogs?per_page=12&page=1`)
             .then((res) => {
                 setTotalPage(res.data.posts.last_page);
                 setTotalPost(res.data.posts.data);
@@ -30,7 +30,7 @@ const Blog = () => {
     function nextPage(event, value) {
         setLoading(true);
         axios
-            .get(`https://beeda.com/api/all-blogs?per_page=12&page=${value}`)
+            .get(`${window.location.href.replace('blogs', '')}api/all-blogs?per_page=12&page=${value}`)
             .then((res) => {
                 setTotalPage(res.data.posts.last_page);
                 setTotalPost(res.data.posts.data);
@@ -113,7 +113,7 @@ const Blog = () => {
                                         <div className="row">
                                             <div className="col-sm-6 pr-sm-0 d-flex ">
                                                 <img
-                                                    src={`${blogImageUrl}/${item.img.file_name}`}
+                                                    src={`${item.img?.file_name}`}
                                                     className="card-img-top"
                                                     alt="blog-card-img"
                                                 />
@@ -178,7 +178,7 @@ const Blog = () => {
                                     >
                                         <div className="col-sm-6 pl-sm-0 d-flex order-1 order-sm-2">
                                             <img
-                                                src={`${blogImageUrl}/${item.img.file_name}`}
+                                                src={`${item.img?.file_name}`}
                                                 className="card-img-top"
                                                 alt="blog-card-img"
                                             />
@@ -252,7 +252,7 @@ const Blog = () => {
                                                 width:'103%',
                                             }}>
                                                 <img
-                                                    src={`${blogImageUrl}/${item.thumbnail_img?.file_name ?item.thumbnail_img?.file_name:item.meta_img?.file_name }`}
+                                                    src={`${item.thumbnail_img?.file_name ?item.thumbnail_img?.file_name:item.meta_img?.file_name }`}
                                                     className="card-img-top"
                                                     alt="blog-card-img"
                                                 />
@@ -316,7 +316,7 @@ const Blog = () => {
 
             <div className="wrapper">
                 <div id="blog-footer">
-                    <Pagination count={totalPage} onChange={nextPage} color="secondary" />
+                    <Pagination count={totalPage} onChange={nextPage} />
                 </div>
             </div>
         </>

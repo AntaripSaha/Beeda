@@ -5,14 +5,17 @@ use App\Currency;
 use App\Models\BusinessSetting;
 use App\Product;
 use App\SellerService;
+use App\Upload;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 
 function getSellerServices()
 {   
-    $token = Cache::get('api_token');
+    $token = getToken();
     if($token)
     {  
         $services = SellerService::with(['service_category', 'shop'=>function($query){
@@ -28,7 +31,8 @@ function getSellerServices()
             ServiceCategoryType::GAS,
             ServiceCategoryType::CAR_SALES,
             ServiceCategoryType::REAL_ESTATE,
-            ServiceCategoryType::FLOWER
+            ServiceCategoryType::FLOWER,
+            ServiceCategoryType::FARMERS,
             ])->get();
         return $services;    
     }
@@ -43,7 +47,7 @@ function filterVariantName($name)
 
 function getProviderServices()
 {   
-    $token = Cache::get('api_token');
+    $token = getToken();
     if($token)
     {  
         $provider_services = SellerService::with(['service_category', 'shop'=>function($query){
@@ -77,6 +81,291 @@ if (! function_exists('currency_symbol')) {
             $currency = Currency::where('code', $code)->first();
         }
         return $currency->symbol;
+    }
+}
+if (! function_exists('uploadImage')) {
+    function uploadImage($image)
+    {
+        // return $image->getClientOriginalExtension();
+        try{
+            if($image){
+                $upload = new Upload();
+                $extension = strtolower($image->getClientOriginalExtension());
+
+                // if(isset($type[$extension])){
+                    $upload->file_original_name = null;
+                    $arr = explode('.', $image->getClientOriginalName());
+                    for($i=0; $i < count($arr)-1; $i++){
+                        if($i == 0){
+                            $upload->file_original_name .= $arr[$i];
+                        }
+                        else{
+                            $upload->file_original_name .= ".".$arr[$i];
+                        }
+                    }
+                    if (env('AWS_ON')) {
+
+                        if(env('APP_ENV')=='production')
+                        {
+                            //Magic..
+                            $tempImgName = rand(10,100) . '.' . $extension;
+                            //another magic
+                            if($extension == "png" || $extension == "jpeg" || $extension == "jpg"){
+                                $imagePath = $image;
+                                switch ($extension) {
+                                    case "png":
+                                        $im = imagecreatefrompng($imagePath);
+                                        $newImagePath = str_replace("png", "webp", $imagePath);
+                                        $quality = 50;
+
+                                        //Create the webp image.
+                                        imagewebp($im, $newImagePath, $quality);
+                                        break;
+                                    case "jpeg":
+                                        $im = imagecreatefromjpeg($imagePath);
+                                        $newImagePath = str_replace("jpeg", "webp", $imagePath);
+                                        $quality = 50;
+
+                                        //Create the webp image.
+                                        imagewebp($im, $newImagePath, $quality);
+                                        break;
+                                    case "jpg":
+                                        $im = imagecreatefromjpeg($imagePath);
+                                        $newImagePath = str_replace("jpg", "webp", $imagePath);
+                                        $quality = 50;
+
+                                        //Create the webp image.
+                                        imagewebp($im, $newImagePath, $quality);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
+                            $publicPath = public_path('/uploads/all/') . $tempImgName;
+                            $publicPath = str_replace('/public', '', $publicPath);
+                            
+                            $awsFileName = rand(100000,999999) . '.' . $extension;
+
+                            // $file = Storage::disk('s3')->put('public/uploads/all/' . $awsFileName, file_get_contents($publicPath));
+                            // $path = env('AWS_MEDIA_URL').'uploads/all/'.$awsFileName;
+                            // $path = substr($path, 45, 200);
+                            $file = Storage::disk('s3')->put('public/uploads/all', $image);
+                            $path = Storage::disk('s3')->url($file);
+                            $path = substr($path, 45, 200);
+                        }
+                        else
+                        {
+                            if($extension == "png" || $extension == "jpeg" || $extension == "jpg"){
+                                $imagePath = $image;
+
+                                //Create an image object.
+                                // $im = imagecreatefrompng($imagePath);
+                                switch ($extension) {
+                                    case "png":
+                                        $im = imagecreatefrompng($imagePath);
+                                        $newImagePath = str_replace("png", "webp", $imagePath);
+                                        //Quality. 1-100.
+                                        $quality = 50;
+
+                                        //Create the webp image.
+                                        imagewebp($im, $newImagePath, $quality);
+                                        break;
+                                    case "jpeg":
+                                        $im = imagecreatefromjpeg($imagePath);
+                                        $newImagePath = str_replace("jpeg", "webp", $imagePath);
+                                        //Quality. 1-100.
+                                        $quality = 50;
+
+                                        //Create the webp image.
+                                        imagewebp($im, $newImagePath, $quality);
+                                        break;
+                                    case "jpg":
+                                        $im = imagecreatefromjpeg($imagePath);
+                                        $newImagePath = str_replace("jpg", "webp", $imagePath);
+                                        //Quality. 1-100.
+                                        $quality = 50;
+
+                                        //Create the webp image.
+                                        imagewebp($im, $newImagePath, $quality);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
+
+                            
+                            
+                            $file = Storage::disk('s3')->put('public/uploads/all', $image);
+                            $path = Storage::disk('s3')->url($file);
+                            $path = substr($path, 45, 200);
+                        }
+                        $size = $image->getSize();
+                    }
+                    else
+                    {
+                        $path = $image->store('uploads/all', 'local');
+                        $size = $image->getSize();
+                    }
+
+                    
+                    $upload->extension = $extension == "png" || $extension == "jpeg" || $extension == "jpg" ? "webp" : $extension;
+                    $upload->file_name = $path;
+                    // $upload->user_id = session()->get('user_info')->user_id;
+                    $upload->type = "image";
+                    $upload->file_size = $size;
+                    $upload->save();
+                // }
+            } 
+            else{
+                return "no image";
+            }
+            return $upload->id;
+        }
+        catch(Exception $e){
+            return failedResponse($e->getMessage());
+        }
+    }
+}
+if (! function_exists('updateImage')) {
+    function updateImage($id, $image)
+    {
+        try{
+            if($image){
+                $upload = Upload::find($id);
+                $unlink_image = $upload->file_name;
+                $extension = strtolower($image->getClientOriginalExtension());
+
+                $upload->file_original_name = null;
+                $arr = explode('.', $image->getClientOriginalName());
+                for($i=0; $i < count($arr)-1; $i++){
+                    if($i == 0){
+                        $upload->file_original_name .= $arr[$i];
+                    }
+                    else{
+                        $upload->file_original_name .= ".".$arr[$i];
+                    }
+                }
+                if (env('AWS_ON')) {
+
+                    if(env('APP_ENV')=='production')
+                    {
+                        //Magic..
+                        $tempImgName = rand(10,100) . '.' . $extension;
+                        //another magic
+                        if($extension == "png" || $extension == "jpeg" || $extension == "jpg"){
+                            $imagePath = $image;
+                            switch ($extension) {
+                                case "png":
+                                    $im = imagecreatefrompng($imagePath);
+                                    $newImagePath = str_replace("png", "webp", $imagePath);
+                                    $quality = 50;
+
+                                    //Create the webp image.
+                                    imagewebp($im, $newImagePath, $quality);
+                                    break;
+                                case "jpeg":
+                                    $im = imagecreatefromjpeg($imagePath);
+                                    $newImagePath = str_replace("jpeg", "webp", $imagePath);
+                                    $quality = 50;
+
+                                    //Create the webp image.
+                                    imagewebp($im, $newImagePath, $quality);
+                                    break;
+                                case "jpg":
+                                    $im = imagecreatefromjpeg($imagePath);
+                                    $newImagePath = str_replace("jpg", "webp", $imagePath);
+                                    $quality = 50;
+
+                                    //Create the webp image.
+                                    imagewebp($im, $newImagePath, $quality);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        
+
+                        $publicPath = public_path('/uploads/all/') . $tempImgName;
+                        $publicPath = str_replace('/public', '', $publicPath);
+                        
+                        $awsFileName = rand(100000,999999) . '.' . $extension;
+
+                        $file = Storage::disk('s3')->put('public/uploads/all', $image);
+                        $path = Storage::disk('s3')->url($file);
+                        $path = substr($path, 45, 200);
+                    }
+                    else
+                    {
+                        if($extension == "png" || $extension == "jpeg" || $extension == "jpg"){
+                            $imagePath = $image;
+
+                            switch ($extension) {
+                                case "png":
+                                    $im = imagecreatefrompng($imagePath);
+                                    $newImagePath = str_replace("png", "webp", $imagePath);
+                                    //Quality. 1-100.
+                                    $quality = 50;
+
+                                    //Create the webp image.
+                                    imagewebp($im, $newImagePath, $quality);
+                                    break;
+                                case "jpeg":
+                                    $im = imagecreatefromjpeg($imagePath);
+                                    $newImagePath = str_replace("jpeg", "webp", $imagePath);
+                                    //Quality. 1-100.
+                                    $quality = 50;
+
+                                    //Create the webp image.
+                                    imagewebp($im, $newImagePath, $quality);
+                                    break;
+                                case "jpg":
+                                    $im = imagecreatefromjpeg($imagePath);
+                                    $newImagePath = str_replace("jpg", "webp", $imagePath);
+                                    //Quality. 1-100.
+                                    $quality = 50;
+
+                                    //Create the webp image.
+                                    imagewebp($im, $newImagePath, $quality);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        Storage::disk('s3')->delete($unlink_image);
+                        
+                        
+                        $file = Storage::disk('s3')->put('public/uploads/all', $image);
+                        $path = Storage::disk('s3')->url($file);
+                        $path = substr($path, 45, 200);
+                    }
+                    $size = $image->getSize();
+                }
+                else
+                {
+                    unlink(public_path() . $unlink_image);
+                    $path = $image->store('uploads/all', 'local');
+                    $size = $image->getSize();
+                }
+
+                // return $path;
+                $upload->extension = $extension == "png" || $extension == "jpeg" || $extension == "jpg" ? "webp" : $extension;
+                $upload->file_name = $path;
+                $upload->type = "image";
+                $upload->file_size = $size;
+                $upload->save();
+                // return $upload;
+            } 
+            else{
+                return "no image";
+            }
+            return $upload->id;
+        }
+        catch(Exception $e){
+            return failedResponse($e->getMessage());
+        }
     }
 }
 if (! function_exists('getUser')) {
@@ -370,5 +659,27 @@ if (!function_exists('uploaded_asset_extension')) {
             return $asset->extension;
         }
         return null;
+    }
+}
+
+if (!function_exists('setToken')) {
+    function setToken($access_token)
+    {
+        return Cookie::queue(Cookie::make('api_token', $access_token, 3000));
+    }
+}
+
+if (!function_exists('getToken')) {
+    function getToken()
+    {
+        if (Cookie::has('api_token')) return Cookie::get('api_token');
+        else return null;
+    }
+}
+
+if (!function_exists('resetToken')) {
+    function forgetToken()
+    {
+        return Cookie::queue(Cookie::forget('api_token'));
     }
 }

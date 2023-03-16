@@ -15,7 +15,7 @@ class RealestateController extends Controller
 
     public function addProperty($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $categories = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -66,7 +66,7 @@ class RealestateController extends Controller
             'area_year_built' => 'required',
             'area_life_styles' => 'required',
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         $property_add = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
         ]);
@@ -152,7 +152,7 @@ class RealestateController extends Controller
     {
       if($request->ajax())
        {
-            $token = Cache::get('api_token');
+            $token = getToken();
             $properties = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
             ])->post($this->getApiUrl().'property/list', [
@@ -223,7 +223,7 @@ class RealestateController extends Controller
 
     public function publishProperty(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $publish_property = Http::withHeaders([
             'Authorization' => 'Bearer '.$token
         ])->post($this->getApiUrl().'property/publish', [
@@ -235,7 +235,7 @@ class RealestateController extends Controller
 
     public function editProperty($id, $shop_id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $categories = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token
@@ -289,7 +289,7 @@ class RealestateController extends Controller
             'area_year_built' => 'required',
             'area_life_styles' => 'required',
         ]);
-        $token = Cache::get('api_token');
+        $token = getToken();
         $property_update = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
         ]);
@@ -378,7 +378,7 @@ class RealestateController extends Controller
     {
       if($request->ajax())
        {
-            $token = Cache::get('api_token');
+            $token = getToken();
             $schedule_list = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
             ])->post($this->getApiUrl().'schedule/list', [
@@ -457,7 +457,7 @@ class RealestateController extends Controller
 
     public function changeScheduleStatus($id, Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $status_schedule = Http::withHeaders([
             'Authorization' => 'Bearer '.$token
         ])->post($this->getApiUrl().'schedule/status', [
@@ -469,7 +469,7 @@ class RealestateController extends Controller
 
     public function shortScheduleList(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $schedules = Http::withHeaders([
@@ -482,7 +482,7 @@ class RealestateController extends Controller
 
     public function scheduleDetails($schedule_id, $id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $schedule = Http::withHeaders([

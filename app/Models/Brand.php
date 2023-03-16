@@ -60,7 +60,7 @@ class Brand extends Model
 
 {
 
-
+    protected $fillable = ['service_category_id', 'name', 'logo', 'top', 'slug', 'meta_title', 'meta_description'];
     public function logo()
     {
 

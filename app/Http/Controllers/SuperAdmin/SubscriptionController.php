@@ -4,23 +4,22 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use App\Constants\ServiceCategoryType;
 use App\ServiceCategory;
 use App\UserSubscription;
 use App\Subscription;
 use App\Revenue;
 use App\User;
-use DataTables;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
-use DB;
+use Illuminate\Support\Facades\DB;
+
 
 class SubscriptionController extends Controller
 {
     public function index(Request $request)
     {
        if($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 return DataTablesDataTables::of($data = Subscription::all())
                     ->addIndexColumn()
@@ -112,7 +111,7 @@ class SubscriptionController extends Controller
 
     public function edit($id)
     {   
-        $token = Cache::get('api_token');
+        $token = getToken();
 
         if ($token) {
             $subscription = Subscription::where('id', $id)->first();
@@ -169,7 +168,7 @@ class SubscriptionController extends Controller
             'id' => 'required',
         ]);
 
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $subscription = Subscription::where('id', $request->id)->first();
             $subscription->delete();
@@ -185,7 +184,7 @@ class SubscriptionController extends Controller
             'subscription_id' => 'required',
         ]);
 
-        $token = Cache::get('api_token');
+        $token = getToken();
         if ($token) {
             $subscription = Subscription::where('id', $request->subscription_id)->first();
             $subscription->is_active = !$subscription->is_active;
@@ -207,7 +206,7 @@ class SubscriptionController extends Controller
         $total_revenue = Revenue::whereIn('service_category_id', [ServiceCategoryType::RIDES, ServiceCategoryType::COURIER])->whereIn('context', ['card_to_transport_subscription_fee', 'wallet_to_transport_subscription_fee'])->value(DB::raw("SUM(amount)"));
 
        if($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 return DataTablesDataTables::of($data =UserSubscription::select('*', DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(discount) as total_discount'))->with(['user'])->groupBy('user_id')->get())
                     ->addIndexColumn()
@@ -242,7 +241,7 @@ class SubscriptionController extends Controller
         $user = User::find($user_id);
 
        if($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 return DataTablesDataTables::of($data =UserSubscription::with(['subscription'])->where('user_id', $user_id)->get())
                     ->addIndexColumn()

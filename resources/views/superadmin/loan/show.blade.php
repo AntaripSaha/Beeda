@@ -87,7 +87,7 @@ Customer Details
 <div class="content">
         <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">              
+                <div class="modal-content">
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <img src="" class="imagepreview" style="width: 100%;" >
@@ -96,8 +96,8 @@ Customer Details
             </div>
         </div>
         <div class="container-fluid">
-        
-        
+
+
           <div class="row">
             <div class="col-md-10">
               <div class="card card-plain">
@@ -111,8 +111,8 @@ Customer Details
                             <div class="row">
                                 <div class="col-lg-7 col-md-7 col-sm-6">
                                     <h4 class="mt-5">
-                                        Applied By: 
-                                        @if($loan->user->name)  {{$loan->user->name}} 
+                                        Applied By:
+                                        @if($loan->user->name)  {{$loan->user->name}}
                                         @else {{$loan->user->first_name}}{{$loan->user->last_name}} @endif
                                     </h4>
                                     <h4>
@@ -122,7 +122,7 @@ Customer Details
                                         Amount: {{$loan->amount}}
                                     </h4>
                                     <ul class="list-unstyled">
-                                      
+
                                         Status:<br>
                                         <select id="loan_status" class="form-select" aria-label="Default select example">
                                             <option value="Pending" @if($loan->loan_status == "Pending") selected @endif>Pending</option>
@@ -210,14 +210,13 @@ Customer Details
         // alert(id);
         var loan_status = $(this).val();
         var user_id = '{{$loan->user_id}}';
-        // alert(user_id);
+        alert(user_id);
 
         $.ajax({
             type:'POST',
             url:"{{ route('loan.status') }}",
             data:{'id':id, 'loan_status':loan_status ,'user_id':user_id, '_token': '{{csrf_token()}}'},
             success:function(data){
-                alert(data.message);
                 console.log(data);
             },
             error:function(e){
@@ -231,8 +230,8 @@ Customer Details
     $(function() {
         $('.pop').on('click', function() {
             $('.imagepreview').attr('src', $(this).find('img').attr('src'));
-            $('#imagemodal').modal('show');   
-        });     
+            $('#imagemodal').modal('show');
+        });
 });
 </script>
 

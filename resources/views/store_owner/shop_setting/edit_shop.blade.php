@@ -359,7 +359,7 @@ input[type="checkbox"]:checked::before {
     }
     .preview {
       overflow: hidden;
-      width: 290px; 
+      width: 290px;
       height: 300px;
       margin: 10px;
       border: 1px solid red;
@@ -397,7 +397,7 @@ input[type="checkbox"]:checked::before {
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-       
+
         <!-- Small boxes (Stat box) -->
                       <!-- form start -->
         <form action="{{route('shop.update')}}" method="post" enctype="multipart/form-data">
@@ -420,29 +420,36 @@ input[type="checkbox"]:checked::before {
                         <input type="text" class="form-control" name="store_name" id="store_name" value="{{$shop->name}}" placeholder="Enter Shop Name">
                         </div>
                     </div>
+                    @php
+                        $radius = $shop->radius;
+                        if($shop->radius_unit == 'Mile') {
+                            $radius = round($shop->radius * 0.621371);
+                        }
+                    @endphp
                     <div class="col-4">
                         <div class="form-group">
                         <label for="delivery_radius">Delivery Radius</label>
-                        @php $radius = explode(' ', $shop->radius); $delivery_radius = $radius[0]; $radius_unit = $radius[1]; @endphp
-                        <input type="text" class="form-control" name="delivery_radius" id="delivery_radius" value="{{$delivery_radius}}" placeholder="Enter Delivery Radius">
+                        <input type="text" class="form-control" name="delivery_radius" id="delivery_radius" value="{{$radius}}" placeholder="Enter Delivery Radius">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                         <label for="radius_unit">Radius Unit</label>
                         <select class="form-control" id="radius_unit" name="radius_unit">
-                            <option value="Mile" @if($radius_unit == 'M') selected @endif>Mile</option>
-                            <option value="KM" @if($radius_unit == 'KM') selected @endif>KM</option>
+                            <option value="Mile" @if($shop->radius_unit == 'Mile') selected @endif>Mile</option>
+                            <option value="KM" @if($shop->radius_unit == 'KM') selected @endif>KM</option>
                         </select>
                         </div>
                     </div>
-                  </div>  
+                  </div>
                   <div class="row">
                     <div class="col-4">
                         <div class="form-group">
                         <label for="delivery_time">Estimated Delivery Time</label>
-                        @php $time = explode(' ', $shop->eta_delivery_time); $delivery_time = $time[0]; $time_unit = $time[1]; @endphp
-                        <input type="text" class="form-control" name="delivery_time" id="delivery_time" value="{{$delivery_time}}" placeholder="Enter Delivery Time" required>
+                        @php if(strpos($shop->eta_delivery_time, ' ') !== false){$time = explode(' ', $shop->eta_delivery_time); $delivery_time = $time[0]; $time_unit = $time[1];}
+                            else{ $delivery_time =0; $time_unit="MIN";}
+                        @endphp
+                        <input type="number" max="1000" class="form-control" name="delivery_time" id="delivery_time" value="{{$delivery_time}}" placeholder="Enter Delivery Time" required>
                         </div>
                     </div>
                     <div class="col-4">
@@ -450,7 +457,10 @@ input[type="checkbox"]:checked::before {
                         <label for="time_unit">Time Unit</label>
                         <select class="form-control" id="time_unit" name="time_unit">
                             <option value="MIN" @if($time_unit == 'MIN') selected @endif>MIN</option>
+                            <option value="MINS" @if($time_unit == 'MINS') selected @endif>MINS</option>
                             <option value="HOUR" @if($time_unit == 'HOUR') selected @endif>HOUR</option>
+                            <option value="HOURS" @if($time_unit == 'HOURS') selected @endif>HOURS</option>
+                            <option value="DAY" @if($time_unit == 'DAY') selected @endif>DAY</option>
                             <option value="DAYS" @if($time_unit == 'DAYS') selected @endif>DAYS</option>
                         </select>
                         </div>
@@ -498,12 +508,13 @@ input[type="checkbox"]:checked::before {
                         <textarea class="form-control" id="short_description" name="short_description" placeholder="Enter Description">{{$shop->description}}</textarea>
                         </div>
                     </div>
-                  </div> 
+                  </div>
                   <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <label>Store Timings</label>
+                            <label>Store Timings</label><br>
                             <!-- timeing area -->
+                            <span style="color:red;font-size:13px;">{{ $errors->first('day') }}</span>
                             <div>
                             <div class="col-md-12">
                             <div class="form-group row" id="every_d">
@@ -598,7 +609,7 @@ input[type="checkbox"]:checked::before {
                     </div>
                     </div>
                   </div>
-                  <div class="row">  
+                  <div class="row">
                       <div class="col-6">
                         <div class="form-group">
                             <label for="packaging_charge">Packaging Charge</label>
@@ -612,7 +623,7 @@ input[type="checkbox"]:checked::before {
                         </div>
                       </div>
                   </div>
-                  <div class="row">  
+                  <div class="row">
                       <div class="col-12">
                         <div class="form-group">
                             <label for="store_banner">Desktop Banner</label>
@@ -657,10 +668,10 @@ input[type="checkbox"]:checked::before {
                       </div>
                   </div>
                   <div class="row">
-                   
+
                   @foreach($shop->seller_documents as $seller_document)
-                    @php 
-                        $shop_document_id = []; 
+                    @php
+                        $shop_document_id = [];
                         foreach($shop->seller_documents as $seller_doc)
                         {
                             $shop_document_id[] = $seller_doc->required_document_id;
@@ -668,7 +679,7 @@ input[type="checkbox"]:checked::before {
                     @endphp
                   @endforeach
 
-                    @foreach($shop->seller_service->service_category->documents as $single_doc) 
+                    @foreach($shop->seller_service->service_category->documents as $single_doc)
                         @if($shop->seller_documents && count($shop->seller_documents) > 0)
                             @foreach($shop->seller_documents as $seller_document)
                                 @if($seller_document->required_document_id == $single_doc->id)
@@ -677,7 +688,7 @@ input[type="checkbox"]:checked::before {
                                             <label for="service_document_files">{{$seller_document->required_document->name}}</label>
                                             <br><embed src="{{assetUrl().$seller_document->doc_file->file_name}}" style="width:150px;height:100px" />
                                         </div>
-                                    </div>    
+                                    </div>
                                 @endif
                             @endforeach
                             @if(!in_array($single_doc->id, $shop_document_id))
@@ -697,7 +708,7 @@ input[type="checkbox"]:checked::before {
                                 <input type="file" class="form-control" name="service_document_files[]">
                             </div>
                             </div>
-                        @endif    
+                        @endif
                     @endforeach
                   </div>
                   <br>
@@ -1066,7 +1077,7 @@ input[type="checkbox"]:checked::before {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
 
 
-<script type="text/javascript">       
+<script type="text/javascript">
 //modal & crop logo
 var image = document.getElementById('image');
 var $modal1 = $('#modal');
@@ -1139,12 +1150,12 @@ $("#crop").click(function(){
     canvas.toBlob(function(blob) {
         url = URL.createObjectURL(blob);
         var reader = new FileReader();
-        reader.readAsDataURL(blob); 
+        reader.readAsDataURL(blob);
         reader.onloadend = function() {
-            var base64data = reader.result; 
+            var base64data = reader.result;
             $modal1.modal('hide');
- 
-            $("." +copped).val(base64data);  
+
+            $("." +copped).val(base64data);
 
             document.getElementById(preview).style.display = 'block';
             document.getElementById(preview).src = base64data;

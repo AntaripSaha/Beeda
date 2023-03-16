@@ -52,6 +52,17 @@ Cuisine Brand
                         </div>
                       </div>
                     </div>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <br>
+                              <div class="">
+                                  <label class="bmd-label-floating">Icon</label>
+                                  <br>
+                                  <input type="file" name="icon" id="icon" />
+                                  <img src="{{env('AWS_MEDIA_URL') . $cuisine->icon}}" height="100px" alt="{{$cuisine->name}}">
+                              </div>
+                          </div>
+                      </div>
                     <div class="row">
                       <div class="col-md-6">
                           <br>

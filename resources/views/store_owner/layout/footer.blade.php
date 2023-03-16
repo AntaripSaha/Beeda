@@ -52,7 +52,7 @@
         });
     }
     shortOrderList();
-    
+
     // schedule
     function shortScheduleList()
     {
@@ -106,7 +106,7 @@
         shortScheduleList();
       @endif
     @endforeach
-    
+
   </script>
 
   <script>
@@ -186,10 +186,10 @@
           id: doc.id,
           ...doc.data(),
         }));
-        console.log("All data in 'users' collection", data); 
+        console.log("All data in 'users' collection", data);
         // [ { id: 'glMeZvPpTN1Ah31sKcnj', title: 'The Great Gatsby' } ]
       });
-    // chat area end   
+    // chat area end
 
     messaging.onMessage(function(payload) {
         const noteTitle = payload.notification.title;
@@ -211,29 +211,29 @@
 @push('scripts')
 <script>
     // order notification
-    Echo.private('order.'+'{{auth()->user()->id}}')
+    @if(Auth::user())
+    Echo.private('order.'+'{{Auth::user()->id}}')
     .listen('OrderCreated', (e) => {
         shortOrderList();
-        console.log(e)  
+        console.log(e)
         iziToast.success({
           title: 'New Order',
           position: 'topRight',
           message: 'New order placed now !',
       });
     })
-
     // property schedule notification
-    // Echo.private('property_schedule.'+'{{auth()->user()->id}}')
-    // .listen('PropertyScheduleCreated', (e) => {
-    //     shortScheduleList();
-    //     console.log(e)  
-    //     iziToast.success({
-    //       title: 'New Schedule',
-    //       position: 'topRight',
-    //       message: 'New schedule booked now !',
-    //   });
-    // })
+    Echo.private('property_schedule.'+'{{Auth::user()->id}}')
+    .listen('PropertyScheduleCreated', (e) => {
+       shortScheduleList();
+        console.log(e)
+        iziToast.success({
+          title: 'New Schedule',
+         position: 'topRight',
+          message: 'New schedule booked now !',
+      });
+     })
+    @endif
 </script>
 @endpush
 
-  

@@ -7,6 +7,17 @@ use App;
 
 class Category extends Model
 {
+    protected $fillable = [
+        'parent_id',
+        'service_category_id',
+        'name',
+        'digital',
+        'slug',
+        'meta_title',
+        'meta_description',
+        'banner',
+        'icon'
+    ];
     public function getTranslation($field = '', $lang = false){
         $lang = $lang == false ? App::getLocale() : $lang;
         $category_translation = $this->hasMany(CategoryTranslation::class)->where('lang', $lang)->first();

@@ -84,11 +84,12 @@ Cuisine List
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Brand Name</th>
-                    <th>Image</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                        <th>ID</th>
+                        <th>Brand Name</th>
+                        <th>Image</th>
+                        <th>Icon</th>
+                        <th>Status</th>
+                        <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -152,9 +153,10 @@ function customShowNotification (from, align, custom_message) {
           {data: 'id', name: 'id'},
           {data: 'name', name: 'name'},
           {data: 'image', name: 'image'},
+          {data: 'icon', name: 'icon'},
           {data: 'status', name: 'status'},
           {data: 'action', name: 'action'}
-          
+
       ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });

@@ -29,11 +29,12 @@ class ProductController extends Controller
                         }
                     })
                     ->editColumn('name', function ($data) {
-                            return '<a href="'.route('product.details', $data->slug) .'" >'.$data->name.'</a>';
+                        return '<a href="'.route('product.details', $data->slug) .'" >'.$data->name.'</a>';
                     })
                     ->editColumn('shop_name', function ($data) {
-                        return $data->shop->name;
-                })
+                        if($data->shop) return $data->shop->name;
+                        else return "---";
+                    })
                     ->editColumn('category', function ($data) {
                         if ($data->category) {
                             return $data->category->name;
@@ -121,7 +122,7 @@ class ProductController extends Controller
             return redirect()->back()->with('success_message', $e->getMessage());
         }
 
-        
+
 
     }
 }

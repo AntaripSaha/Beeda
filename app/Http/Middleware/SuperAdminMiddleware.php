@@ -18,7 +18,7 @@ class SuperAdminMiddleware
     {
         if(!session()->get('super_user_info'))
         {
-          return redirect()->route('super.admin.login')->with('error_message', 'Unauthenticated access');  
+          return redirect()->route('super.admin.login')->with('error_message', 'Unauthenticated access');
         }
         return $next($request);
     }

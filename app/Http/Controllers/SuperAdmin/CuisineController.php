@@ -24,6 +24,9 @@ class CuisineController extends Controller
                 ->editColumn('image', function ($data) {
                     return '<img src="'. env('AWS_MEDIA_URL') . $data->image.'" width="50" height="50" />';
                 })
+                ->editColumn('icon', function ($data) {
+                    return '<img src="'. env('AWS_MEDIA_URL') . $data->icon.'" width="50" height="50" />';
+                })
                 ->editColumn('status', function($data){
                     if($data->status)  return '<span class="badge badge-success">Active</span>';
                     return '<span class="badge badge-danger">Inactive</span>';
@@ -33,7 +36,7 @@ class CuisineController extends Controller
                     $btn .= '<a href="' .route('superadmin.cuisine.delete', ['id' => $data->id]).'"><i class="material-icons">delete</i></a>';
                     return $btn;
                 })
-                ->rawColumns(['status','image', 'action'])
+                ->rawColumns(['status','image', 'icon', 'action'])
                 ->make(true);
         }
         $page = 'manage_service';
@@ -55,8 +58,14 @@ class CuisineController extends Controller
         if($request->hasFile('image')) {
             $file = Storage::disk('s3')->put('public/uploads/all', $request->file('image'));
             $path = Storage::disk('s3')->url($file);
-            $file_name = env('APP_ENV')!='production' ? $path : substr($path, 45, 200);
+            $file_name = Storage::disk('s3')->put('uploads/all', $request->file('image'));
             $cuisine->image = $file_name;
+        }
+        if($request->hasFile('icon')) {
+            $file = Storage::disk('s3')->put('public/uploads/all', $request->file('icon'));
+            $path = Storage::disk('s3')->url($file);
+            $file_name = Storage::disk('s3')->put('uploads/all', $request->file('icon'));
+            $cuisine->icon = $file_name;
         }
         $cuisine->save();
         return redirect()->route('superadmin.cuisine.index')->with('success_message', 'Cuisine added successfully.');
@@ -78,8 +87,14 @@ class CuisineController extends Controller
         if($request->hasFile('image')) {
             $file = Storage::disk('s3')->put('public/uploads/all', $request->file('image'));
             $path = Storage::disk('s3')->url($file);
-            $file_name = env('APP_ENV')!='production' ? $path : substr($path, 45, 200);
+            $file_name = Storage::disk('s3')->put('uploads/all', $request->file('image'));
             $cuisine->image = $file_name;
+        }
+        if($request->hasFile('icon')) {
+            $file = Storage::disk('s3')->put('public/uploads/all', $request->file('icon'));
+            $path = Storage::disk('s3')->url($file);
+            $file_name = Storage::disk('s3')->put('uploads/all', $request->file('icon'));
+            $cuisine->icon = $file_name;
         }
         $cuisine->update();
         return redirect()->route('superadmin.cuisine.index')->with('success_message', 'Cuisine updated successfully.');
@@ -103,5 +118,5 @@ class CuisineController extends Controller
         return $slug;
     }
 
-    
+
 }

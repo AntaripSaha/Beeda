@@ -54,6 +54,16 @@ Route::group(['prefix' => 'transport', 'as' => 'transport.', 'middleware' => ['S
         Route::get('/assign-vehicle-sub-type/{id}', [VehicleTypeController::class, 'assignVehicleSubType'])->name('assign');
         Route::post('/assign-vehicle-sub-type', [VehicleTypeController::class, 'assignVehicleSubTypeSubmit'])->name('assign.submit');
         Route::post('/change-status', [VehicleTypeController::class, 'vehicleSubTypevisible'])->name('change.status');
+        Route::get('/assign-vehicle-icon/{id}', [VehicleTypeController::class, 'assignVehicleIcon'])->name('assign.vehicle.icon');
+        Route::post('/assign-vehicle-icon', [VehicleTypeController::class, 'assignVehicleIconSubmit'])->name('assign.vehicle.icon.submit');
+    });
+
+    Route::group(['prefix' => 'vehicle-icon', 'as' => 'vehicle-icon.'], function () {
+        Route::get('/list', [VehicleTypeController::class, 'vehicleIconList'])->name('list');
+        Route::get('/create', [VehicleTypeController::class, 'vehicleIconCreate'])->name('create');
+        Route::post('/store', [VehicleTypeController::class, 'vehicleIconStore'])->name('store');
+        Route::get('/edit/{id}', [VehicleTypeController::class, 'vehicleIconEdit'])->name('edit');
+        Route::post('/update', [VehicleTypeController::class, 'vehicleIconUpdate'])->name('update');
     });
 });
 

@@ -86,7 +86,7 @@
           @if($service->service_category_id != 34)
           <div class="card" style="margin-right: 0px;">
             <h6 style="text-align:center;background-color: #061880;color: white;">Your {{$service->service_category->name}} Shop</h6>
-            <img class="card-img-top" style="margin-top: -8px;" src="{{$service->shop?assetUrl().$service->shop->logo_img->file_name:'https://cesarkaikarate.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}" alt="Card image cap">
+            <img class="card-img-top" style="margin-top: -8px;" src="{{isset($service->shop->logo_img) ? assetUrl().$service->shop->logo_img->file_name:'https://cesarkaikarate.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title" style="color: #4f5fb9;font-weight: bolder;">{{$service->shop?$service->shop->name:'Shop is not created'}}</h5>
               <p class="card-text">{{$service->shop?$service->shop->address:'N/A'}}</p>

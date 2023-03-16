@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
@@ -18,15 +19,15 @@ class ServiceItemController extends Controller
     use ApiUrl;
     use AddProductDataFormat;
     use EditProductDataFormat;
-    
+
     public function serviceItem($id)
     {
         return view('store_owner.service_item.service_item_list');
-    }   
+    }
 
     public function addServiceItem($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $pre_data = Http::withHeaders([
@@ -40,40 +41,45 @@ class ServiceItemController extends Controller
             if($pre_data)   $data = json_decode($pre_data);
             $shop_id = $id;
             $parent = $shop_id;
-            $page = 'add_product'; 
+            $page = 'add_product';
             $shop = Shop::find($id);
+            $regions = Region::all();
 
             if($data->shop->seller_service->service_category_id == ServiceCategoryType::FOOD)
             {
-                return view('store_owner.service_item.add_food_item', compact('data', 'shop_id', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.add_food_item', compact('data', 'shop_id', 'page', 'parent', 'shop', 'regions'));
             }
             if($data->shop->seller_service->service_category_id == ServiceCategoryType::GROCERY)
             {
-                return view('store_owner.service_item.add_grocery_item', compact('data', 'shop_id', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.add_grocery_item', compact('data', 'shop_id', 'page', 'parent', 'shop', 'regions'));
             }
             if($data->shop->seller_service->service_category_id == ServiceCategoryType::GAS)
             {
-                return view('store_owner.service_item.add_gas_item', compact('data', 'shop_id', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.add_gas_item', compact('data', 'shop_id', 'page', 'parent', 'shop', 'regions'));
             }
             if($data->shop->seller_service->service_category_id == ServiceCategoryType::BEEDA_MALL)
             {
-                return view('store_owner.service_item.add_service_item', compact('data', 'shop_id', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.add_service_item', compact('data', 'shop_id', 'page', 'parent', 'shop', 'regions'));
             }
             if($data->shop->seller_service->service_category_id == ServiceCategoryType::LIQUOR)
             {
-                return view('store_owner.service_item.add_liquor_item', compact('data', 'shop_id', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.add_liquor_item', compact('data', 'shop_id', 'page', 'parent', 'shop', 'regions'));
             }
             if($data->shop->seller_service->service_category_id == ServiceCategoryType::FLOWER)
             {
-                return view('store_owner.service_item.add_flower_item', compact('data', 'shop_id', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.add_flower_item', compact('data', 'shop_id', 'page', 'parent', 'shop', 'regions'));
             }
             if($data->shop->seller_service->service_category_id == ServiceCategoryType::PHARMACY)
             {
-                return view('store_owner.service_item.add_pharmacy_item', compact('data', 'shop_id', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.add_pharmacy_item', compact('data', 'shop_id', 'page', 'parent', 'shop', 'regions'));
             }
             if($data->shop->seller_service->service_category_id == ServiceCategoryType::WATER)
             {
-                return view('store_owner.service_item.add_water_item', compact('data', 'shop_id', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.add_water_item', compact('data', 'shop_id', 'page', 'parent', 'shop', 'regions'));
+            }
+            if($data->shop->seller_service->service_category_id == ServiceCategoryType::FARMERS)
+            {
+                return view('store_owner.service_item.add_farmer_item', compact('data', 'shop_id', 'page', 'parent', 'shop', 'regions'));
             }
 
         }
@@ -81,37 +87,43 @@ class ServiceItemController extends Controller
         {
             return redirect()->route('login.login');
         }
-        
+
     }
 
     public function addServiceItemSubmit(Request $request)
     {
-        $token = Cache::get('api_token');
-        if($request->service_category_id == ServiceCategoryType::FOOD) $item_add = $this->addFoodProduct($request);
-        if($request->service_category_id == ServiceCategoryType::GROCERY) $item_add = $this->addGroceryProduct($request);
-        if($request->service_category_id == ServiceCategoryType::BEEDA_MALL) $item_add = $this->addBeedamallProduct($request);
-        if($request->service_category_id == ServiceCategoryType::GAS)  $item_add = $this->addGasProduct($request);
-        if($request->service_category_id == ServiceCategoryType::LIQUOR) $item_add = $this->addLiquorProduct($request);
-        if($request->service_category_id == ServiceCategoryType::FLOWER) $item_add = $this->addFlowerProduct($request);
-        if($request->service_category_id == ServiceCategoryType::PHARMACY)  $item_add = $this->addPharmacyProduct($request);
-        if($request->service_category_id == ServiceCategoryType::WATER)  $item_add = $this->addWaterProduct($request);
-        if($token)
-        {
-            if($item_add && isset(json_decode($item_add)->error))  return redirect()->route('login.login');
-            $item_add = json_decode($item_add);
-            if($item_add && $item_add->success)
-                return redirect()->route('service.item.list', ['id' => $request->service_category_id])->with('success_message', 'Product uploaded successfully');
-            return redirect()->route('service.item.list', ['id' => $request->service_category_id])->with('error_message', 'Something went wrong !');
-            
+        try{
+            $token = getToken();
+            if($request->service_category_id == ServiceCategoryType::FOOD) $item_add = $this->addFoodProduct($request);
+            if($request->service_category_id == ServiceCategoryType::GROCERY) $item_add = $this->addGroceryProduct($request);
+            if($request->service_category_id == ServiceCategoryType::BEEDA_MALL) $item_add = $this->addBeedamallProduct($request);
+            if($request->service_category_id == ServiceCategoryType::GAS)  $item_add = $this->addGasProduct($request);
+            if($request->service_category_id == ServiceCategoryType::LIQUOR) $item_add = $this->addLiquorProduct($request);
+            if($request->service_category_id == ServiceCategoryType::FLOWER) $item_add = $this->addFlowerProduct($request);
+            if($request->service_category_id == ServiceCategoryType::PHARMACY)  $item_add = $this->addPharmacyProduct($request);
+            if($request->service_category_id == ServiceCategoryType::WATER)  $item_add = $this->addWaterProduct($request);
+            if($request->service_category_id == ServiceCategoryType::FARMERS)  $item_add = $this->addFarmerProduct($request);
+            if($token)
+            {
+                if($item_add && isset(json_decode($item_add)->error))  return redirect()->route('login.login');
+                $item_add = json_decode($item_add);
+                if($item_add && $item_add->success)  return redirect()->route('service.item.list', ['id' => $request->service_category_id])->with('success_message', 'Product uploaded successfully');
+                return redirect()->back()->with('error_message', $item_add->message);
+
+            }
+            return redirect()->route('login.login');
         }
-        return redirect()->route('login.login');
+        catch(\Exception $e)
+        {
+            return redirect()->back()->with('error_message', $e->getMessage());
+        }
     }
 
     public function serviceItemList($service_category_id, Request $request)
     {
         $products = Product::orderBy('id', 'desc')->with(['category', 'brand', 'stocks', 'thumbnail_image', 'shop'])
                     ->where('user_id', session()->get('user_info')->user_id)
-                    ->where('service_category_id', $service_category_id)->get(); 
+                    ->where('service_category_id', $service_category_id)->get();
 
        if($request->ajax())
        {
@@ -135,9 +147,9 @@ class ServiceItemController extends Controller
                     {
                         return count($data->stocks) > 0 ? $data->stocks[0]->qty : 0;
                     }
-                    
+
                 })
-                ->editColumn('published', function($data){  
+                ->editColumn('published', function($data){
                     $active = '';
                     $checked = '';
                     if($data->published)
@@ -146,7 +158,7 @@ class ServiceItemController extends Controller
                         $checked = 'checked';
                     }
                     $switch = '<div class="toggle-btn '.$active.'">
-                                    <input type="checkbox" onclick="publish('.$data->id.')" class="cb-value publish'.$data->id.'" '.$checked.'/>
+                                    <input type="checkbox" onclick="publish('.$data->id.','.$data->service_category_id.')" class="cb-value publish'.$data->id.'" '.$checked.'/>
                                     <span class="round-btn"></span>
                                 </div>';
                     return $switch;
@@ -169,8 +181,8 @@ class ServiceItemController extends Controller
                 })
                 ->rawColumns(['current_qty','category','published','image','options'])
                 ->make(true);
-            
-       } 
+
+       }
        $parent = $service_category_id;
        $page = 'product_list';
        return view('store_owner.service_item.service_item_list', compact('service_category_id', 'page', 'parent'));
@@ -178,32 +190,33 @@ class ServiceItemController extends Controller
 
     public function publishProduct(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $publish_product = Http::withHeaders([
             'Authorization' => 'Bearer '.$token
         ])->post($this->getApiUrl().'seller_products/publish', [
-            'id' => $request->product_id
+            'id' => $request->product_id,
+            'service_category_id' => $request->service_category_id
         ]);
         $publish_product = json_decode($publish_product);
-        return response()->json(['status'=>true, 'data'=> $publish_product]);    
+        return response()->json(['status'=>true, 'data'=> $publish_product]);
     }
 
     public function featureProduct(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $feature_product = Http::withHeaders([
             'Authorization' => 'Bearer '.$token
         ])->post($this->getApiUrl().'seller_products/feature', [
             'id' => $request->product_id
         ]);
         $feature_product = json_decode($feature_product);
-        return response()->json(['status'=>true, 'data'=> $feature_product]);    
+        return response()->json(['status'=>true, 'data'=> $feature_product]);
     }
 
     public function editServiceItem($id)
     {
         try {
-            $token = Cache::get('api_token');
+            $token = getToken();
             $product_response = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token
             ])->get($this->getApiUrl().'seller_products_by_id/'.$id);
@@ -217,7 +230,7 @@ class ServiceItemController extends Controller
             }
             if($product_response && isset(json_decode($product_response)->error))  return redirect()->route('login.login');
             $product = json_decode($product_response)->data;
-            
+
             $gallery_images = json_decode($product_response)->gallery_images;
             $thumbnail_image = json_decode($product_response)->thumbnail_image;
             $meta_image = json_decode($product_response)->meta_image;
@@ -227,36 +240,40 @@ class ServiceItemController extends Controller
                 'Authorization' => 'Bearer '.$token
             ])->post($this->getApiUrl().'product_upload_pre_req', [
                 'shop_id' => $product->shop_id
-            ]); 
+            ]);
             if($pre_data && isset(json_decode($pre_data)->error))  return redirect()->route('login.login');
             $shop_id = $product->shop_id;
             $data = json_decode($pre_data);
             $attribute_array = [];
             foreach($data->attributes as $attribute)
             {
-                $attribute_array[$attribute->id] = $attribute->name; 
+                $attribute_array[$attribute->id] = $attribute->name;
             }
             $parent = 'seller';
             $page = 'product_list';
             $id = $product->shop_id;
             $shop = Shop::find($id);
+            $regions = Region::all();
+//            dd($regions[0]->id);
 
             if($product->service_category_id == ServiceCategoryType::FOOD)
-                return view('store_owner.service_item.edit_food_item', compact('data', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'attribute_array', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.edit_food_item', compact('data', 'regions', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'attribute_array', 'page', 'parent', 'shop'));
             if($product->service_category_id == ServiceCategoryType::GROCERY)
-                return view('store_owner.service_item.edit_grocery_item', compact('data', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.edit_grocery_item', compact('data', 'regions', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
             if($product->service_category_id == ServiceCategoryType::BEEDA_MALL)
-                return view('store_owner.service_item.edit_service_item', compact('data', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.edit_service_item', compact('data', 'regions', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
             if($product->service_category_id == ServiceCategoryType::GAS)
-                return view('store_owner.service_item.edit_gas_item', compact('data', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.edit_gas_item', compact('data', 'regions', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
             if($product->service_category_id == ServiceCategoryType::LIQUOR)
-                return view('store_owner.service_item.edit_liquor_item', compact('data', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.edit_liquor_item', compact('data', 'regions', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
             if($product->service_category_id == ServiceCategoryType::FLOWER)
-                return view('store_owner.service_item.edit_flower_item', compact('data', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.edit_flower_item', compact('data', 'regions', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
             if($product->service_category_id == ServiceCategoryType::PHARMACY)
-                return view('store_owner.service_item.edit_pharmacy_item', compact('data', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.edit_pharmacy_item', compact('data', 'regions', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
             if($product->service_category_id == ServiceCategoryType::WATER)
-                return view('store_owner.service_item.edit_water_item', compact('data', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
+                return view('store_owner.service_item.edit_water_item', compact('data', 'regions', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
+            if($product->service_category_id == ServiceCategoryType::FARMERS)
+                return view('store_owner.service_item.edit_farmer_item', compact('data', 'regions', 'shop_id', 'product', 'gallery_images', 'thumbnail_image', 'meta_image', 'pdf', 'delivery_charges', 'attribute_array', 'page', 'parent', 'shop'));
         } catch (\Throwable $e) {
             $parent = 'seller';
             $page = 'error';
@@ -268,8 +285,8 @@ class ServiceItemController extends Controller
 
     public function updateServiceItem(Request $request)
     {
-          
-        $token = Cache::get('api_token');
+
+        $token = getToken();
         if($request->service_category_id == ServiceCategoryType::FOOD) $item_update = $this->editFoodProduct($request);
         if($request->service_category_id == ServiceCategoryType::GROCERY) $item_update = $this->editGroceryProduct($request);
         if($request->service_category_id == ServiceCategoryType::BEEDA_MALL) $item_update = $this->editBeedamallProduct($request);
@@ -278,6 +295,7 @@ class ServiceItemController extends Controller
         if($request->service_category_id == ServiceCategoryType::FLOWER) $item_update = $this->editFlowerProduct($request);
         if($request->service_category_id == ServiceCategoryType::PHARMACY) $item_update = $this->editPharmacyProduct($request);
         if($request->service_category_id == ServiceCategoryType::WATER) $item_update = $this->editWaterProduct($request);
+        if($request->service_category_id == ServiceCategoryType::FARMERS) $item_update = $this->editFarmerProduct($request);
         if($token)
         {
             if($item_update && isset(json_decode($item_update)->error))  return redirect()->route('login.login');
@@ -288,10 +306,10 @@ class ServiceItemController extends Controller
             }
             else
             {
-                return redirect()->route('service.item.list', ['id' => $request->service_category_id])->with('error_message', 'Something went wrong!');   
+                return redirect()->route('service.item.list', ['id' => $request->service_category_id])->with('error_message', 'Something went wrong!');
             }
-            
-            
+
+
         }
         else
         {
@@ -303,17 +321,17 @@ class ServiceItemController extends Controller
     {
 
         $data = $request->attr_array;
-        
+
         $combos=$this->possible_combos($data);
-        
+
         //calculate all the possible comobos creatable from a given choices array
-        
+
 
         return response()->json(['status'=> true, 'data'=>$combos]);
     }
 
     public function possible_combos($groups, $prefix='') {
-               
+
         $result = array();
         $group = array_shift($groups);
         foreach($group as $selected) {
@@ -328,7 +346,7 @@ class ServiceItemController extends Controller
 
     public function getServiceCategoryPreData(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $service_category_pre = Http::withHeaders([

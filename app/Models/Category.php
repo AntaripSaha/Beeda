@@ -74,8 +74,16 @@ class Category extends Model
     {
         return $this->belongsTo(Upload::class, 'banner');
     }
+    public function bannerImg()
+    {
+        return $this->belongsTo(Upload::class, 'banner');
+    }
 
     public function icon()
+    {
+        return $this->belongsTo(Upload::class, 'icon');
+    }
+    public function iconImg()
     {
         return $this->belongsTo(Upload::class, 'icon');
     }

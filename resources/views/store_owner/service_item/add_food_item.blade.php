@@ -187,7 +187,7 @@ Add Food Product
   }
   .preview {
     overflow: hidden;
-    width: 290px; 
+    width: 290px;
     height: 300px;
     margin: 10px;
     border: 1px solid red;
@@ -293,6 +293,16 @@ Add Food Product
                   <input type="number" min="1" class="form-control" name="min_quantity" id="min_quantity" value="1" required>
                   <span style="color:red;font-size:13px;">{{ $errors->first('min_quantity') }}</span>
                 </div>
+                  <div class="form-group">
+                      <label for="description">Regions</label>
+                      <select class="multiple-region form-control" name="regions[]" multiple="multiple" required>
+                          @if($regions)
+                              @foreach($regions as $region)
+                                  <option value="{{$region->id}}">{{$region->name}}</option>
+                              @endforeach
+                          @endif
+                      </select>
+                  </div>
                 {{-- <div class="form-group">
                   <label for="packaging_charge">Packaging Charge</label>
                   <input type="number" min="0" class="form-control" name="packaging_charge" value="0" id="packaging_charge" placeholder="0">
@@ -323,13 +333,12 @@ Add Food Product
 
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <textarea class="summernote" name="description">
-                    </textarea>
+                    <textarea id="editor" name="description"></textarea>
                 </div>
 
                 <div class="form-group">
                   <label for="service_description">Service Description</label>
-                  <textarea class="summernote" name="service_description"></textarea>
+                    <textarea class="summernote" name="service_description"></textarea>
                 </div>
 
 
@@ -595,7 +604,7 @@ Add Food Product
               <div class="card-header">
                 <h3 class="card-title">PDF Specification</h3>
               </div>
-              
+
               <div class="card-body">
                 <div class="form-group">
                   <label for="pdf_specification_file">Upload PDF</label>
@@ -858,6 +867,31 @@ Add Food Product
               <!-- /.card-body -->
             </div>
             <!-- vat & tax end -->
+            <!-- Pickup -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Product Pickup Service</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <label for="pickup">Pickup Status</label>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <select class="form-control" name="pickup">
+                        <option value="0">Default</option>
+                        @if($shop->pickup_status)
+                        <option value="1">Pickup</option>
+                        @endif
+                      </select>
+                      <span style="font-size: 14px;font-weight: 600;color: #a1615ac7">If your shop settings on pickup status then pickup available here.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- Pickup end -->
           </div>
         </div>
         <!-- /.row -->
@@ -913,9 +947,153 @@ Add Food Product
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/super-build/ckeditor.js"></script>
+<script>
+     // This sample still does not showcase all CKEditor 5 features (!)
+            // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+            CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+                // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+                toolbar: {
+                    items: [
+                        'exportPDF','exportWord', '|',
+                        'findAndReplace', 'selectAll', '|',
+                        'heading', '|',
+                        'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                        'bulletedList', 'numberedList', 'todoList', '|',
+                        'outdent', 'indent', '|',
+                        'undo', 'redo',
+                        '-',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                        'alignment', '|',
+                        'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                        'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                        'textPartLanguage', '|',
+                        'sourceEditing',
+                    ],
+                    shouldNotGroupWhenFull: true
+                },
+                // Changing the language of the interface requires loading the language file using the <script> tag.
+                // language: 'es',
+                list: {
+                    properties: {
+                        styles: true,
+                        startIndex: true,
+                        reversed: true
+                    }
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                        { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                        { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                        { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+                    ]
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+                placeholder: 'Description here..',
+                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+                fontFamily: {
+                    options: [
+                        'default',
+                        'Arial, Helvetica, sans-serif',
+                        'Courier New, Courier, monospace',
+                        'Georgia, serif',
+                        'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                        'Tahoma, Geneva, sans-serif',
+                        'Times New Roman, Times, serif',
+                        'Trebuchet MS, Helvetica, sans-serif',
+                        'Verdana, Geneva, sans-serif'
+                    ],
+                    supportAllValues: true
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+                fontSize: {
+                    options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+                    supportAllValues: true
+                },
+                // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+                // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+                htmlSupport: {
+                    allow: [
+                        {
+                            name: /.*/,
+                            attributes: true,
+                            classes: true,
+                            styles: true
+                        }
+                    ]
+                },
+                // Be careful with enabling previews
+                // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+                htmlEmbed: {
+                    showPreviews: true
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+                link: {
+                    decorators: {
+                        addTargetToExternalLinks: true,
+                        defaultProtocol: 'https://',
+                        toggleDownloadable: {
+                            mode: 'manual',
+                            label: 'Downloadable',
+                            attributes: {
+                                download: 'file'
+                            }
+                        }
+                    }
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+                mention: {
+                    feeds: [
+                        {
+                            marker: '@',
+                            feed: [
+                                '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                                '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                                '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                                '@sugar', '@sweet', '@topping', '@wafer'
+                            ],
+                            minimumCharacters: 1
+                        }
+                    ]
+                },
+                // The "super-build" contains more premium features that require additional configuration, disable them below.
+                // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+                removePlugins: [
+                    // These two are commercial, but you can try them out without registering to a trial.
+                    // 'ExportPdf',
+                    // 'ExportWord',
+                    'CKBox',
+                    'CKFinder',
+                    'EasyImage',
+                    // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+                    // Storing images as Base64 is usually a very bad idea.
+                    // Replace it on production website with other solutions:
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+                    // 'Base64UploadAdapter',
+                    'RealTimeCollaborativeComments',
+                    'RealTimeCollaborativeTrackChanges',
+                    'RealTimeCollaborativeRevisionHistory',
+                    'PresenceList',
+                    'Comments',
+                    'TrackChanges',
+                    'TrackChangesData',
+                    'RevisionHistory',
+                    'Pagination',
+                    'WProofreader',
+                    // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+                    // from a local file system (file://) - load this site via HTTP server if you enable MathType
+                    'MathType'
+                ]
+            });
+</script>
 
-
-<script>       
+<script>
   //modal crop logo
   var image = document.getElementById('image');
   var $modal1 = $('#modal');
@@ -988,22 +1166,22 @@ Add Food Product
       canvas.toBlob(function(blob) {
           url = URL.createObjectURL(blob);
           var reader = new FileReader();
-          reader.readAsDataURL(blob); 
+          reader.readAsDataURL(blob);
           reader.onloadend = function() {
-              var base64data = reader.result; 
+              var base64data = reader.result;
               $modal1.modal('hide');
-   
-              $("." +copped).val(base64data);  
-  
+
+              $("." +copped).val(base64data);
+
               document.getElementById(preview).style.display = 'block';
               document.getElementById(preview).src = base64data;
-  
+
           }
       });
   })
   </script>
-  
-  <script type="text/javascript">  
+
+  <script type="text/javascript">
       $("#crop_modal_cancel").click(function() {
           $("#modal").modal("hide");
       });
@@ -1018,6 +1196,9 @@ Add Food Product
   });
   $(document).ready(function() {
     $('.addon-basic-multiple').select2();
+  });
+  $(document).ready(function() {
+      $('.multiple-region').select2();
   });
 </script>
 
@@ -1210,7 +1391,7 @@ Add Food Product
 
   $('#participantTable').hide();
 
-  //  multiple image upload 
+  //  multiple image upload
   // $(document).ready(function() {
   //   if (window.File && window.FileList && window.FileReader) {
   //     $("#files").on("change", function(e) {
@@ -1401,7 +1582,7 @@ Add Food Product
         {
           if($("#"+selected_attribute[i]).tagsinput('items'))
           {
-            
+
             for(var k = 0; k < $("#"+selected_attribute[i]).tagsinput('items').length; k++)
             {
               variant_name = selected_colors[m];
@@ -1409,10 +1590,10 @@ Add Food Product
               all_variant.push(variant_name);
             }
           }
-          
-          
+
+
         }
-       
+
       }
       else
       {
@@ -1425,7 +1606,7 @@ Add Food Product
             all_variant.push(variant_name);
           }
         }
-        
+
       }
     }
     break;
@@ -1461,7 +1642,7 @@ Add Food Product
           total_attribute_values = 1;
         }
       }
-      
+
     }
     if(total_attribute_values == 0)
     {

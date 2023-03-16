@@ -11,9 +11,12 @@ use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WalletController;
 
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
 Route::middleware(['StoreRegisterMiddleware'])->group(function () {
 
-    // Store Register    
+    // Store Register
     Route::get('/seller/email/verify', [RegisterController::class, 'storeEmailVerifyGet'])->name('register.storeEmailVerifyGet');
     Route::get('/seller/phone/verify', [RegisterController::class, 'storePhoneVerifyGet'])->name('register.storePhoneVerifyGet');
     Route::post('/seller/email/verify/submit', [RegisterController::class, 'storeEmailVerify'])->name('register.storeEmailVerifySubmit');
@@ -27,12 +30,7 @@ Route::middleware(['StoreRegisterMiddleware'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('login.logout');
 
 
-
-    // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    
-
-    // Service Item  
+    // Service Item
     Route::get('/service-item/{id}', [ServiceItemController::class, 'serviceItem'])->name('service.item.index');
     Route::get('/add-service-item/{id}', [ServiceItemController::class, 'addServiceItem'])->name('service.add.item');
     Route::post('/get-possible-combination', [ServiceItemController::class, 'getPossibleAttributeCombination'])->name('service.get.attr.combs');

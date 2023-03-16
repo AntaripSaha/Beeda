@@ -11,6 +11,7 @@ use App\Upload;
 use App\Constants\ServiceCategoryType;
 use Illuminate\Support\Facades\Storage;
 use DataTables;
+use Illuminate\Support\Facades\URL;
 
 
 class BeedaBlogController extends Controller
@@ -76,11 +77,16 @@ class BeedaBlogController extends Controller
         $blog->user_id = session()->get('super_user_info')->user_id;
         $blog->category_id = $request->category_id;
         $blog->title = $request->title;
+        $blog->thumbnail_alt = $request->thumbnail_alt;
+        $blog->thumbnail_meta_description = $request->thumbnail_meta_description;
+        $blog->banner_alt = $request->banner_alt;
+        $blog->banner_meta_description = $request->banner_meta_description;
         $blog->device_type = $request->device_type;
         $blog->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
         $blog->short_description = $request->short_description;
         // $blog->description = $request->description;
         $blog->meta_title = $request->meta_title;
+        $blog->meta_image_alt = $request->meta_image_alt;
         $blog->meta_description = $request->meta_description;
         $blog->meta_keywords = $request->meta_keywords;
 
@@ -89,17 +95,19 @@ class BeedaBlogController extends Controller
         $scraps = explode('src="data:image/',$request->description); 
         for($i=1; $i<count($scraps); $i++) $base_64s[] = "data:image/".explode('">', $scraps[$i])[0];
         $generatedLinks= [];
+
         foreach($base_64s as $key=>$base_64)
         {
             $image_parts = explode(";base64,", $base_64);
             $imageExtension = explode("image/", $image_parts[0])[1];
             $image_base64 = base64_decode($image_parts[1]);
-            if(!env('AWS_ON'))
+            if(true) // !env('AWS_ON')
             {
                 $fileName = uniqid() . '.'.$imageExtension;
-                $file = public_path('test/') . $fileName;
+                $file = "img/blogs/".$fileName;
                 file_put_contents($file, $image_base64);
-                $fileName = "public/test/".$fileName;
+                $fileName = env('APP_URL')."/img/blogs/".$fileName;
+                $generatedLinks[] = $fileName;
             }
             else
             {
@@ -114,11 +122,36 @@ class BeedaBlogController extends Controller
                 $path = env('AWS_MEDIA_URL').'test/'.$aws_file_name;
                 $fileName = substr($path, 45, 200);
                 $fileName = 'test/'.$aws_file_name;
+                $generatedLinks[] = env('AWS_MEDIA_URL').$fileName;
             }    
-            $generatedLinks[] = env('AWS_MEDIA_URL').$fileName;
         }
+
         foreach($generatedLinks as $key=>$link)  $description = str_replace($base_64s[$key],$link,$description);
         $blog->description = $description;
+
+        if ($request->file('thumbnail')) {
+            $upload = new Upload;
+            $file = $request->file('thumbnail');
+            $name = $request->file('thumbnail')->getClientOriginalName();
+            $size = $request->file('thumbnail')->getSize();
+            $ext = $file->getClientOriginalExtension();
+
+            //$file = Storage::disk('s3')->put('public/uploads/all', $request->file('thumbnail'));
+            //$path = Storage::disk('s3')->url($file);
+            //$file_name = substr($path, 45, 200);
+
+            $file->move('img/blogs/', $name);
+            $upload->file_name = env('APP_URL').'/img/blogs/'.$name;
+
+            $upload->file_original_name = $name;
+            $upload->extension = $ext;
+            $upload->user_id = session()->get('super_user_info')->user_id;
+            // $upload->file_name = $file_name;
+            $upload->type = "image";
+            $upload->file_size = $size;
+            $upload->save();
+            $blog->thumbnail = $upload->id;
+        }
 
         if ($request->file('banner')) {
             $upload = new Upload;
@@ -126,22 +159,21 @@ class BeedaBlogController extends Controller
             $name = $request->file('banner')->getClientOriginalName();
             $size = $request->file('banner')->getSize();
             $ext = $file->getClientOriginalExtension();
-            $file = Storage::disk('s3')->put('public/uploads/all', $request->file('banner'));
-            $path = Storage::disk('s3')->url($file);
-            $file_name = substr($path, 45, 200);
+
+            //$file = Storage::disk('s3')->put('public/uploads/all', $request->file('banner'));
+            //$path = Storage::disk('s3')->url($file);
+            //$file_name = substr($path, 45, 200);
+
+            $file->move('img/blogs/', $name);
+            $upload->file_name = env('APP_URL').'/img/blogs/'.$name;
 
             $upload->file_original_name = $name;
-
             $upload->extension = $ext;
-
-            $upload->file_name = $file_name;
-
+            $upload->user_id = session()->get('super_user_info')->user_id;
+            // $upload->file_name = $file_name;
             $upload->type = "image";
-
             $upload->file_size = $size;
-
             $upload->save();
-
             $blog->banner = $upload->id;
         }
 
@@ -151,22 +183,21 @@ class BeedaBlogController extends Controller
             $name = $request->file('meta_img')->getClientOriginalName();
             $size = $request->file('meta_img')->getSize();
             $ext = $file->getClientOriginalExtension();
-            $file = Storage::disk('s3')->put('public/uploads/all', $request->file('meta_img'));
-            $path = Storage::disk('s3')->url($file);
-            $file_name = substr($path, 45, 200);
+
+            //$file = Storage::disk('s3')->put('public/uploads/all', $request->file('meta_img'));
+            //$path = Storage::disk('s3')->url($file);
+            //$file_name = substr($path, 45, 200);
+
+            $file->move('img/blogs/', $name);
+            $upload->file_name = env('APP_URL').'/img/blogs/'.$name;
 
             $upload->file_original_name = $name;
-
             $upload->extension = $ext;
-
-            $upload->file_name = $file_name;
-
+            $upload->user_id = session()->get('super_user_info')->user_id;
+            // $upload->file_name = $file_name;
             $upload->type = "image";
-
             $upload->file_size = $size;
-
             $upload->save();
-
             $blog->meta_img = $upload->id;
         }
 
@@ -196,11 +227,16 @@ class BeedaBlogController extends Controller
         $blog->user_id = session()->get('super_user_info')->user_id;
         $blog->category_id = $request->category_id;
         $blog->title = $request->title;
+        $blog->thumbnail_alt = $request->thumbnail_alt;
+        $blog->thumbnail_meta_description = $request->thumbnail_meta_description;
+        $blog->banner_alt = $request->banner_alt;
+        $blog->banner_meta_description = $request->banner_meta_description;
         $blog->device_type = $request->device_type;
         $blog->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
         $blog->short_description = $request->short_description;
         // $blog->description = $request->description;
         $blog->meta_title = $request->meta_title;
+        $blog->meta_image_alt = $request->meta_image_alt;
         $blog->meta_description = $request->meta_description;
         $blog->meta_keywords = $request->meta_keywords;
 
@@ -214,12 +250,13 @@ class BeedaBlogController extends Controller
             $image_parts = explode(";base64,", $base_64);
             $imageExtension = explode("image/", $image_parts[0])[1];
             $image_base64 = base64_decode($image_parts[1]);
-            if(!env('AWS_ON'))
+            if(true) // !env('AWS_ON')
             {
                 $fileName = uniqid() . '.'.$imageExtension;
-                $file = public_path('test/') . $fileName;
+                $file = "img/blogs/".$fileName;
                 file_put_contents($file, $image_base64);
-                $fileName = "public/test/".$fileName;
+                $fileName = env('APP_URL')."/img/blogs/".$fileName;
+                $generatedLinks[] = $fileName;
             }
             else
             {
@@ -234,43 +271,77 @@ class BeedaBlogController extends Controller
                 $path = env('AWS_MEDIA_URL').'test/'.$aws_file_name;
                 $fileName = substr($path, 45, 200);
                 $fileName = 'test/'.$aws_file_name;
+                $generatedLinks[] = env('AWS_MEDIA_URL').$fileName;
             }    
-            $generatedLinks[] = env('AWS_MEDIA_URL').$fileName;
         }
         foreach($generatedLinks as $key=>$link)  $description = str_replace($base_64s[$key],$link,$description);
         $blog->description = $description;
+
+        if ($request->file('thumbnail')) {
+            $old_upload = Upload::where('id', $blog->thumbnail)->first();
+            if($old_upload)
+            {
+                //if (!file_exists('img/blogs/'.$old_upload->file_original_name)) unlink('img/blogs/'.$old_upload->file_original_name);
+                // $old_upload->forceDelete();
+                // if(Storage::disk('s3')->exists('public/'.$old_upload->file_name))
+                // {
+                //     Storage::disk('s3')->delete('public/'.$old_upload->file_name);
+                // }
+            }
+            $upload = new Upload;
+            $file = $request->file('thumbnail');
+            $name = $request->file('thumbnail')->getClientOriginalName();
+            $size = $request->file('thumbnail')->getSize();
+            $ext = $file->getClientOriginalExtension();
+
+            // $file = Storage::disk('s3')->put('public/uploads/all', $request->file('thumbnail'));
+            // $path = Storage::disk('s3')->url($file);
+            // $file_name = substr($path, 45, 200);
+
+            $file->move('img/blogs/', $name);
+            $upload->file_name = env('APP_URL').'/img/blogs/'.$name;
+
+            $upload->file_original_name = $name;
+            $upload->extension = $ext;
+            $upload->user_id = session()->get('super_user_info')->user_id;
+            // $upload->file_name = $file_name;
+            $upload->type = "image";
+            $upload->file_size = $size;
+            $upload->save();
+            $blog->thumbnail = $upload->id;
+        }
 
         if ($request->file('banner')) {
             $old_upload = Upload::where('id', $blog->banner)->first();
             if($old_upload)
             {
-                $old_upload->forceDelete();
-                if(Storage::disk('s3')->exists('public/'.$old_upload->file_name))
-                {
-                    Storage::disk('s3')->delete('public/'.$old_upload->file_name);
-                }
+                //if (!file_exists('img/blogs/'.$old_upload->file_original_name)) unlink('img/blogs/'.$old_upload->file_original_name);
+                // $old_upload->forceDelete();
+                // if(Storage::disk('s3')->exists('public/'.$old_upload->file_name))
+                // {
+                //     Storage::disk('s3')->delete('public/'.$old_upload->file_name);
+                // }
             }
             $upload = new Upload;
             $file = $request->file('banner');
             $name = $request->file('banner')->getClientOriginalName();
             $size = $request->file('banner')->getSize();
             $ext = $file->getClientOriginalExtension();
-            $file = Storage::disk('s3')->put('public/uploads/all', $request->file('banner'));
-            $path = Storage::disk('s3')->url($file);
-            $file_name = substr($path, 45, 200);
+
+            // $file = Storage::disk('s3')->put('public/uploads/all', $request->file('banner'));
+            // $path = Storage::disk('s3')->url($file);
+            // $file_name = substr($path, 45, 200);
+
+            $file->move('img/blogs/', $name);
+            $upload->file_name = env('APP_URL').'/img/blogs/'.$name;
 
             $upload->file_original_name = $name;
-
             $upload->extension = $ext;
-
-            $upload->file_name = $file_name;
-
+            $upload->user_id = session()->get('super_user_info')->user_id;
+            // $upload->file_name = $file_name;
             $upload->type = "image";
-
             $upload->file_size = $size;
-
             $upload->save();
-
             $blog->banner = $upload->id;
         }
 
@@ -278,33 +349,33 @@ class BeedaBlogController extends Controller
             $old_upload = Upload::where('id', $blog->meta_image)->first();
             if($old_upload)
             {
-                $old_upload->forceDelete();
-                if(Storage::disk('s3')->exists('public/'.$old_upload->file_name))
-                {
-                    Storage::disk('s3')->delete('public/'.$old_upload->file_name);
-                }
+                //if (!file_exists('img/blogs/'.$old_upload->file_original_name)) unlink('img/blogs/'.$old_upload->file_original_name);
+                // $old_upload->forceDelete();
+                // if(Storage::disk('s3')->exists('public/'.$old_upload->file_name))
+                // {
+                //     Storage::disk('s3')->delete('public/'.$old_upload->file_name);
+                // }
             }
             $upload = new Upload;
             $file = $request->file('meta_img');
             $name = $request->file('meta_img')->getClientOriginalName();
             $size = $request->file('meta_img')->getSize();
             $ext = $file->getClientOriginalExtension();
-            $file = Storage::disk('s3')->put('public/uploads/all', $request->file('meta_img'));
-            $path = Storage::disk('s3')->url($file);
-            $file_name = substr($path, 45, 200);
+
+            // $file = Storage::disk('s3')->put('public/uploads/all', $request->file('meta_img'));
+            // $path = Storage::disk('s3')->url($file);
+            // $file_name = substr($path, 45, 200);
+
+            $file->move('img/blogs/', $name);
+            $upload->file_name = env('APP_URL').'/img/blogs/'.$name;
 
             $upload->file_original_name = $name;
-
             $upload->extension = $ext;
-
-            $upload->file_name = $file_name;
-
+            $upload->user_id = session()->get('super_user_info')->user_id;
+            // $upload->file_name = $file_name;
             $upload->type = "image";
-
             $upload->file_size = $size;
-
             $upload->save();
-
             $blog->meta_img = $upload->id;
         }
         
@@ -332,23 +403,38 @@ class BeedaBlogController extends Controller
     public function deleteBlog($id)
     {
         $blog = BeedaBlog::find($id);
+        $thumbnail_upload = Upload::where('id', $blog->thumbnail)->first();
+        if($thumbnail_upload)
+        {
+            if (!file_exists('img/blogs/'.$thumbnail_upload->file_original_name)) unlink('img/blogs/'.$thumbnail_upload->file_original_name);
+            // $thumbnail_upload->forceDelete();
+            // if(Storage::disk('s3')->exists('public/'.$thumbnail_upload->file_name))
+            // {
+            //     Storage::disk('s3')->delete('public/'.$thumbnail_upload->file_name);
+            // }
+            $thumbnail_upload->delete();
+        }
         $banner_upload = Upload::where('id', $blog->banner)->first();
         if($banner_upload)
         {
-            $banner_upload->forceDelete();
-            if(Storage::disk('s3')->exists('public/'.$banner_upload->file_name))
-            {
-                Storage::disk('s3')->delete('public/'.$banner_upload->file_name);
-            }
+            if (!file_exists('img/blogs/'.$banner_upload->file_original_name))unlink('img/blogs/'.$banner_upload->file_original_name);
+            // $banner_upload->forceDelete();
+            // if(Storage::disk('s3')->exists('public/'.$banner_upload->file_name))
+            // {
+            //     Storage::disk('s3')->delete('public/'.$banner_upload->file_name);
+            // }
+            $banner_upload->delete();
         }
         $meta_upload = Upload::where('id', $blog->meta_img)->first();
         if($meta_upload)
         {
-            $meta_upload->forceDelete();
-            if(Storage::disk('s3')->exists('public/'.$meta_upload->file_name))
-            {
-                Storage::disk('s3')->delete('public/'.$meta_upload->file_name);
-            }
+            if (!file_exists('img/blogs/'.$meta_upload->file_original_name)) unlink('img/blogs/'.$meta_upload->file_original_name);
+            // $meta_upload->forceDelete();
+            // if(Storage::disk('s3')->exists('public/'.$meta_upload->file_name))
+            // {
+            //     Storage::disk('s3')->delete('public/'.$meta_upload->file_name);
+            // }
+            $meta_upload->delete();
         }
         $blog->delete();
         return redirect()->back();

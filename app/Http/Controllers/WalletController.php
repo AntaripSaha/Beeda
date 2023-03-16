@@ -14,7 +14,7 @@ class WalletController extends Controller
 
     public function index(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $wallet = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->post($this->getApiUrl() . 'my-wallet/seller', [
@@ -29,7 +29,7 @@ class WalletController extends Controller
     public function personalAccount(Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $transections = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -86,7 +86,7 @@ class WalletController extends Controller
     public function storeAccount(Request $request)
     {
         if ($request->ajax()) {
-            $token = Cache::get('api_token');
+            $token = getToken();
             if ($token) {
                 $transections = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $token
@@ -138,7 +138,7 @@ class WalletController extends Controller
 
     public function qrCode()
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $wallet = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token
         ])->post($this->getApiUrl() . 'my-wallet/seller', [

@@ -31,12 +31,37 @@ class BlogController extends Controller
                     $query->select('id', 'name');
                 },'user'=> function($query){
                     $query->select('id', 'name', 'first_name', 'last_name');
+                }, 'thumbnail_img'=> function($query){
+                    $query->select('id', 'file_original_name', 'file_name');
                 }, 'img'=> function($query){
                     $query->select('id', 'file_original_name', 'file_name');
                 }, 'metaImg'=> function($query){
                     $query->select('id', 'file_original_name', 'file_name');
                 }])
-                ->where('status', 1)->orderBy('id', 'asc')->distinct()->paginate($request->per_page);
+                ->where('status', 1)->orderBy('id', 'desc')->distinct()->paginate($request->per_page);
+
+            return response()->json(['status' => true, 'status_code' => 200, 'message' => 'success', 'posts' => $blogPosts]);
+        }
+        catch(Exception $e) {
+            return response()->json(['status' => false, 'status_code' => 500, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function allBlogs(Request $request)
+    {
+    	try{
+            $blogPosts = BeedaBlog::with(['category'=> function($query){
+                    $query->select('id', 'name');
+                },'user'=> function($query){
+                    $query->select('id', 'name', 'first_name', 'last_name');
+                }, 'thumbnail_img'=> function($query){
+                    $query->select('id', 'file_original_name', 'file_name');
+                }, 'img'=> function($query){
+                    $query->select('id', 'file_original_name', 'file_name');
+                }, 'metaImg'=> function($query){
+                    $query->select('id', 'file_original_name', 'file_name');
+                }])
+                ->where('status', 1)->orderBy('id', 'desc')->distinct()->get();
 
             return response()->json(['status' => true, 'status_code' => 200, 'message' => 'success', 'posts' => $blogPosts]);
         }
@@ -52,6 +77,8 @@ class BlogController extends Controller
                     $query->select('id', 'name');
                 },'user'=> function($query){
                     $query->select('id', 'name', 'first_name', 'last_name');
+                }, 'thumbnail_img'=> function($query){
+                    $query->select('id', 'file_original_name', 'file_name');
                 }, 'img'=> function($query){
                     $query->select('id', 'file_original_name', 'file_name');
                 }, 'metaImg'=> function($query){

@@ -18,7 +18,7 @@ class OrderController extends Controller
 
     /*public function orderList(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             return $orders = Http::withHeaders([
@@ -140,7 +140,7 @@ class OrderController extends Controller
 
     public function orderList(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $id = session()->get('user_info')->user_id;
@@ -279,7 +279,7 @@ class OrderController extends Controller
 
     public function shortOrderList(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             $orders = Http::withHeaders([
@@ -297,7 +297,7 @@ class OrderController extends Controller
 
     public function makePayment(Request $request)
     {
-      $token = Cache::get('api_token');
+      $token = getToken();
         if($token)
         {
             /*
@@ -336,7 +336,7 @@ class OrderController extends Controller
 
     public function changeDeliveryStatus(Request $request)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         $message = "";
 
         if($token)
@@ -425,7 +425,7 @@ class OrderController extends Controller
 
     public function orderDetails($id)
     {
-        $token = Cache::get('api_token');
+        $token = getToken();
         if($token)
         {
             /*

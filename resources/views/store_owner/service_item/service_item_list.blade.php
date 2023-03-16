@@ -171,14 +171,14 @@
 
 <script>
 //$('input.cb-value').prop("checked", true);
-function publish(id)
+function publish(id, service_category_id)
 {
   var mainParent = $('.publish'+id).parent('.toggle-btn');
   if($(mainParent).find('input.publish'+id).is(':checked')) {
     $.ajax({
             url: '{{route("service.item.publish")}}',
             method: 'POST',
-            data: {'product_id': id, '_token': '{{csrf_token()}}'},
+            data: {'product_id': id, 'service_category_id': service_category_id, '_token': '{{csrf_token()}}'},
             success: function(data){
               iziToast.success({
                   title: 'Success',
@@ -193,7 +193,7 @@ function publish(id)
     $.ajax({
             url: '{{route("service.item.publish")}}',
             method: 'POST',
-            data: {'product_id': id, '_token': '{{csrf_token()}}'},
+            data: {'product_id': id, 'service_category_id': service_category_id, '_token': '{{csrf_token()}}'},
             success: function(data){
               iziToast.success({
                   title: 'Success',
