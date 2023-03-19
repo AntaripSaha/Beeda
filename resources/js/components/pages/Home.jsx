@@ -27,7 +27,7 @@ const Home = () => {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Mega App- Simplify Your Life with Beeda</title>
+        <title>Beeda Mega App- Let's Go Further Together</title>
         <meta name="description" content="Revolutionize your daily life with Beeda - the ultimate all-in-one solution. Enjoy effortless services designed to make things easier for users and vendors." />
         <link rel="canonical" href="abcd" />
       </Helmet>

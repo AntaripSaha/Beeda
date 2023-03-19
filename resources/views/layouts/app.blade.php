@@ -1,28 +1,16 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <!-- Social media Meta Tags -->
-    <meta property="og:url" content="https://beeda.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Beeda Mega App- A Mega App Platform">
-    <meta property="og:description" content="Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are E-commerce, Food Delivery, Ride Sharing, Travel, and more.">
-    <meta property="og:image" content=" https://beeda.com/assets/front/img/beeda_white_logo.png">
-
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="beeda.com">
-    <meta property="twitter:url" content="https://beeda.com/">
-    <meta name="twitter:title" content="Beeda Mega App- A Mega App Platform">
-    <meta name="twitter:description" content="Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are E-commerce, Food Delivery, Ride Sharing, Travel, and more.">
-    <meta name="twitter:image" content="https://scontent.fdac99-1.fna.fbcdn.net/v/t39.30808-6/321369159_1527524304416404_7417830470071739237_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=19026a&_nc_eui2=AeHo1aAsDV2Klp0AmYOqrT0HMd1JVt_OSjAx3UlW385KMOKoRZuw4aSGgz1Z4wqJ7AhQ3Spv4cjd7pe3xDBu_xOp&_nc_ohc=P60UFx6DdvMAX_kqKaa&_nc_ht=scontent.fdac99-1.fna&oh=00_AfDKwMDuhdrLUWkltLAKfs_fQWWLh_RIjG1to-u4LIIb1Q&oe=63AF14E5">
+   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="beeda, beeda mega app, beeda app, best mega app, best app for services, best service app, mega app platform, super app for service, ride sharing app, delivery service app, mega app">
+
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="{{ url()->current() }}">
 
-    <title>Beeda Mega App- A Mega App Platform</title>
     <link rel="icon" href="https://d2t5292uahafuy.cloudfront.net/public/assets/img/app+icon.png" type="image/png">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -84,7 +72,7 @@
         "https://beeda.com/img/banner-phone.png",
         "https://beeda.com/img/beeda-store-woman-hand.png"
     ],
-    "description": "Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are eCommerce, Food Delivery, Ride Sharing, Travel, and more.",
+    "description": "Revolutionize your daily life with Beeda - the ultimate all-in-one solution. Enjoy effortless services designed to make things easier for users and vendors.",
     "url": "https://beeda.com",
     "potentialAction": {
         "@type": "ViewAction",
@@ -142,7 +130,7 @@
                 "name": "What is Beeda Mega App?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Revolutionize your daily life with Beeda - the ultimate all-in-one solution. Enjoy effortless services designed to make things easier for users and vendors. Beeda Mega App is Currently Available in United States and United Arab Emirates only."
+                    "text": "Beeda is a Mega App with 50+ Services to satisfy everyone's needs. Some of our best services are eCommerce, Food Delivery, Ride Sharing, Travel, Liquor Home Delivery and more."
                 }
             },
             {
